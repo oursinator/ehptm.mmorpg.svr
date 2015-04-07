@@ -3,13 +3,13 @@ import com.modeliosoft.modelio.javadesigner.annotations.objid;
 @objid ("cc180a09-76b4-46eb-abe5-19ea8dd720b6")
 public class PaireBottes extends Equipement {
     @objid ("732d5af8-4bcc-4c4b-9e32-b84631fd238b")
-    private static final String PAIREBOTTES_CUIR;
+    private static final String PAIREBOTTES_CUIR = "cuir";
 
     @objid ("1f346337-f841-484f-9cb7-cca1ab049875")
-    private static final String PAIREBOTTES_BRONZE;
+    private static final String PAIREBOTTES_BRONZE = "bronze";
 
     @objid ("74368eb0-0dad-4f23-af95-7924b2c43885")
-    private static final String PAIREBOTTES_OR;
+    private static final String PAIREBOTTES_OR = "or";
 
     @objid ("fdc95be2-110d-4c28-85ca-7adf96cdf742")
     static String getPAIREBOTTES_CUIR() {

@@ -3,7 +3,7 @@ import com.modeliosoft.modelio.javadesigner.annotations.objid;
 @objid ("daf1056a-7192-44b6-982b-8c213135f69f")
 public class Partie {
     @objid ("d9fbe4bd-c407-48a3-9331-2db922d84bb1")
-    private static final int NB_MAX_JOUEUR;
+    private static final int NB_MAX_JOUEUR=5;
 
     @objid ("42633720-d3bd-406d-a903-1ead445dca6d")
     private Carte carte;

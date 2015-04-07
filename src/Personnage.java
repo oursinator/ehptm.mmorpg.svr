@@ -53,17 +53,18 @@ public class Personnage {
     @objid ("5a3a7caa-198d-4ea6-a92a-948c2290481d")
     PointPlan getPointPlan() {
         // Automatically generated method. Please delete this comment before entering specific code.
-        return this.pointPlan;
+        return this.position;
     }
 
     @objid ("24607851-442b-4b5d-8f5d-1f4c56311a2a")
     void setPointPlan(PointPlan value) {
         // Automatically generated method. Please delete this comment before entering specific code.
-        this.pointPlan = value;
+        this.position = value;
     }
 
     @objid ("809d8f2f-76e6-48da-a7d4-19ce3541669e")
     public int etat() {
+    	return 0;
     }
 
     @objid ("e2355739-8edf-44c6-902e-c130de52cfeb")

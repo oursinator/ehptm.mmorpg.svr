@@ -6,13 +6,13 @@ public class Item {
     private String Nom;
 
     @objid ("b594cf42-4241-4902-b72f-d83a2d8e2e5d")
-    void setNom(String value) {
+    private void setNom(String value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.Nom = value;
     }
 
     @objid ("555b12a8-3efd-48bd-a57f-f60e25c49d11")
-    String getNom() {
+    private String getNom() {
         // Automatically generated method. Please delete this comment before entering specific code.
         return this.Nom;
     }

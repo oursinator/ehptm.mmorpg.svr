@@ -14,95 +14,89 @@ public class Inventaire {
     private Armure armure;
 
     @objid ("9e4b45f8-3b0e-46fe-b067-a31886715fc2")
-    private List<Arme> arme = new ArrayList<Arme> ();
+    private static List<Arme> arme = new ArrayList<Arme> ();
 
     @objid ("7f6a6269-0b67-400d-9c96-dd30dd0f0659")
     private PaireBottes paireBottes;
 
     @objid ("b06d4046-b92c-4435-8536-3be26435c6f7")
-    private List<Gant> gant = new ArrayList<Gant> ();
+    private List<Gants> gant = new ArrayList<Gants> ();
 
-    @objid ("f03a1add-2b80-401f-93bb-25f19d336051")
-    Item getItem() {
+    @objid ("d4883274-8609-43ee-8f7a-419816eee988")
+    void setSacADos(List<Item> value) {
         // Automatically generated method. Please delete this comment before entering specific code.
-        return this.item;
+        this.sacADos = value;
     }
 
-    @objid ("e6707639-468d-4797-b8c2-01335c4d7b85")
-    void setItem(Item value) {
+    @objid ("fed01aa0-22bb-4c69-8e20-b686d4279f2a")
+    List<Item> getSacADos() {
         // Automatically generated method. Please delete this comment before entering specific code.
-        this.item = value;
+        return this.sacADos;
     }
 
-    @objid ("fae7aedb-6693-4467-81a1-19bb69e61d5b")
-    int getTailleSacADos() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return this.tailleSacADos;
-    }
-
-    @objid ("0b543cf5-2ec2-453b-bb70-4017a4fdbbb3")
-    void setTailleSacADos(int value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        this.tailleSacADos = value;
-    }
-
-    @objid ("56893107-deda-4c4f-bb57-6908f1b77388")
+    @objid ("784009be-44fb-4104-96ea-fcfa4902bde5")
     Armure getArmure() {
         // Automatically generated method. Please delete this comment before entering specific code.
         return this.armure;
     }
 
-    @objid ("c9bb883e-d54b-48a6-a4f7-4a69d339daae")
+    @objid ("3cc8b7da-5c8e-4183-b14d-1fc03db432d3")
     void setArmure(Armure value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.armure = value;
     }
 
-    @objid ("a35bb9e0-ab58-49aa-8970-a2ebf65fda40")
-    Arme getArme() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return this.arme;
-    }
-
-    @objid ("f5534d33-553c-47c7-bbce-1c702ee958df")
-    void setArme(Arme value) {
+    @objid ("4ee0a1de-946c-499a-b0cf-ccc775cd71e1")
+    void setArme(List<Arme> value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.arme = value;
     }
 
-    @objid ("d4cfba30-6780-4518-9c50-813d6e9ab473")
-    PaireBottes getPaireBottes() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return this.paireBottes;
-    }
-
-    @objid ("35fb6bc1-3af5-43ca-8b82-bb678516af9f")
+    @objid ("69a2e600-d7fc-42db-a413-a7aedc608a43")
     void setPaireBottes(PaireBottes value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.paireBottes = value;
     }
 
-    @objid ("7128f5a1-85fa-416c-bc9a-367d19bf15fa")
-    Gant getGant() {
+    @objid ("b944055b-3ecc-43a0-878d-1f978fd2add7")
+    PaireBottes getPaireBottes() {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        return this.paireBottes;
+    }
+
+    @objid ("c211d7e8-eced-4885-93ae-e2c25c4f8505")
+    List<Gants> getGant() {
         // Automatically generated method. Please delete this comment before entering specific code.
         return this.gant;
     }
 
-    @objid ("e4088443-e009-4219-b239-04ae75ef697e")
-    void setGant(Gant value) {
+    @objid ("08341949-c16b-4b8d-a454-5b4985bfd885")
+    void setGant(List<Gants> value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.gant = value;
     }
 
-    @objid ("b71a9350-214e-49f4-9b62-a38639e1366d")
+    @objid ("12410745-e1fb-46f1-a5d3-4848cc13391c")
+    int getTailleSacADos() {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        return this.tailleSacADos;
+    }
+
+    @objid ("3472ea93-c08b-472b-9d69-2f4cf46bafea")
+    void setTailleSacADos(int value) {
+        // Automatically generated method. Please delete this comment before entering specific code.
+        this.tailleSacADos = value;
+    }
+
+    @objid ("dd0a0ae8-1389-40bf-982f-95a1a1c4d7ee")
     public void equiper() {
     }
 
-    @objid ("4557c7ef-03a9-429a-9eaf-23873b2972b2")
+    @objid ("be12ee50-1884-4ae6-88c6-80e81998bdf2")
     public void desequiper() {
     }
 
-    @objid ("b4fc0f24-2934-4622-8473-aa5abb3bb4db")
+    @objid ("79e89308-6d1f-4ef6-87bc-3b71c289c719")
     public void jeter() {
     }
 

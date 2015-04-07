@@ -9,10 +9,10 @@ public class Arme extends Equipement {
     private int[] impact = new int[2];
 
     @objid ("37d4bb17-3d6c-427d-af35-b56bdd6041bb")
-    private static final String EPEE;
+    private static final String EPEE = "epee";
 
     @objid ("4b0d7c39-d42d-4736-9d1e-cedaed085238")
-    private static final String BOUCLIER;
+    private static final String BOUCLIER = "bouclier";
 
     @objid ("00ae7932-27be-45f0-9d1f-07f0dd3a22bf")
     int[] getManiabilite() {
