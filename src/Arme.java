@@ -9,31 +9,62 @@ public class Arme extends Equipement {
     private int[] impact = new int[2];
 
     @objid ("37d4bb17-3d6c-427d-af35-b56bdd6041bb")
-    private static final String EPEE = "epee";
+    public static final String EPEE = "epee";
 
     @objid ("4b0d7c39-d42d-4736-9d1e-cedaed085238")
-    private static final String BOUCLIER = "bouclier";
+    public static final String BOUCLIER = "bouclier";
+    
+    
+    public Arme(String type,String nom){
+    	super(type+" "+nom,new int[2],new int[2]);    	
+    	int[] solidite=new int[2];
+		int[] encombrement=new int[2];
+    	if(type.equals(Arme.EPEE)){
+    		solidite[0]=1;
+    		solidite[1]=1;
+    		encombrement[0]=1;
+    		encombrement[1]=1;
+    		this.maniabilite[0]=2;
+    		this.maniabilite[1]=2;
+    		this.impact[0]=2;
+    		this.impact[1]=2;
+    	}
+    	else if(type.equals(Arme.BOUCLIER)){
+    		solidite[0]=1;
+    		solidite[1]=1;
+    		encombrement[0]=1;
+    		encombrement[1]=1;
+    		this.maniabilite[0]=2;
+    		this.maniabilite[1]=2;
+    		this.impact[0]=2;
+    		this.impact[1]=2;
+    	}
+    	super.setEncombrement(encombrement);
+    	super.setSolidite(solidite);
+    	
+    	
+    }
 
     @objid ("00ae7932-27be-45f0-9d1f-07f0dd3a22bf")
-    int[] getManiabilite() {
+    public int[] getManiabilite() {
         // Automatically generated method. Please delete this comment before entering specific code.
         return this.maniabilite;
     }
 
     @objid ("3f58821a-b3de-47ff-939d-00809a03c444")
-    void setManiabilite(int[] value) {
+    public void setManiabilite(int[] value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.maniabilite = value;
     }
 
     @objid ("96c441cc-b741-48e0-95f0-31e13a084276")
-    int[] getImpact() {
+    public int[] getImpact() {
         // Automatically generated method. Please delete this comment before entering specific code.
         return this.impact;
     }
 
     @objid ("ff8592dc-38ac-43a7-b30e-a370b14f08ab")
-    void setImpact(int[] value) {
+    public void setImpact(int[] value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.impact = value;
     }
