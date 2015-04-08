@@ -9,7 +9,9 @@ public class Equipement extends Item {
 
     @objid ("8c5780c4-918e-4a3a-b0ad-102f187f29bd")
     private int[] encombrement = new int[2];
-
+    public Equipement (String nom){
+    	super(nom);
+    }
     public Equipement(String nom,int[] solidite,int[] encombrement) {
 		super(nom);
 		this.solidite=solidite;

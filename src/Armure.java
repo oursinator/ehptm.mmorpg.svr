@@ -11,6 +11,23 @@ public class Armure extends Equipement {
     @objid ("9829e3a1-a91f-4846-a458-05e9892e8da9")
     public static final String ARMURE_OR="or";
 
+    public Armure(String type){
+    	super("Armure en "+type);
+    	if(type.equals(Armure.ARMURE_CUIR)){
+    		int[] solidite={1,0};
+    		int[] encombrement={1,0};
+    		super.setSolidite(solidite);
+    		super.setEncombrement(encombrement);
+    	}
+    	else if(type.equals(Armure.ARMURE_BRONZE)){
+    		
+    	}
+    	else if(type.equals(Armure.ARMURE_OR)){
+    		
+    	}
+    }
+    
+    
     @objid ("4d967e13-5f01-4ed2-9cbb-9c6179704eb7")
     public static String getARMURE_CUIR() {
         // Automatically generated method. Please delete this comment before entering specific code.
