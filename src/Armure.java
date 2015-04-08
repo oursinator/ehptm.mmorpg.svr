@@ -20,10 +20,16 @@ public class Armure extends Equipement {
     		super.setEncombrement(encombrement);
     	}
     	else if(type.equals(Armure.ARMURE_BRONZE)){
-    		
+    		int[] solidite={2,0};
+    		int[] encombrement={2,0};
+    		super.setSolidite(solidite);
+    		super.setEncombrement(encombrement);
     	}
     	else if(type.equals(Armure.ARMURE_OR)){
-    		
+    		int[] solidite={3,1};
+    		int[] encombrement={4,0};
+    		super.setSolidite(solidite);
+    		super.setEncombrement(encombrement);
     	}
     }
     
