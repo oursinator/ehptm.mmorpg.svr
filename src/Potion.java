@@ -9,6 +9,10 @@ public class Potion extends Item {
     	super("Potion "+nom);
     	this.pointAction=pointAction;
     }
+    public Potion(Potion potion){
+        super(potion);
+        this.pointAction=potion.getPointAction();
+    }
     
     @objid ("03bf965b-a77a-460c-a895-959bad3c1c09")
     public int getPointAction() {
