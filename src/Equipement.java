@@ -3,15 +3,28 @@ import com.modeliosoft.modelio.javadesigner.annotations.objid;
 @objid ("685f1a51-0059-483c-ac81-1e87c854b8bd")
 public class Equipement extends Item {
     
-
 	@objid ("84b2e4b8-c5ed-4a47-b891-dd6ef99897cc")
     private int[] solidite = new int[2];
 
     @objid ("8c5780c4-918e-4a3a-b0ad-102f187f29bd")
     private int[] encombrement = new int[2];
+    
     public Equipement (String nom){
     	super(nom);
     }
+    
+    public Equipement(Equipement equipement){
+    	super(equipement);
+    	this.solidite=new int[2];
+    	for (int i=0;i<equipement.getSolidite().lenght && i<this.solidite.lenght;i++){
+    		this.solidite[i]=equipement.getSolidite()[i];
+    	}
+    	this.encombrement=new int[2];
+    	for (int i=0;i<equipement.getSolidite().lenght && i<this.encombrement.lenght;i++){
+    		this.encombrement[i]=equipement.getSolidite()[i];
+    	}
+    }
+    
     public Equipement(String nom,int[] solidite,int[] encombrement) {
 		super(nom);
 		this.solidite=solidite;
