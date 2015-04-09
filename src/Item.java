@@ -8,6 +8,9 @@ public class Item {
     public Item (String nom){
     	this.nom=nom;
     }
+    public Item(Item item){
+        this.nom=new String(item.getNom());
+    }
     @objid ("b594cf42-4241-4902-b72f-d83a2d8e2e5d")
     public void setNom(String value) {
         // Automatically generated method. Please delete this comment before entering specific code.
