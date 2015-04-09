@@ -19,7 +19,11 @@ public class PotionSoin  extends Potion {
     		super.setPointAction(2);
     		this.soin=20;
     	}
-    	
+    }
+    
+    public PotionSoin(PotionSoin potion){
+    	super(potion);
+    	this.soin=potion.getSoin();
     }
     @objid ("0b2dc258-117e-429d-b778-80f5eabd4536")
     public static String getSOIN_1() {
@@ -30,7 +34,13 @@ public class PotionSoin  extends Potion {
         // Automatically generated method. Please delete this comment before entering specific code.
         return SOIN_2;
     }
-
+    
+    public int getSoin(){
+    	return this.soin;
+    }
+    public void setSoin(int soin){
+    	this.soin=soin;
+    }
     @objid ("5da7a707-c077-4863-9ff9-881ba4c45f4f")
     public void utiliser() {
     }

@@ -30,6 +30,10 @@ public class PaireBottes extends Equipement {
     			break;
     	}
     }
+    
+    public PaireBottes(PaireBottes paireBottes){
+    	super(paireBottes);
+    }
     @objid ("fdc95be2-110d-4c28-85ca-7adf96cdf742")
     public String getPAIREBOTTES_CUIR() {
         // Automatically generated method. Please delete this comment before entering specific code.

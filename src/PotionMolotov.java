@@ -22,6 +22,12 @@ public class PotionMolotov extends Potion {
         	this.radius=2;
     	}
     }
+    public PotionMolotov(PotionMolotov potion){
+    	super(potion);
+    	this.degat=potion.getDegat();
+    	this.radius=potion.getRadius();
+    }
+    
     @objid ("950757dc-a913-4edf-a538-8a2c4b5212ec")
     public static String getMOLOTOV_1() {
         // Automatically generated method. Please delete this comment before entering specific code.

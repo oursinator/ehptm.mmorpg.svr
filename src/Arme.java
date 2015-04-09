@@ -16,7 +16,7 @@ public class Arme extends Equipement {
     
     
     public Arme(String type,String nom){
-    	super(type+" "+nom,new int[2],new int[2]);    	
+    	super(type+" "+nom);    	
     	int[] solidite=new int[2];
 		int[] encombrement=new int[2];
     	if(type.equals(Arme.EPEE)){
@@ -45,13 +45,13 @@ public class Arme extends Equipement {
     
     public Arme(Arme arme){
     	super(arme);
-    	this.maniabilite=new int[2];
-    	for(i=0;i<this.maniabiltie.lenght && i<arme.getManiabilite().lenght;i++){
-    		this.maniabilite[i]=arme.getManiabilite()[î];
+    	this.maniabilite=new int[arme.getManiabilite().length];
+    	for(int i=0;i<arme.getManiabilite().length;i++){
+    		this.maniabilite[i]=arme.getManiabilite()[i];
     	}
-    	this.impact=new int[2];
-    	for(i=0;i<this.impact.lenght && i<arme.getImpact().lenght;i++){
-    		this.impact[i]=arme.getImpact()[î];
+    	this.impact=new int[arme.getImpact().length];
+    	for(int i=0;i<arme.getImpact().length;i++){
+    		this.impact[i]=arme.getImpact()[i];
     	}
     }
 

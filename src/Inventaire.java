@@ -15,29 +15,65 @@ public class Inventaire {
     private Armure armure;
 
     @objid ("9e4b45f8-3b0e-46fe-b067-a31886715fc2")
-    private Arme[] arme =new Arme[2];
+    private Arme[] arme;
 
     @objid ("7f6a6269-0b67-400d-9c96-dd30dd0f0659")
     private PaireBottes paireBottes;
 
     @objid ("b06d4046-b92c-4435-8536-3be26435c6f7")
-    private Gants[] gant = new Gants[2];
+    private Gants[] gant;
 
     public Inventaire(){
     	this.tailleSacADos=0;
     	this.nbPlaceSacADos=0;
     }
-    public Inventaire(Item[] sacADos,Armure amure,Arme[] arme,PaireBottes paireBottes,Gants[] gants){
+    public Inventaire(Item[] sacADos,Armure armure,Arme[] arme,PaireBottes paireBottes,Gants[] gants){
     	this.sacADos=sacADos;
     	this.tailleSacADos=sacADos.length;
-    	
+    	this.nbPlaceSacADos=0;
+    	this.armure=armure;
+    	this.arme=arme;
+    	this.paireBottes=paireBottes;
+    	this.gant=gants;
+    	//Pas finis !
+    }
+    public Inventaire(Inventaire inventaire){
+    	this.tailleSacADos=inventaire.getSacADos().length;
+    	this.nbPlaceSacADos=inventaire.getNbPlaceSacADos();
+    	this.armure=new Armure(inventaire.getArmure());
+    	this.paireBottes=new PaireBottes(inventaire.getPaireBottes());
+    	this.sacADos=new Item[inventaire.getSacADos().length];
+    	for(int i=0;i<inventaire.getSacADos().length;i++){
+    		if (inventaire.getSacADos()[i] instanceof Arme)
+    			this.sacADos[i]=new Arme((Arme)inventaire.getSacADos()[i]);
+    		else if (inventaire.getSacADos()[i] instanceof Armure)
+    			this.sacADos[i]=new Armure((Armure)inventaire.getSacADos()[i]);
+    		else if (inventaire.getSacADos()[i] instanceof Gants)
+    			this.sacADos[i]=new Gants((Gants)inventaire.getSacADos()[i]);
+    		else if (inventaire.getSacADos()[i] instanceof PaireBottes)
+    			this.sacADos[i]=new PaireBottes((PaireBottes)inventaire.getSacADos()[i]);
+    		else if (inventaire.getSacADos()[i] instanceof PotionSoin)
+    			this.sacADos[i]=new PotionSoin((PotionSoin)inventaire.getSacADos()[i]);
+    		else if (inventaire.getSacADos()[i] instanceof PotionMolotov)
+    			this.sacADos[i]=new PotionMolotov((PotionMolotov)inventaire.getSacADos()[i]);
+    	}
+    	this.arme=new Arme[inventaire.getArme().length];
+    	for(int i=0;i<inventaire.getArme().length;i++){
+    		if (inventaire.getArme()[i] instanceof Arme)
+    		this.arme[i]=new Arme(inventaire.getArme()[i]);
+    	}
+    	this.gant=new Gants[inventaire.getGant().length];
+    	for(int i=0;i<inventaire.getGant().length;i++){
+    		if (inventaire.getGant()[i] instanceof Gants)
+    		this.gant[i]=new Gants(inventaire.getGant()[0]);
+    	}
     }
     
     @objid ("d4883274-8609-43ee-8f7a-419816eee988")
     public void setSacADos(Item[] value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.sacADos = value;
-        this.setTailleSacADos(value.length);
+        this.setTailleSacADos(this.sacADos.length);
     }
 
     @objid ("fed01aa0-22bb-4c69-8e20-b686d4279f2a")
