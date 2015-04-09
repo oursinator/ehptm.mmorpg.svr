@@ -41,8 +41,18 @@ public class Arme extends Equipement {
     	}
     	super.setEncombrement(encombrement);
     	super.setSolidite(solidite);
-    	
-    	
+    }
+    
+    public Arme(Arme arme){
+    	super(arme);
+    	this.maniabilite=new int[2];
+    	for(i=0;i<this.maniabiltie.lenght && i<arme.getManiabilite().lenght;i++){
+    		this.maniabilite[i]=arme.getManiabilite()[î];
+    	}
+    	this.impact=new int[2];
+    	for(i=0;i<this.impact.lenght && i<arme.getImpact().lenght;i++){
+    		this.impact[i]=arme.getImpact()[î];
+    	}
     }
 
     @objid ("00ae7932-27be-45f0-9d1f-07f0dd3a22bf")
