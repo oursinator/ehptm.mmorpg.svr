@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import com.modeliosoft.modelio.javadesigner.annotations.objid;
 
 @objid ("68ac6f91-faa6-45a3-ace5-c63ce60be32f")
@@ -35,7 +33,6 @@ public class Inventaire {
     	this.arme=arme;
     	this.paireBottes=paireBottes;
     	this.gant=gants;
-    	//Pas finis !
     }
     public Inventaire(Inventaire inventaire){
     	this.tailleSacADos=inventaire.getSacADos().length;

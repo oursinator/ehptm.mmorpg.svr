@@ -16,13 +16,11 @@ public class Potion extends Item {
     
     @objid ("03bf965b-a77a-460c-a895-959bad3c1c09")
     public int getPointAction() {
-        // Automatically generated method. Please delete this comment before entering specific code.
         return this.pointAction;
     }
 
     @objid ("ec7ce16c-76c9-4242-8920-afc3b3404268")
     public void setPointAction(int value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
         this.pointAction = value;
     }
     public String toString(){

@@ -84,17 +84,9 @@ public class Arme extends Equipement {
     @objid ("95e3e5d0-23f9-4b70-9784-d700b4af486f")
     public void utiliser() {
     }
-
-    @objid ("e2ad7777-79fc-44e8-923d-02d956bb9fba")
-    static String getEPEE() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return EPEE;
-    }
-
-    @objid ("0b999271-3981-4f9f-9375-01e57a05df58")
-    static String getBOUCLIER() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return BOUCLIER;
+    
+    public String toString(){
+    	return super.toString()+" | maniabilite: ("+this.maniabilite[0]+"D+"+this.maniabilite[1]+")"+" | impact: ("+this.impact[0]+"D+"+this.impact[1]+")"+"]";
     }
 
 }

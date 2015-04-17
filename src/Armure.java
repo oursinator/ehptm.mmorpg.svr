@@ -11,27 +11,31 @@ public class Armure extends Equipement {
     @objid ("9829e3a1-a91f-4846-a458-05e9892e8da9")
     public static final String ARMURE_OR="or";
 
+    public Armure(String nom,int[] solidite,int[] encombrement){
+    	super(nom,solidite,encombrement);
+    }
+    
     public Armure(String type){
     	super("Armure en "+type);
     	int[] solidite=new int[2];
     	int[] encombrement= new int[2];
     	switch(type){
     	case Armure.ARMURE_CUIR:
-    		solidite[0]=1;
-    		solidite[1]=0;
+    		solidite[0]=0;
+    		solidite[1]=3;
     		encombrement[0]=1;
     		encombrement[1]=1;
     		break;
     	case Armure.ARMURE_BRONZE:
     		solidite[0]=1;
-    		solidite[1]=0;
-    		encombrement[0]=1;
-    		encombrement[1]=1;
+    		solidite[1]=4;
+    		encombrement[0]=2;
+    		encombrement[1]=2;
     		break;
     	case Armure.ARMURE_OR:
-    		solidite[0]=1;
-    		solidite[1]=0;
-    		encombrement[0]=1;
+    		solidite[0]=2;
+    		solidite[1]=2;
+    		encombrement[0]=3;
     		encombrement[1]=1;
     		break;
     	}
@@ -43,26 +47,7 @@ public class Armure extends Equipement {
     	super(armure);
     }
     
-    
-    @objid ("4d967e13-5f01-4ed2-9cbb-9c6179704eb7")
-    public static String getARMURE_CUIR() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return ARMURE_CUIR;
-    }
-
-    @objid ("14f1cd40-445a-4e8f-861a-5e0e59c4caf4")
-    public static String getARMURE_BRONZE() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return ARMURE_BRONZE;
-    }
-
-    @objid ("24bfb090-941f-40da-acd7-05ae0d05310a")
-    public static String getARMURE_OR() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return ARMURE_OR;
-    }
     public String toString(){
-    	return super.toString();
+    	return super.toString()+"]";
     }
-
 }

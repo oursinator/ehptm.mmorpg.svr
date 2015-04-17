@@ -60,7 +60,7 @@ public class Equipement extends Item {
         return this.encombrement;
     }
     public String toString(){
-    	return super.toString()+", solidite: ("+this.solidite[0]+"D+"+this.solidite[1]+"), encombrement: ("+this.encombrement[0]+"D+"+this.encombrement[1]+")";
+    	return super.toString()+" [solidite: ("+this.solidite[0]+"D+"+this.solidite[1]+") | encombrement: ("+this.encombrement[0]+"D+"+this.encombrement[1]+")";
     }
 
 }

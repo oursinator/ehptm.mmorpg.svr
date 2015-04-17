@@ -21,7 +21,7 @@ public class Item {
         return this.nom;
     }
     public String toString(){
-    	return "Nom: "+this.nom;
+    	return this.nom;
     }
 
 }

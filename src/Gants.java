@@ -11,6 +11,10 @@ public class Gants extends Equipement {
     @objid ("bca20c58-6d60-4cb5-a2e8-f56cbf5580a2")
     public static final String GANT_OR = "or";
 
+    public Gants(String nom,int[] solidite,int[] encombrement){
+    	super(nom,solidite,encombrement);
+    }
+    
     public Gants(String type){
     	super("Gants en "+type);
     	int[] solidite=new int[2];
@@ -35,23 +39,4 @@ public class Gants extends Equipement {
     public Gants(Gants gants){
     	super(gants);
     }
-    
-    @objid ("1bf26215-6704-4edf-8bb1-349cb9409808")
-    public static String getGANT_CUIR() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return GANT_CUIR;
-    }
-
-    @objid ("3fc8ceed-0375-4d83-b13f-ba28499c1583")
-    public static String getGANT_BRONZE() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return GANT_BRONZE;
-    }
-
-    @objid ("bff137f4-d755-4e1f-9b92-561a2b61e9b7")
-    public static String getGANT_OR() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return GANT_OR;
-    }
-
 }

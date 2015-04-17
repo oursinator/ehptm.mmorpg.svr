@@ -11,8 +11,11 @@ public class PaireBottes extends Equipement {
     @objid ("74368eb0-0dad-4f23-af95-7924b2c43885")
     public static final String PAIREBOTTES_OR = "or";
 
+    public PaireBottes(String nom,int[] solidite,int[] encombrement){
+    	super(nom,solidite,encombrement);
+    }
     public PaireBottes(String type){
-    	super("chaussure en "+type);
+    	super("Chaussure en "+type);
     	int[] solidite=new int[2];
 		int[] encombrement=new int[2];
     	switch(type){
@@ -29,27 +32,14 @@ public class PaireBottes extends Equipement {
 	    		encombrement[0]=1;encombrement[1]=3;
     			break;
     	}
+    	super.setSolidite(solidite);
+    	super.setEncombrement(encombrement);
     }
-    
     public PaireBottes(PaireBottes paireBottes){
     	super(paireBottes);
     }
-    @objid ("fdc95be2-110d-4c28-85ca-7adf96cdf742")
-    public String getPAIREBOTTES_CUIR() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return PAIREBOTTES_CUIR;
+    
+    public String toString(){
+    	return super.toString()+"]";
     }
-
-    @objid ("eb9422aa-e9aa-40a2-bbef-c6a6590ff88f")
-    public static String getPAIREBOTTES_BRONZE() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return PAIREBOTTES_BRONZE;
-    }
-
-    @objid ("a14460e4-5e1e-494d-8b96-577bebbaec3f")
-    public static String getPAIREBOTTES_OR() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return PAIREBOTTES_OR;
-    }
-
 }
