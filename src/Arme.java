@@ -19,27 +19,29 @@ public class Arme extends Equipement {
     	super(type+" "+nom);    	
     	int[] solidite=new int[2];
 		int[] encombrement=new int[2];
-    	if(type.equals(Arme.EPEE)){
-    		solidite[0]=1;
-    		solidite[1]=1;
-    		encombrement[0]=1;
-    		encombrement[1]=1;
-    		this.maniabilite[0]=2;
-    		this.maniabilite[1]=2;
-    		this.impact[0]=2;
-    		this.impact[1]=2;
-    	}
-    	else if(type.equals(Arme.BOUCLIER)){
-    		solidite[0]=1;
-    		solidite[1]=1;
-    		encombrement[0]=1;
-    		encombrement[1]=1;
-    		this.maniabilite[0]=2;
-    		this.maniabilite[1]=2;
-    		this.impact[0]=2;
-    		this.impact[1]=2;
-    	}
-    	super.setEncombrement(encombrement);
+		switch(type){
+			case Arme.EPEE:
+				solidite[0]=1;
+	    		solidite[1]=1;
+	    		encombrement[0]=1;
+	    		encombrement[1]=1;
+	    		this.maniabilite[0]=2;
+	    		this.maniabilite[1]=2;
+	    		this.impact[0]=2;
+	    		this.impact[1]=2;
+				break;
+			case Arme.BOUCLIER:
+				solidite[0]=1;
+	    		solidite[1]=1;
+	    		encombrement[0]=1;
+	    		encombrement[1]=1;
+	    		this.maniabilite[0]=2;
+	    		this.maniabilite[1]=2;
+	    		this.impact[0]=2;
+	    		this.impact[1]=2;
+				break;
+		}
+		super.setEncombrement(encombrement);
     	super.setSolidite(solidite);
     }
     

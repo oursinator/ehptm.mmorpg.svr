@@ -13,7 +13,7 @@ public class Equipement extends Item {
     	super(nom);
     }
     public Equipement(Equipement equipement){
-    	super((Item)equipement);
+    	super(equipement);
     	this.solidite=new int[equipement.getSolidite().length];
     	for (int i=0;i<equipement.getSolidite().length ;i++){
     		this.solidite[i]=equipement.getSolidite()[i];

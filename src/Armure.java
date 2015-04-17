@@ -13,24 +13,30 @@ public class Armure extends Equipement {
 
     public Armure(String type){
     	super("Armure en "+type);
-    	if(type.equals(Armure.ARMURE_CUIR)){
-    		int[] solidite={1,0};
-    		int[] encombrement={1,0};
-    		super.setSolidite(solidite);
-    		super.setEncombrement(encombrement);
+    	int[] solidite=new int[2];
+    	int[] encombrement= new int[2];
+    	switch(type){
+    	case Armure.ARMURE_CUIR:
+    		solidite[0]=1;
+    		solidite[1]=0;
+    		encombrement[0]=1;
+    		encombrement[1]=1;
+    		break;
+    	case Armure.ARMURE_BRONZE:
+    		solidite[0]=1;
+    		solidite[1]=0;
+    		encombrement[0]=1;
+    		encombrement[1]=1;
+    		break;
+    	case Armure.ARMURE_OR:
+    		solidite[0]=1;
+    		solidite[1]=0;
+    		encombrement[0]=1;
+    		encombrement[1]=1;
+    		break;
     	}
-    	else if(type.equals(Armure.ARMURE_BRONZE)){
-    		int[] solidite={2,0};
-    		int[] encombrement={2,0};
-    		super.setSolidite(solidite);
-    		super.setEncombrement(encombrement);
-    	}
-    	else if(type.equals(Armure.ARMURE_OR)){
-    		int[] solidite={3,1};
-    		int[] encombrement={4,0};
-    		super.setSolidite(solidite);
-    		super.setEncombrement(encombrement);
-    	}
+    	super.setSolidite(solidite);
+		super.setEncombrement(encombrement);
     }
     
     public Armure(Armure armure){
