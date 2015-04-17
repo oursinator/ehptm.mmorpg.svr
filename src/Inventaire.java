@@ -19,20 +19,23 @@ public class Inventaire {
     private PaireBottes paireBottes;
 
     @objid ("b06d4046-b92c-4435-8536-3be26435c6f7")
-    private Gants[] gant;
+    private Gants[] gants;
 
     public Inventaire(){
-    	this.tailleSacADos=0;
-    	this.nbPlaceSacADos=0;
+    	this.tailleSacADos=20;
+    	this.sacADos=new Item[this.tailleSacADos];
+    	this.nbPlaceSacADos=this.tailleSacADos;
+    	this.arme=new Arme[2];
+    	this.gants=new Gants[2];
     }
     public Inventaire(Item[] sacADos,Armure armure,Arme[] arme,PaireBottes paireBottes,Gants[] gants){
     	this.sacADos=sacADos;
     	this.tailleSacADos=sacADos.length;
-    	this.nbPlaceSacADos=0;
+    	this.nbPlaceSacADos=this.nbTailleRestante();
     	this.armure=armure;
     	this.arme=arme;
     	this.paireBottes=paireBottes;
-    	this.gant=gants;
+    	this.gants=gants;
     }
     public Inventaire(Inventaire inventaire){
     	this.tailleSacADos=inventaire.getSacADos().length;
@@ -59,10 +62,10 @@ public class Inventaire {
     		if (inventaire.getArme()[i] instanceof Arme)
     		this.arme[i]=new Arme(inventaire.getArme()[i]);
     	}
-    	this.gant=new Gants[inventaire.getGant().length];
-    	for(int i=0;i<inventaire.getGant().length;i++){
-    		if (inventaire.getGant()[i] instanceof Gants)
-    		this.gant[i]=new Gants(inventaire.getGant()[0]);
+    	this.gants=new Gants[inventaire.getGants().length];
+    	for(int i=0;i<inventaire.getGants().length;i++){
+    		if (inventaire.getGants()[i] instanceof Gants)
+    		this.gants[i]=new Gants(inventaire.getGants()[0]);
     	}
     }
     
@@ -114,15 +117,15 @@ public class Inventaire {
     }
 
     @objid ("c211d7e8-eced-4885-93ae-e2c25c4f8505")
-    public Gants[] getGant() {
+    public Gants[] getGants() {
         // Automatically generated method. Please delete this comment before entering specific code.
-        return this.gant;
+        return this.gants;
     }
 
     @objid ("08341949-c16b-4b8d-a454-5b4985bfd885")
-    public void setGant(Gants[] value) {
+    public void setGants(Gants[] value) {
         // Automatically generated method. Please delete this comment before entering specific code.
-        this.gant = value;
+        this.gants = value;
     }
 
     @objid ("12410745-e1fb-46f1-a5d3-4848cc13391c")
@@ -133,8 +136,10 @@ public class Inventaire {
 
     @objid ("3472ea93-c08b-472b-9d69-2f4cf46bafea")
     public void setTailleSacADos(int value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
         this.tailleSacADos = value;
+        /*Recreer tableau, 
+         * verifier que le sac à dos a assez de place libre 
+         * pour le changer sa taille*/
     }
 
     public int getNbPlaceSacADos() {
@@ -145,6 +150,14 @@ public class Inventaire {
 		this.nbPlaceSacADos = nbPlaceSacADos;
 	}
 
+	private int nbTailleRestante(){
+		int place=0;
+		for(int i=0;i<this.sacADos.length;i++){
+			if(this.sacADos[i]==null)
+				place++;
+		}
+		return place;
+	}
 	@objid ("dd0a0ae8-1389-40bf-982f-95a1a1c4d7ee")
     public void equiper() {
     }
