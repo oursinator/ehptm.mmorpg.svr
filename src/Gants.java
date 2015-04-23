@@ -32,10 +32,6 @@ public class Gants extends Equipement {
     	super.setSolidite(solidite);
 		super.setEncombrement(encombrement);
     }
-    public Gants(Gants gants){
-    	super(gants);
-    }
-    
     @objid ("1bf26215-6704-4edf-8bb1-349cb9409808")
     public static String getGANT_CUIR() {
         // Automatically generated method. Please delete this comment before entering specific code.

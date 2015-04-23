@@ -33,10 +33,6 @@ public class Armure extends Equipement {
     	}
     }
     
-    public Armure(Armure armure){
-    	super(armure);
-    }
-    
     
     @objid ("4d967e13-5f01-4ed2-9cbb-9c6179704eb7")
     public static String getARMURE_CUIR() {
@@ -54,9 +50,6 @@ public class Armure extends Equipement {
     public static String getARMURE_OR() {
         // Automatically generated method. Please delete this comment before entering specific code.
         return ARMURE_OR;
-    }
-    public String toString(){
-    	return super.toString();
     }
 
 }

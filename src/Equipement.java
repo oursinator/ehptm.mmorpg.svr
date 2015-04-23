@@ -12,15 +12,16 @@ public class Equipement extends Item {
     public Equipement (String nom){
     	super(nom);
     }
+    
     public Equipement(Equipement equipement){
-    	super((Item)equipement);
-    	this.solidite=new int[equipement.getSolidite().length];
-    	for (int i=0;i<equipement.getSolidite().length ;i++){
+    	super(equipement);
+    	this.solidite=new int[2];
+    	for (int i=0;i<equipement.getSolidite().lenght && i<this.solidite.lenght;i++){
     		this.solidite[i]=equipement.getSolidite()[i];
     	}
-    	this.encombrement=new int[equipement.getSolidite().length];
-    	for (int i=0;i<equipement.getSolidite().length;i++){
-    		this.encombrement[i]=equipement.getEncombrement()[i];
+    	this.encombrement=new int[2];
+    	for (int i=0;i<equipement.getSolidite().lenght && i<this.encombrement.lenght;i++){
+    		this.encombrement[i]=equipement.getSolidite()[i];
     	}
     }
     
@@ -58,9 +59,6 @@ public class Equipement extends Item {
     public int[] getEncombrement() {
         // Automatically generated method. Please delete this comment before entering specific code.
         return this.encombrement;
-    }
-    public String toString(){
-    	return super.toString()+", solidite: ("+this.solidite[0]+"D+"+this.solidite[1]+"), encombrement: ("+this.encombrement[0]+"D+"+this.encombrement[1]+")";
     }
 
 }
