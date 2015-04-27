@@ -1,4 +1,4 @@
-package Classes_métiers;
+package classe_metier;
 
 public class Monstre extends PersonnagenonJoueur {
 
@@ -10,9 +10,12 @@ public class Monstre extends PersonnagenonJoueur {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void dropOtem()
+	public void dropItem()
 	{
-		
+		for(int i=0;i<this.getInventaire().getTailleSacADos();i++)
+		{
+				this.getInventaire().getSacADos()[i]= null;
+		}
 	}
 
 }

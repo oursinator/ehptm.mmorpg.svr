@@ -1,4 +1,4 @@
-package Classes_métiers;
+package classe_metier;
 
 public class PointPlan {
 
@@ -10,6 +10,12 @@ public class PointPlan {
 	public PointPlan(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+	
+	public PointPlan(PointPlan copie)
+	{
+		this.x= copie.getX();
+		this.y= copie.getY();
 	}
 	public int getX() {
 		return x;

@@ -1,25 +1,27 @@
-package Classes_métiers;
+package classe_metier;
 
 public class Personnage {
+	
 
 	private int pointVie;
 	private int pointAction;
 	private Inventaire inventaire;
 	private PointPlan position;
 	
-	public Personnage(int pointVie, int pointAction, Inventaire inventaire,
+	public Personnage(int pvMax, int pointVie, int pointAction, Inventaire inventaire,
 			PointPlan position) {
 		
 		this.pointVie = pointVie;
 		this.pointAction = pointAction;
 		this.inventaire = inventaire;
 		this.position = position;
+		
 	}
 	
 	public Personnage()
 	{
 		
-		this.pointVie = 10;
+		this.pointVie = 6;
 		this.pointAction = 5;
 		this.inventaire = null;
 		this.position = null;
@@ -27,12 +29,22 @@ public class Personnage {
 	}
 	
 	public Personnage(Personnage copie){
-		Personnage a= new Personnage();
-		a.pointVie= copie.pointVie;
-		a.pointAction= copie.pointAction;
-		a.inventaire= new Inventaire(copie.inventaire);
-		a.position= new PointPlan(copie.position);
 		
+		this.pointVie= copie.pointVie;
+		this.pointAction= copie.pointAction;
+		this.inventaire= new Inventaire(copie.inventaire);
+		this.position= new PointPlan(copie.position);
+		
+	}
+	
+	
+
+	public PointPlan getPosition() {
+		return position;
+	}
+
+	public void setPosition(PointPlan position) {
+		this.position = position;
 	}
 	
 	public int getPointVie() {
@@ -60,9 +72,61 @@ public class Personnage {
 		this.position = position;
 	}
 	
-	/*public void attaquer(Personnage cible)
+	public void attaquer(Personnage cible)//methode abstraite
 	{
-		cible.setPointVie(cible.getPointVie()-);
+		
 	}
-	*/
+	
+	public String etat()
+	{
+		String a= "mort";
+		
+		if(this.pointVie== 6)
+		{
+			a="Parfaite santé";
+		}
+		
+		else if(this.pointVie== 5)
+		{
+			a= "Blessures superficielles";
+		}
+		else if(this.pointVie==4)
+		{
+			a= "Légèrement blessé";
+		}
+		else if(this.pointVie== 3)
+		{
+			a= "Blessé";
+		}
+		else if(this.pointVie== 2)
+		{
+			a= "Gravement blessé";
+		}
+		else if(this.pointVie== 1)
+		{
+			a= "Inconscient";
+		}
+		
+		return a; // si pointVie egale à 0
+	}
+	
+	public void recuperationPointAction()
+	{
+		
+	}
+	public void utiliserItem(Item item)
+	{
+		
+	}
+	public void deplacer(int x, int y)
+	{
+		if(this.position.getX()-1 == x || this.position.getX()+1 == x )
+		{
+			this.position.setX(x);
+		}
+		if(this.position.getY()-1 == y || this.position.getY()+1 == y)
+		{
+			this.position.setY(y);
+		}
+	}
 }
