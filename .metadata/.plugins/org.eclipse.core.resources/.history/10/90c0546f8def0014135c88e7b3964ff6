@@ -1,0 +1,121 @@
+package classe_metier;
+
+public class PersonnageJoueur extends Personnage {
+
+	private int[] px;
+	private int[] force;
+	private int[] adresse;
+	private int[] resistance;
+	
+	public PersonnageJoueur(int pointVie, int pointAction, Inventaire inventaire,
+			PointPlan position, int[] px, int[] force, int[] adresse, int[] resistance) {
+		super(pointVie, pointAction, inventaire, position);
+		this.px = px;
+		this.force = force;
+		this.adresse = adresse;
+		this.resistance = resistance;
+	}
+	
+	
+	public int[] getPx() {
+		return px;
+	}
+
+
+	public void setPx(int[] px) {
+		this.px = px;
+	}
+
+
+	public int[] getForce() {
+		return force;
+	}
+
+
+	public void setForce(int[] force) {
+		this.force = force;
+	}
+
+
+	public int[] getAdresse() {
+		return adresse;
+	}
+
+
+	public void setAdresse(int[] adresse) {
+		this.adresse = adresse;
+	}
+
+
+	public int[] getResistance() {
+		return resistance;
+	}
+
+
+	public void setResistance(int[] resistance) {
+		this.resistance = resistance;
+	}
+
+
+	public int[] initiative()
+	{
+		int[] encombrement= new int[2];
+		encombrement[0]=0;
+		encombrement[1]=0;
+		for(int i=0;i<this.getInventaire().getTailleSacADos();i++)
+		{
+			if(this.getInventaire().getSacADos()[i] instanceof Equipement)
+				{
+					Equipement a= (Equipement)this.getInventaire().getSacADos()[i];
+					encombrement[0]+= a.getEncombrement()[0];//il faut que item herite equipement
+					encombrement[1]+= a.getEncombrement()[1];
+				}
+			
+		}
+		encombrement[0]= this.getAdresse()[0]- encombrement[0];
+		encombrement[1]= this.getAdresse()[1]- encombrement[1];
+		return encombrement;
+	}
+	public int[] attaque()
+	{
+		
+		int tab[]= new int[2];
+		tab[0]=	this.getInventaire().getArme()[0].getManiabilite()[0]+this.getInventaire().getArme()[1].getManiabilite()[0];
+		tab[1]= this.getInventaire().getArme()[0].getManiabilite()[1]+this.getInventaire().getArme()[1].getManiabilite()[1];
+		tab[0]= tab[0]+ this.getAdresse()[0];
+		tab[1]= tab[1]+this.getAdresse()[1];
+			return tab;
+	}
+	public int[] esquive()
+	{
+		return this.initiative(); // car meme formule que initiative donc gain de temps
+	}
+	public int[] degats()
+	{
+		int tab[]= new int[2];
+		tab[0]=	this.getInventaire().getArme()[0].getImpact()[0]+this.getInventaire().getArme()[1].getImpact()[0];
+		tab[1]= this.getInventaire().getArme()[0].getImpact()[1]+this.getInventaire().getArme()[1].getImpact()[1];
+		tab[0]= tab[0]+ this.getForce()[0];
+		tab[1]= tab[1]+ this.getForce()[1];
+			return tab;
+	}
+	public int[] defense()
+	{
+		int tab[]= new int[2];
+		tab[0]=	this.getInventaire().getArme()[0].getSolidite()[0]+this.getInventaire().getArme()[1].getSolidite()[0];
+		tab[1]= this.getInventaire().getArme()[0].getSolidite()[1]+this.getInventaire().getArme()[1].getSolidite()[1];
+		tab[0]= tab[0]+ this.getResistance()[0];
+		tab[1]= tab[1]+ this.getResistance()[1];
+			return tab;
+	}
+	public void dropItem(Item nom)
+	{
+		for(int i=0;i<this.getInventaire().getTailleSacADos();i++)
+		{
+			if(this.getInventaire().getSacADos()[i].equals(nom.getNom())//méthode equals a definir dans la classe Item 
+			{
+				this.getInventaire().getSacADos()[i]= null;
+			}
+		}
+	}
+}

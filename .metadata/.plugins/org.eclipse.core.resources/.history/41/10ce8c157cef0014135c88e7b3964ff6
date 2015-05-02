@@ -1,0 +1,56 @@
+package classe_metier;
+import java.lang.Math;
+
+public class Carte {
+	
+	private Position grille[][]; 
+	private String nom;	
+	
+	
+	
+
+	public Carte(Position grille[][], String nom) {
+		this.grille= grille;
+		this.nom= nom;
+	}
+	
+	
+
+	public Carte() {
+		this.nom = "Default_map";
+		
+		this.grille= new Position[(int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM)][(int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM) ];
+	}
+
+	
+
+	public Position[][] getGrille() {
+		return grille;
+	}
+
+
+
+	public void setGrille(Position[][] grille) {
+		this.grille = grille;
+	}
+
+
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	
+	public boolean collision(int a, int b)
+	{
+		if(this.getGrille()[a][b] != null)
+			return true; //il y a collision
+		
+		return false;
+	}
+	
+
+}

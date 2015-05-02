@@ -1,0 +1,85 @@
+package classe_metier;
+import java.lang.Math;
+
+public class Carte {
+	
+	private PointPlan grille[][];
+	private String nom;
+	private ItemPosition tab[];
+	private PointPlan murs[];
+	private Personnage collection[];
+	
+	
+	
+	
+
+	public Carte(String nom, ItemPosition[] tab, PointPlan[] murs,
+			Personnage[] collection, PointPlan grille[][]) {
+		super();
+		this.nom = nom;
+		this.tab = tab;
+		this.murs = murs;
+		this.collection = collection;
+		this.grille= grille;
+	}
+	
+	public PointPlan[][] getGrille() {
+		return grille;
+	}
+
+	public void setGrille(PointPlan[][] grille) {
+		this.grille = grille;
+	}
+
+	public Carte(String nom) {
+		this.nom = nom;
+		this.tab= new ItemPosition[Partie.NB_MAX_ITEM];
+		this.murs=new PointPlan[50];
+		this.collection= new Personnage[Partie.NB_MAX_JOUEUR];
+		this.grille= new PointPlan[(int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM)][(int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM) ];
+	}
+
+	
+	public ItemPosition[] getTab() {
+		return tab;
+	}
+	
+	public void setTab(ItemPosition[] tab) {
+		this.tab = tab;
+	}
+
+	public PointPlan[] getMurs() {
+		return murs;
+	}
+
+	public void setMurs(PointPlan[] murs) {
+		this.murs = murs;
+	}
+
+	public Personnage[] getCollection() {
+		return collection;
+	}
+
+	public void setCollection(Personnage[] collection) {
+		this.collection = collection;
+	}
+
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	
+	public boolean collision(Personnage a)
+	{
+		for(int i=0;i<this.getCollection().length;i++)
+		{
+			
+		}
+		if(a.getPosition().getX()  && a.getPosition().getY()==)
+	}
+
+}

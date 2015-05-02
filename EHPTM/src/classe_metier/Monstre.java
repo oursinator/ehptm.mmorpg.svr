@@ -1,6 +1,6 @@
 package classe_metier;
 
-public class Monstre extends PersonnagenonJoueur {
+public class Monstre extends PersonnageNonJoueur {
 
 	public Monstre(int pointVie, int pointAction, Inventaire inventaire,
 			PointPlan position, int niveau, int initiative, int attaque,

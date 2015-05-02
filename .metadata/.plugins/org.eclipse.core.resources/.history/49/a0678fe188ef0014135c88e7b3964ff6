@@ -1,0 +1,104 @@
+package classe_metier;
+import java.lang.Math;
+
+public class Carte {
+	
+	private Position grille[][]; 
+	private String nom;
+	private Position[] murs;
+	public static final int NB_MURS= 5;
+	
+	
+
+	public Carte(Position grille[][], String nom, Position murs[]) {
+		this.grille= grille;
+		this.nom= nom;
+		int taille= (int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM + Carte.NB_MURS);
+		this.murs= murs;
+		for(int i=0;i< murs.length;i++)
+		{
+			for(int j=0; j<taille;j++)
+			{
+				for(int x=0;x<taille;x++)
+				{
+					if(this.grille[j][x] != null)
+					{
+						int a= (int)(Math.random() *(taille-1));
+						int b= (int)(Math.random() *(taille-1));
+						while(this.collision(a, b))
+						{
+							a= (int)(Math.random() *(taille-1));
+							b= (int)(Math.random() *(taille-1));
+						}
+						this.getGrille()[a][b]= this.murs[i];
+					}
+				}
+			}
+			
+			
+		}
+	}
+	
+	
+
+	public Carte() {
+		this.nom = "Default_map";
+		this.murs= new Position[Carte.NB_MURS];
+		int taille= (int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM + Carte.NB_MURS);
+		this.grille= new Position[taille][taille];
+		for(int i=0;i< murs.length;i++)
+		{
+			for(int j=0; j<taille;j++)
+			{
+				for(int x=0;x<taille;x++)
+				{
+					if(this.grille[j][x] != null)
+					{
+						int a= (int)(Math.random() *(taille-1));
+						int b= (int)(Math.random() *(taille-1));
+						while(this.collision(a, b))
+						{
+							a= (int)(Math.random() *(taille-1));
+							b= (int)(Math.random() *(taille-1));
+						}
+						this.getGrille()[a][b]= this.murs[i];
+					}
+				}
+			}
+			
+			
+		}
+	}
+
+	
+
+	public Position[][] getGrille() {
+		return grille;
+	}
+
+
+
+	public void setGrille(Position[][] grille) {
+		this.grille = grille;
+	}
+
+
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	
+	public boolean collision(int a, int b)
+	{
+		if(this.getGrille()[a][b] != null)
+			return true; //il y a collision
+		
+		return false;
+	}
+	
+
+}

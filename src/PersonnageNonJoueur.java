@@ -1,6 +1,6 @@
-package Classes_métiers;
+package classe_metier;
 
-public class PersonnagenonJoueur extends Personnage{
+public class PersonnageNonJoueur extends Personnage {
 	
 	private int niveau;
 	private int initiative;
@@ -8,7 +8,7 @@ public class PersonnagenonJoueur extends Personnage{
 	private int esquive;
 	private int degats;
 	private int defense;
-	public PersonnagenonJoueur(int pointVie, int pointAction,Inventaire inventaire, PointPlan position, int niveau,
+	public PersonnageNonJoueur(int pointVie, int pointAction,Inventaire inventaire, PointPlan position, int niveau,
 			int initiative, int attaque, int esquive, int degats, int defense) {
 		super(pointVie, pointAction, inventaire, position);
 		this.niveau = niveau;
@@ -19,15 +19,26 @@ public class PersonnagenonJoueur extends Personnage{
 		this.defense = defense;
 	}
 	
-	public PersonnagenonJoueur()
+	public PersonnageNonJoueur()
 	{
 		super();
-		this.niveau = niveau;
+		this.niveau = 1;
 		this.initiative = 0;
 		this.attaque = 0;
 		this.esquive = 0;
 		this.degats = 0;
 		this.defense = 0;
+	}
+	
+	public PersonnageNonJoueur(PersonnageNonJoueur a)
+	{
+		super((Personnage) a);
+		this.niveau = a.getNiveau();
+		this.initiative = a.getInitiative();
+		this.attaque = a.getAttaque();
+		this.esquive = a.getEsquive();
+		this.degats = a.getDegats();
+		this.defense = a.getDefense();
 	}
 	public int getNiveau() {
 		return niveau;
@@ -66,9 +77,41 @@ public class PersonnagenonJoueur extends Personnage{
 		this.defense = defense;
 	}
 	
-	public void attaquer(Personnage cible)
+	public void attaquer(PersonnageJoueur cible)
 	{
+		if(this.getPointAction()>=3)
+		{
+			this.setPointAction(this.getPointAction()-3);	
+			
+					int somme2=0;
+					for(int i=0;i<cible.esquive()[0];i++)
+					{
+						int a= (int)((Math.random()*(7-1))+1);
+						somme2 += a;
+					}
+					somme2 += cible.esquive()[1];
+					if(this.getAttaque()> somme2)
+					{
+						int def=0;
+						for(int i=0;i<cible.defense()[0];i++)
+						{
+							int a= (int)((Math.random()*(7-1))+1);
+							def += a;
+						}
+						def += cible.defense()[1];
+						int difference= this.getDegats()- def;
+						int pvPerdu= (int) difference/3;
+						cible.setPointVie(cible.getPointVie()- pvPerdu);
+					}
+					else
+						System.out.println("Raté!! pas assez rapide!");
+			
 		
+		}
+		else
+		{
+			System.out.println("Pas assez de point d'actions");
+		}
 	}
 	
 	public PointPlan getPointPlan()
@@ -86,10 +129,31 @@ public class PersonnagenonJoueur extends Personnage{
 		this.setPointPlan(new PointPlan(x,y));
 		
 	}
-	public int etat()
+	public void dropItem()
 	{
-		if()
+		for(int i=0;i<this.getInventaire().getTailleSacADos();i++)
+		{
+			
+				this.getInventaire().getSacADos()[i]= null;
+			
+		}
 	}
 	
 
+	public void recuperationPointAction(Partie partie)
+	{
+		int degre =((int)this.getInitiative()/3)+(this.getInitiative()%3);
+		long endTime = System.currentTimeMillis();
+		long dla= this.getStartTime();
+		if(endTime-dla>= partie.getDuree())
+		{
+			
+			this.setPointAction((int)(degre*0.5));
+			if(this.getPointAction()>6)
+			{
+				this.setPointAction(6);
+			}
+		}
+		
+	}
 }

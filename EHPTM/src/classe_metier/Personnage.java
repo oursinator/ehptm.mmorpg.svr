@@ -1,43 +1,52 @@
 package classe_metier;
 
-public class Personnage {
+public class Personnage extends Position{
 	
 
 	private int pointVie;
 	private int pointAction;
 	private Inventaire inventaire;
 	private PointPlan position;
-	
-	public Personnage(int pvMax, int pointVie, int pointAction, Inventaire inventaire,
-			PointPlan position) {
+	private long startTime;
+	public Personnage(int pointVie, int pointAction, Inventaire inventaire,
+			PointPlan position, String nom) {
 		
+		super(nom);
 		this.pointVie = pointVie;
 		this.pointAction = pointAction;
 		this.inventaire = inventaire;
 		this.position = position;
-		
+		this.startTime= System.currentTimeMillis();
 	}
 	
 	public Personnage()
 	{
-		
+		super();
 		this.pointVie = 6;
 		this.pointAction = 5;
 		this.inventaire = null;
 		this.position = null;
-		
+		this.startTime = System.currentTimeMillis();
 	}
 	
 	public Personnage(Personnage copie){
 		
 		this.pointVie= copie.pointVie;
 		this.pointAction= copie.pointAction;
-		this.inventaire= new Inventaire(copie.inventaire);
+		this.inventaire= new Inventaire(copie.getInventaire());//il faut créer un constructeur par copie dans inventaire
 		this.position= new PointPlan(copie.position);
-		
+		this.startTime = System.currentTimeMillis();
 	}
 	
 	
+
+	public long getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(long startTime) {
+		this.startTime = startTime;
+	}
 
 	public PointPlan getPosition() {
 		return position;
@@ -110,23 +119,15 @@ public class Personnage {
 		return a; // si pointVie egale à 0
 	}
 	
-	public void recuperationPointAction()
+	public void recuperationPointAction()//methode abstraite
 	{
 		
 	}
 	public void utiliserItem(Item item)
 	{
-		
+		//il faut utiliser la méthode utiliser des items en questions
 	}
-	public void deplacer(int x, int y)
-	{
-		if(this.position.getX()-1 == x || this.position.getX()+1 == x )
-		{
-			this.position.setX(x);
-		}
-		if(this.position.getY()-1 == y || this.position.getY()+1 == y)
-		{
-			this.position.setY(y);
-		}
-	}
+	
+	
+	
 }
