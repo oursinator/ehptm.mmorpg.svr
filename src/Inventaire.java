@@ -4,7 +4,6 @@ import com.modeliosoft.modelio.javadesigner.annotations.objid;
 public class Inventaire {
     @objid ("3de8dc5e-bde0-415c-af29-ff965ff1eb32")
     private int tailleSacADos;
-    private int nbPlaceSacADos;
 
     @objid ("3a82e576-3105-4328-9d93-653039ebc87a")
     private Item[] sacADos;
@@ -24,14 +23,12 @@ public class Inventaire {
     public Inventaire(){
     	this.tailleSacADos=20;
     	this.sacADos=new Item[this.tailleSacADos];
-    	this.nbPlaceSacADos=this.tailleSacADos;
     	this.arme=new Arme[2];
     	this.gants=new Gants[2];
     }
     public Inventaire(Item[] sacADos,Armure armure,Arme[] arme,PaireBottes paireBottes,Gants[] gants){
     	this.sacADos=sacADos;
     	this.tailleSacADos=sacADos.length;
-    	this.nbPlaceSacADos=this.nbTailleRestante();
     	this.armure=armure;
     	this.arme=arme;
     	this.paireBottes=paireBottes;
@@ -39,7 +36,6 @@ public class Inventaire {
     }
     public Inventaire(Inventaire inventaire){
     	this.tailleSacADos=inventaire.getSacADos().length;
-    	this.nbPlaceSacADos=inventaire.getNbPlaceSacADos();
     	this.armure=new Armure(inventaire.getArmure());
     	this.paireBottes=new PaireBottes(inventaire.getPaireBottes());
     	this.sacADos=new Item[inventaire.getSacADos().length];
@@ -73,7 +69,7 @@ public class Inventaire {
     public void setSacADos(Item[] value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.sacADos = value;
-        this.setTailleSacADos(this.sacADos.length);
+        this.tailleSacADos=this.sacADos.length;
     }
 
     @objid ("fed01aa0-22bb-4c69-8e20-b686d4279f2a")
@@ -142,32 +138,130 @@ public class Inventaire {
          * pour le changer sa taille*/
     }
 
-    public int getNbPlaceSacADos() {
+    public int getNbPlaceRestanteSacADos() {
+    	int nbPlaceSacADos=0;
+		for(int i=0;i<this.sacADos.length;i++){
+			if(this.sacADos[i]==null)
+				nbPlaceSacADos++;
+		}
 		return nbPlaceSacADos;
 	}
 
-	public void setNbPlaceSacADos(int nbPlaceSacADos) {
-		this.nbPlaceSacADos = nbPlaceSacADos;
-	}
-
-	private int nbTailleRestante(){
-		int place=0;
-		for(int i=0;i<this.sacADos.length;i++){
-			if(this.sacADos[i]==null)
-				place++;
-		}
-		return place;
-	}
 	@objid ("dd0a0ae8-1389-40bf-982f-95a1a1c4d7ee")
-    public void equiper() {
+    public void equiper(int numeroItem) {
+		if(this.sacADos[numeroItem] instanceof Arme){
+			if(this.arme[0]==null)
+				this.arme[0]=(Arme)this.sacADos[numeroItem];
+			else if(this.arme[1]==null)
+				this.arme[1]=(Arme)this.sacADos[numeroItem];
+		}
+		else if(this.sacADos[numeroItem] instanceof Gants){
+			if(this.gants[0]==null)
+				this.gants[0]=(Gants)this.sacADos[numeroItem];
+			else if(this.gants[1]==null)
+				this.gants[1]=(Gants)this.sacADos[numeroItem];
+		}
+		else if(this.sacADos[numeroItem] instanceof Armure){
+			if(this.armure==null)
+				this.armure=(Armure)this.sacADos[numeroItem];
+		}
+		else if(this.sacADos[numeroItem] instanceof PaireBottes){
+			if(this.paireBottes==null)
+				this.paireBottes=(PaireBottes)this.sacADos[numeroItem];
+		}
     }
 
     @objid ("be12ee50-1884-4ae6-88c6-80e81998bdf2")
-    public void desequiper() {
+    public void desequiper(int typeItem,int numeroItem) {
+    	if(this.getNbPlaceRestanteSacADos()>0){
+    		int i=0;
+    		while(i<this.sacADos.length && this.sacADos[i]!=null){
+    			i++;
+    		}
+    		i--;
+	    	switch(typeItem){
+		    	case 0:
+		    		this.sacADos[i]=this.arme[numeroItem];
+		    		this.arme[numeroItem]=null;
+		    		break;
+		    	case 1:
+		    		this.sacADos[i]=this.gants[numeroItem];
+		    		this.gants[numeroItem]=null;
+		    		break;
+		    	case 2:
+		    		this.sacADos[i]=this.armure;
+		    		this.armure=null;
+		    		break;
+		    	case 3:
+		    		this.sacADos[i]=this.paireBottes;
+		    		this.paireBottes=null;
+		    		break;
+		    }
+    	}
+    	
     }
 
     @objid ("79e89308-6d1f-4ef6-87bc-3b71c289c719")
-    public void jeter() {
+    public Item jeter(int choix,int numeroItem) {
+    	Item item_cache=new Item("");
+	    switch(choix){
+	    	case 0:
+	    		item_cache=this.sacADos[numeroItem];
+	    		this.sacADos[numeroItem]=null;
+	    		break;
+	    	case 1:
+	    		item_cache=this.arme[numeroItem];
+	    		this.arme[numeroItem]=null;
+	    		break;
+	    	case 2:
+	    		item_cache=this.gants[numeroItem];
+	    		this.gants[numeroItem]=null;
+	    		break;
+	    	case 3:
+	    		item_cache=this.armure;
+	    		this.armure=null;
+	    		break;
+	    	case 4:
+	    		item_cache=this.paireBottes;
+	    		this.paireBottes=null;
+	    		break;
+	    }
+	    return item_cache;
+    }
+    
+    public String toString(){
+    	String s="### Contenu du sac a dos ###\nPlace restante: "+this.getNbPlaceRestanteSacADos()+"\n";
+    	for(int i=0;i<this.sacADos.length;i++){
+    		if(this.sacADos[i]!=null)
+    			s+="\tEmplacement "+(i+1)+": "+this.sacADos[i]+"\n";
+    	}
+    	s+="\n### Armes ###\n";
+    	s+="\tEmplacement 1: ";
+    	if(arme[0]!=null)
+    		s+=this.arme[0]+"\n";
+    	else
+    		s+="vide\n";
+    	s+="\tEmplacement 2: ";
+    	if(arme[1]!=null)
+    	   	s+=this.arme[1]+"\n";
+    	else
+    		s+="vide\n";
+    	
+    	s+="\n### Gants ###\n";
+    	s+="\tEmplacement 1: ";
+    	if(gants[0]!=null)
+    		s+=this.gants[0]+"\n";
+    	else
+    		s+="vide\n";
+    	s+="\tEmplacement 2: ";
+    	if(gants[1]!=null)
+    	   	s+=this.gants[1]+"\n";
+    	else
+    		s+="vide\n";
+    	
+    	s+="\n### Armure ###\n\t"+this.armure+"\n";
+    	s+="\n### Bottes ###\n\t"+this.paireBottes+"\n";
+    	return s;
     }
 
 }

@@ -39,4 +39,8 @@ public class Gants extends Equipement {
     public Gants(Gants gants){
     	super(gants);
     }
+    
+    public String toString(){
+    	return super.toString()+"]";
+    }
 }

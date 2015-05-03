@@ -20,24 +20,24 @@ public class Armure extends Equipement {
     	int[] solidite=new int[2];
     	int[] encombrement= new int[2];
     	switch(type){
-    	case Armure.ARMURE_CUIR:
-    		solidite[0]=0;
-    		solidite[1]=3;
-    		encombrement[0]=1;
-    		encombrement[1]=1;
-    		break;
-    	case Armure.ARMURE_BRONZE:
-    		solidite[0]=1;
-    		solidite[1]=4;
-    		encombrement[0]=2;
-    		encombrement[1]=2;
-    		break;
-    	case Armure.ARMURE_OR:
-    		solidite[0]=2;
-    		solidite[1]=2;
-    		encombrement[0]=3;
-    		encombrement[1]=1;
-    		break;
+	    	case Armure.ARMURE_CUIR:
+	    		solidite[0]=0;
+	    		solidite[1]=3;
+	    		encombrement[0]=1;
+	    		encombrement[1]=1;
+	    		break;
+	    	case Armure.ARMURE_BRONZE:
+	    		solidite[0]=1;
+	    		solidite[1]=4;
+	    		encombrement[0]=2;
+	    		encombrement[1]=2;
+	    		break;
+	    	case Armure.ARMURE_OR:
+	    		solidite[0]=2;
+	    		solidite[1]=2;
+	    		encombrement[0]=3;
+	    		encombrement[1]=1;
+	    		break;
     	}
     	super.setSolidite(solidite);
 		super.setEncombrement(encombrement);

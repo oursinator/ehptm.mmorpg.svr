@@ -56,6 +56,12 @@ public class Arme extends Equipement {
     		this.impact[i]=arme.getImpact()[i];
     	}
     }
+    
+    public Arme(String nom,int [] solidite,int[] encombrement,int[] maniabilite,int[] impact){
+    	super(nom,solidite,encombrement);
+    	this.maniabilite=maniabilite;
+    	this.impact=impact;
+    }
 
     @objid ("00ae7932-27be-45f0-9d1f-07f0dd3a22bf")
     public int[] getManiabilite() {

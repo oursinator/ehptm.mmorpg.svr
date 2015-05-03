@@ -28,15 +28,12 @@ public class PotionMolotov extends Potion {
     	this.radius=potion.getRadius();
     }
     
-    @objid ("950757dc-a913-4edf-a538-8a2c4b5212ec")
-    public static String getMOLOTOV_1() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return MOLOTOV_1;
+    public PotionMolotov(String nom,int pa,int degat,int rayon){
+    	super(nom,pa);
+    	this.degat=degat;
+    	this.radius=rayon;
     }
-    public static String getMOLOTOV_2() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return MOLOTOV_2;
-    }
+    
 
     @objid ("359b6437-47d4-4408-909b-800a960226a3")
     public int getDegat() {
@@ -61,6 +58,6 @@ public class PotionMolotov extends Potion {
     }
 
 	public String toString(){
-    	return super.toString() + ", degat: "+this.degat+", rayon: "+this.radius;
+    	return super.toString() + " | degat: "+this.degat+" | rayon: "+this.radius+"]";
     }
 }

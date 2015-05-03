@@ -3,8 +3,8 @@ import com.modeliosoft.modelio.javadesigner.annotations.objid;
 @objid ("7f0f513f-b7d3-482a-8363-26f22f66bb86")
 public class PotionSoin  extends Potion {
     @objid ("c1c189ba-7316-497d-932e-98edb4325a78")
-    public static final String SOIN_1="soin 1";
-    public static final String SOIN_2="soin 2";
+    public static final String SOIN_1="de soin niveau 1";
+    public static final String SOIN_2="de soin niveau 2";
 
     @objid ("73a3882c-21e3-4563-8930-f3b8986b321d")
     private int soin;
@@ -20,19 +20,13 @@ public class PotionSoin  extends Potion {
     		this.soin=20;
     	}
     }
-    
     public PotionSoin(PotionSoin potion){
     	super(potion);
     	this.soin=potion.getSoin();
     }
-    @objid ("0b2dc258-117e-429d-b778-80f5eabd4536")
-    public static String getSOIN_1() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return SOIN_1;
-    }
-    public static String getSOIN_2() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return SOIN_2;
+    public PotionSoin(String nom,int pa,int soin){
+    	super(nom,pa);
+    	this.soin=soin;
     }
     
     public int getSoin(){
@@ -46,7 +40,7 @@ public class PotionSoin  extends Potion {
     }
     
     public String toString(){
-    	return super.toString() + ", soin: "+this.soin;
+    	return super.toString() + " | Soin: "+this.soin+"]";
     }
 
 }

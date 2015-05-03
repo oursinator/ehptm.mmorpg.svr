@@ -24,7 +24,7 @@ public class Potion extends Item {
         this.pointAction = value;
     }
     public String toString(){
-    	return super.toString() + ", point d'action: "+this.pointAction;
+    	return super.toString() + " [Point d'action: "+this.pointAction;
     }
 
 }
