@@ -1,71 +1,208 @@
-import java.util.ArrayList;
-import java.util.List;
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
-
-@objid ("3c8b203f-6a8a-4c2f-91d7-beea68711832")
 public class Carte {
-    @objid ("9f22a72b-d33d-47f4-bb48-4cf4651b6f7a")
-    private String nom;
+	
+	private Object grille[][]; 
+	private String nom;
+	public static final int NB_MURS= 5;
+	public static final int TAILLE_GRILLE=(int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM + Carte.NB_MURS);
+	
+	
 
-    @objid ("9e456c6b-bb43-4153-be99-4bcaf477e22d")
-    private List<ItemPosition> itemPosition = new ArrayList<ItemPosition> ();
+	public Carte(Object grille[][], String nom) {
+		this.grille= grille;
+		this.nom= nom;
+	}
+	
+	
 
-    @objid ("af6eb0b6-7094-48e7-b6ff-d0c4f23fa47c")
-    private List<Personnage> personnage = new ArrayList<Personnage> ();
+	public Carte() {
+		this.nom = "Default_map";
+		this.grille= new Object[Carte.TAILLE_GRILLE][Carte.TAILLE_GRILLE];
+		for(int i=0; i<grille.length;i++){
+			grille[i][0]=new Object();
+			grille[i][grille[0].length-1]=new Object();
+			
+		}
+		for(int j=0;j<grille[0].length;j++){
+			grille[0][j]=new Object();
+			grille[grille.length-1][j]=new Object();
+		}
+		for(int i=0;i< Carte.NB_MURS;i++)
+		{
+			for(int j=0; j<Carte.TAILLE_GRILLE;j++)
+			{
+				for(int x=0;x<Carte.TAILLE_GRILLE;x++)
+				{
+					if(this.grille[j][x] != null)
+					{
+						int a= (int)(Math.random() *(Carte.TAILLE_GRILLE-1));
+						int b= (int)(Math.random() *(Carte.TAILLE_GRILLE-1));
+						while(this.collision(a, b))
+						{
+							a= (int)(Math.random() *(Carte.TAILLE_GRILLE-1));
+							b= (int)(Math.random() *(Carte.TAILLE_GRILLE-1));
+						}
+						this.getGrille()[a][b]= new Object();
+					}
+				}
+			}
+			
+			
+		}
+	}
 
-    @objid ("2a6392a1-f533-4f26-b065-8edf8108a618")
-    private List<PointPlan> mur = new ArrayList<PointPlan> ();
+	public Carte(Carte a)
+	{
+		this.nom= new String(a.getNom());
+		this.grille= new Object[a.getGrille().length][a.getGrille()[0].length];
+		for(int i=0; i<this.grille.length;i++)
+		{
+			for(int j=0;j< this.grille[0].length; i++)
+			{
+				if( this.getGrille()[i][j] instanceof Item)
+					this.getGrille()[i][j]=new Item((Item)this.getGrille()[i][j]);
+				else if (this.getGrille()[i][j] instanceof PersonnageJoueur)
+					this.getGrille()[i][j]=new PersonnageJoueur((PersonnageJoueur)this.getGrille()[i][j]);
+				else if (this.getGrille()[i][j] instanceof Monstre)
+					this.getGrille()[i][j]=new Monstre((Monstre)this.getGrille()[i][j]);
+				else if(this.getGrille()[i][j] instanceof PersonnageNonJoueur)
+					this.getGrille()[i][j]=new PersonnageNonJoueur((PersonnageNonJoueur)this.getGrille()[i][j]);
+				else
+					this.getGrille()[i][j]= new Object();
+			}
+			
+		}
+		
+	}
 
-    @objid ("8d8530b8-6991-41e0-9c9a-417eea5ebd20")
-    String getNom() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return this.nom;
-    }
+	public static int getNbMurs() {
+		return NB_MURS;
+	}
 
-    @objid ("3e1afff3-ec2f-47da-acea-667b540d107e")
-    void setNom(String value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        this.nom = value;
-    }
 
-    @objid ("ae11b76d-9cf3-4434-abaa-5940873a7569")
-    public void collision() {
-    }
 
-    @objid ("270a7215-6752-4fe0-84f1-959b084aa1fe")
-    void setPersonnage(List<Personnage> value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        this.personnage = value;
-    }
+	public Object[][] getGrille() {
+		return grille;
+	}
 
-    @objid ("af1ec020-45cd-4591-bfdc-7aaffc7d5b91")
-    List<Personnage> getPersonnage() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return this.personnage;
-    }
 
-    @objid ("82e992c0-4883-4620-aab8-f25fb249e11a")
-    void setMur(List<PointPlan> value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        this.mur = value;
-    }
 
-    @objid ("ac67afa1-a5d8-47c5-83ef-eb2d560f8291")
-    List<PointPlan> getMur() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return this.mur;
-    }
+	public void setGrille(Object[][] grille) {
+		this.grille = grille;
+	}
 
-    @objid ("8610b863-05a8-46f2-bd46-27e19a4ef341")
-    List<ItemPosition> getItemPosition() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return this.itemPosition;
-    }
 
-    @objid ("4f2a554e-b99c-4b2f-b13f-05c2dc03b2bc")
-    void setItemPosition(List<ItemPosition> value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        this.itemPosition = value;
-    }
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	
+	public boolean collision(int a, int b)
+	{
+		if(this.getGrille()[a][b] != null)
+			return true; //il y a collision
+		
+		return false;
+	}
+	
+	
+	//##############################
+	//A modifier !
+	
+//	public void deplacer(Personnage a)
+//	{
+//		int taille= (int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM + Carte.NB_MURS);
+//		for(int i=0;i<taille;i++)
+//		{
+//			for(int j=0;j<taille;j++)
+//			{
+//				if(this.getGrille()[i][j].equals(a))
+//				{
+//					Scanner input= new Scanner(System.in);
+//					System.out.println("voulez-vous vous déplacer verticalement ou horizontalement? Tapez 1 pour la verticale et 2 pour l'horizontale.");
+//					int b= input.nextInt();
+//					while(b!=1 || b!=2)
+//					{
+//						System.out.println("voulez-vous vous déplacer verticalement ou horizontalement? Tapez 1 pour la verticale et 2 pour l'horizontale.");
+//						b= input.nextInt();
+//					}
+//					if(b==1)
+//					{
+//						System.out.println("Tapez 1 pour monter ou 2 pour descendre.");
+//						int c= input.nextInt();
+//						while(c!=1 || c!=2)
+//						{
+//							System.out.println("Tapez 1 pour monter ou 2 pour descendre.");
+//							c= input.nextInt();
+//						}
+//						try
+//						{
+//							if(c==1)
+//							{
+//								if(this.getGrille()[i-1][j] !=null)
+//									this.getGrille()[i-1][j]=a;
+//									
+//							}
+//						}
+//						catch(IndexOutOfBoundsException e)
+//						{
+//							System.out.println("Vous ne pouvez pas monter plus haut.");
+//						}
+//						try
+//						{
+//							if(c==2)
+//							{
+//								if(this.getGrille()[i-1][j] !=null)
+//									this.getGrille()[i-1][j]=a;
+//							}
+//						}
+//						catch(IndexOutOfBoundsException e)
+//						{
+//							System.out.println("Vous ne pouvez pas descendre plus bas.");
+//						}
+//					}
+//					else
+//					{
+//						System.out.println("Tapez 1 pour aller à droite ou 2 pour aller à gauche.");
+//						int c= input.nextInt();
+//						while(c!=1 || c!=2)
+//						{
+//							System.out.println("Tapez 1 pour aller à droite ou 2 pour aller à gauche.");
+//							c= input.nextInt();
+//						}
+//						try
+//						{
+//							if(c==1)
+//							{
+//								if(this.getGrille()[i][j+1] !=null)
+//									this.getGrille()[i][j+1]=a;
+//									
+//							}
+//						}
+//						catch(IndexOutOfBoundsException e)
+//						{
+//							System.out.println("Vous ne pouvez pas aller plus à droite.");
+//						}
+//						try
+//						{
+//							if(c==2)
+//							{
+//								if(this.getGrille()[i][j-1] !=null)
+//									this.getGrille()[i][j-1]=a;
+//							}
+//						}
+//						catch(IndexOutOfBoundsException e)
+//						{
+//							System.out.println("Vous ne pouvez pas aller plus à gauche.");
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
+	//##############################
 
 }

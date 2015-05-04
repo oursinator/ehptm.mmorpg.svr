@@ -1,89 +1,231 @@
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
-
-@objid ("83cf2207-dabf-489a-b982-65eaf615aaa0")
 public class PersonnageJoueur extends Personnage {
-    @objid ("ddd8439a-8a28-49c1-a817-90ea0ee9f877")
-    private int px;
 
-    @objid ("cba4aa57-547c-41cc-a743-e89681c1d04a")
-    private int force;
+	private int[] px;
+	private int[] force;
+	private int[] adresse;
+	private int[] resistance;
+	
+	public PersonnageJoueur(int pointVie, int pointAction, Inventaire inventaire, String nom, int[] px, int[] force, int[] adresse, int[] resistance) {
+		super(pointVie, pointAction, inventaire, nom);
+		this.px = px;
+		this.force = force;
+		this.adresse = adresse;
+		this.resistance = resistance;
+	}
+	
+	public PersonnageJoueur(PersonnageJoueur a)
+	{
+		this.px= new int[2];
+		this.force= new int[2];
+		this.adresse= new int[2];
+		this.resistance= new int[2];
+		for(int i=0;i<2;i++)
+		{
+			this.px[i]= a.getPx()[i];
+			this.force[i]= a.getForce()[i];
+			this.adresse[i]= a.getAdresse()[i];
+			this.resistance[i]= a.getResistance()[i];
+		}
+	}
+	
+	public int[] getPx() {
+		return px;
+	}
 
-    @objid ("76f764b9-7078-44b0-ab3b-88292b701bac")
-    private int adresse;
 
-    @objid ("9167c9a1-4f56-41bc-b34e-9ba6cad75fae")
-    private int resistance;
+	public void setPx(int[] px) {
+		this.px = px;
+	}
 
-    @objid ("df2c0e93-2723-49cb-94b3-3041bd924dac")
-    private int getPx() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return this.px;
-    }
 
-    @objid ("5ad0b02b-fd91-4756-ae55-2ca28c72febd")
-    void setPx(int value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        this.px = value;
-    }
+	public int[] getForce() {
+		return force;
+	}
 
-    @objid ("9c239adb-45ef-44fc-b6c6-f74c0a23acf6")
-    int getForce() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return this.force;
-    }
 
-    @objid ("9d8973a7-1351-4c0b-b4f5-f1fc5f03acb1")
-    void setForce(int value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        this.force = value;
-    }
+	public void setForce(int[] force) {
+		this.force = force;
+	}
 
-    @objid ("919bb48a-6b78-4eb7-89ce-87d56b8b04a9")
-    int getAdresse() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return this.adresse;
-    }
 
-    @objid ("bf55c5c5-f988-4de1-879a-435255cb4739")
-    void setAdresse(int value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        this.adresse = value;
-    }
+	public int[] getAdresse() {
+		return adresse;
+	}
 
-    @objid ("42730e82-c8bf-43e8-b5cf-ade5599d4d6f")
-    int getResistance() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return this.resistance;
-    }
 
-    @objid ("65a7608a-50b4-42c1-9c72-16c3c34d0710")
-    void setResistance(int value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        this.resistance = value;
-    }
+	public void setAdresse(int[] adresse) {
+		this.adresse = adresse;
+	}
 
-    @objid ("39219d12-8a74-4680-8988-38b7383c6b16")
-    public int initiative() {
-    }
 
-    @objid ("5638d85f-3c91-4068-9b9f-09b0463b774f")
-    public int attaque() {
-    }
+	public int[] getResistance() {
+		return resistance;
+	}
 
-    @objid ("499bf623-6f60-4d51-b6a8-41c589f97794")
-    public int esquive() {
-    }
 
-    @objid ("56412998-a133-4348-b146-1bd9fafd46d1")
-    public int degat() {
-    }
+	public void setResistance(int[] resistance) {
+		this.resistance = resistance;
+	}
 
-    @objid ("4a1c3441-7f72-428e-8c1c-d8d73aa78c3c")
-    public int defense() {
-    }
 
-    @objid ("fd46f767-d7c4-43ae-a7c3-c35708c5af80")
-    public void dropItem() {
-    }
+	public int[] initiative()
+	{
+		int[] encombrement= new int[2];
+		encombrement[0]=0;
+		encombrement[1]=0;
+		for(int i=0;i<this.getInventaire().getTailleSacADos();i++)
+		{
+			if(this.getInventaire().getSacADos()[i] instanceof Equipement)
+				{
+					Equipement a= (Equipement)this.getInventaire().getSacADos()[i];
+					encombrement[0]+= a.getEncombrement()[0];//il faut que item herite equipement
+					encombrement[1]+= a.getEncombrement()[1];
+				}
+			
+		}
+		encombrement[0]= this.getAdresse()[0]- encombrement[0];
+		encombrement[1]= this.getAdresse()[1]- encombrement[1];
+		
 
+		
+			return encombrement;
+	}
+	public int[] attaque()
+	{
+		int tab[]= new int[2];
+		tab[0]=	this.getInventaire().getArme()[0].getManiabilite()[0]+this.getInventaire().getArme()[1].getManiabilite()[0];
+		tab[1]= this.getInventaire().getArme()[0].getManiabilite()[1]+this.getInventaire().getArme()[1].getManiabilite()[1];
+		tab[0]= tab[0]+ this.getAdresse()[0];
+		tab[1]= tab[1]+this.getAdresse()[1];
+		
+		
+			return tab;
+	}
+	public int[] esquive()
+	{
+		return this.initiative(); // car meme formule que initiative donc gain de temps
+	}
+	public int[] degats()
+	{
+		int tab[]= new int[2];
+		tab[0]=	this.getInventaire().getArme()[0].getImpact()[0]+this.getInventaire().getArme()[1].getImpact()[0];
+		tab[1]= this.getInventaire().getArme()[0].getImpact()[1]+this.getInventaire().getArme()[1].getImpact()[1];
+		tab[0]= tab[0]+ this.getForce()[0];
+		tab[1]= tab[1]+ this.getForce()[1];
+		
+			return tab;
+			
+	}
+	public int[] defense()
+	{
+		int tab[]= new int[2];
+		tab[0]=	this.getInventaire().getArme()[0].getSolidite()[0]+this.getInventaire().getArme()[1].getSolidite()[0];
+		tab[1]= this.getInventaire().getArme()[0].getSolidite()[1]+this.getInventaire().getArme()[1].getSolidite()[1];
+		tab[0]= tab[0]+ this.getResistance()[0];
+		tab[1]= tab[1]+ this.getResistance()[1];
+		
+
+			return tab;
+	}
+	/*
+	public void dropItem(Item nom)
+	{
+		for(int i=0;i<this.getInventaire().getTailleSacADos();i++)
+		{
+			if(this.getInventaire().getSacADos()[i].equals(nom.getNom()))//méthode equals a definir dans la classe Item 
+			{
+				this.getInventaire().getSacADos()[i]= null;
+			}
+		}
+	}*/
+	
+	public void attaquer(Personnage cible) // cette méthode ne calcule pas les carac mais fait des dégats
+	{
+		if(this.getPointAction()>=3)
+		{
+			this.setPointAction(this.getPointAction()-3);
+			int somme=0;
+			for(int i=0;i<this.attaque()[0];i++)
+			{
+				int a= (int)((Math.random()*(7-1))+1);
+				somme+= a;
+			}
+			somme+= this.attaque()[1];		
+			if(cible instanceof PersonnageJoueur)
+			{
+				PersonnageJoueur b= new PersonnageJoueur((PersonnageJoueur)cible);
+					int somme2=0;
+					for(int i=0;i<b.esquive()[0];i++)
+					{
+						int a= (int)((Math.random()*(7-1))+1);
+						somme2 += a;
+					}
+					somme2 += b.esquive()[1];
+					if(somme> somme2)
+					{
+						int degats=0;
+						for(int i=0;i<this.degats()[0];i++)
+						{
+							int a= (int)((Math.random()*(7-1))+1);
+							degats += a;
+						}
+						degats += this.degats()[1];
+						int def=0;
+						for(int i=0;i<b.defense()[0];i++)
+						{
+							int a= (int)((Math.random()*(7-1))+1);
+							def += a;
+						}
+						def += b.defense()[1];
+						int difference= degats- def;
+						int pvPerdu= (int) difference/3;
+						cible.setPointVie(cible.getPointVie()- pvPerdu);
+					}
+					else
+						System.out.println("Raté!! pas assez rapide!");// A enlever
+			
+			}
+			if(cible instanceof PersonnageNonJoueur)
+			{
+				PersonnageNonJoueur newCible = new PersonnageNonJoueur((PersonnageNonJoueur) cible);
+				if(somme> newCible.getInitiative())
+				{
+					int degats=0;
+					for(int i=0;i<this.degats()[0];i++)
+					{
+						int a= (int)((Math.random()*(7-1))+1);
+					degats += a;
+					}
+					degats += this.degats()[1];
+					int difference= degats - newCible.getDefense();
+					int pvPerdu= (int)difference/3;
+					cible.setPointVie(cible.getPointVie()- pvPerdu);
+				}
+				else
+					System.out.println("Raté!! pas assez rapide!"); // A enlever
+			}
+		
+		}
+		else
+		{
+			System.out.println("Pas assez de point d'actions");// A enlever
+		}
+	}
+	
+	public void recuperationPointAction(Partie partie)
+	{
+		int degre =this.initiative()[0]*3+this.initiative()[1];
+		long endTime = System.currentTimeMillis();
+		long dla= this.getStartTime();
+		if(endTime-dla>= partie.getDuree())
+		{
+			
+			this.setPointAction((int)(degre*0.5));
+			if(this.getPointAction()>6)
+			{
+				this.setPointAction(6);
+			}
+		}
+		
+	}
 }
