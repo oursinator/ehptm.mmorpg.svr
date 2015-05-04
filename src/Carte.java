@@ -112,97 +112,92 @@ public class Carte {
 	//##############################
 	//A modifier !
 	
-//	public void deplacer(Personnage a)
-//	{
-//		int taille= (int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM + Carte.NB_MURS);
-//		for(int i=0;i<taille;i++)
-//		{
-//			for(int j=0;j<taille;j++)
-//			{
-//				if(this.getGrille()[i][j].equals(a))
-//				{
-//					Scanner input= new Scanner(System.in);
-//					System.out.println("voulez-vous vous déplacer verticalement ou horizontalement? Tapez 1 pour la verticale et 2 pour l'horizontale.");
-//					int b= input.nextInt();
-//					while(b!=1 || b!=2)
-//					{
-//						System.out.println("voulez-vous vous déplacer verticalement ou horizontalement? Tapez 1 pour la verticale et 2 pour l'horizontale.");
-//						b= input.nextInt();
-//					}
-//					if(b==1)
-//					{
-//						System.out.println("Tapez 1 pour monter ou 2 pour descendre.");
-//						int c= input.nextInt();
-//						while(c!=1 || c!=2)
-//						{
-//							System.out.println("Tapez 1 pour monter ou 2 pour descendre.");
-//							c= input.nextInt();
-//						}
-//						try
-//						{
-//							if(c==1)
-//							{
-//								if(this.getGrille()[i-1][j] !=null)
-//									this.getGrille()[i-1][j]=a;
-//									
-//							}
-//						}
-//						catch(IndexOutOfBoundsException e)
-//						{
-//							System.out.println("Vous ne pouvez pas monter plus haut.");
-//						}
-//						try
-//						{
-//							if(c==2)
-//							{
-//								if(this.getGrille()[i-1][j] !=null)
-//									this.getGrille()[i-1][j]=a;
-//							}
-//						}
-//						catch(IndexOutOfBoundsException e)
-//						{
-//							System.out.println("Vous ne pouvez pas descendre plus bas.");
-//						}
-//					}
-//					else
-//					{
-//						System.out.println("Tapez 1 pour aller à droite ou 2 pour aller à gauche.");
-//						int c= input.nextInt();
-//						while(c!=1 || c!=2)
-//						{
-//							System.out.println("Tapez 1 pour aller à droite ou 2 pour aller à gauche.");
-//							c= input.nextInt();
-//						}
-//						try
-//						{
-//							if(c==1)
-//							{
-//								if(this.getGrille()[i][j+1] !=null)
-//									this.getGrille()[i][j+1]=a;
-//									
-//							}
-//						}
-//						catch(IndexOutOfBoundsException e)
-//						{
-//							System.out.println("Vous ne pouvez pas aller plus à droite.");
-//						}
-//						try
-//						{
-//							if(c==2)
-//							{
-//								if(this.getGrille()[i][j-1] !=null)
-//									this.getGrille()[i][j-1]=a;
-//							}
-//						}
-//						catch(IndexOutOfBoundsException e)
-//						{
-//							System.out.println("Vous ne pouvez pas aller plus à gauche.");
-//						}
-//					}
-//				}
-//			}
-//		}
-//	}
-	//##############################
-
+	public String deplacer(Personnage a, int direction, int sens)
+	{
+		String mess="vos indices de déplacements ne sont pas valides";
+		if(direction ==1 || direction == -1) // 1 pour horizontale et -1 pour verticale
+		{
+			if(sens==1 || sens ==-1) // 1 pour droite et -1 pour gauche
+			{
+				for(int i=0;i<TAILLE_GRILLE;i++)
+				{
+					for(int j=0;j<TAILLE_GRILLE;j++)
+					{
+						if(this.getGrille()[i][j].equals(a))
+						{
+							
+							if(direction ==1)
+							{
+								if(sens ==1)
+								{
+									try{
+										if(this.getGrille()[i][j+1] !=null)
+										{
+											this.getGrille()[i][j+1]=a;
+											mess= "à droite toute!";
+										}
+									}
+									catch(IndexOutOfBoundsException e)
+									{
+										mess="Vous ne pouvez pas allez plus à droite."
+									}
+								}
+										
+								else
+								{
+									try{
+										if(this.getGrille()[i][j-1] !=null)
+										{
+											this.getGrille()[i][j-1]=a;
+											mess= "à droite toute!";
+										}
+									}
+									catch(IndexOutOfBoundsException e)
+									{
+										mess="Vous ne pouvez pas allez plus à gauche."
+									}
+								}
+							}
+							else
+							{
+								if(sens ==1)
+								{
+									try{
+										if(this.getGrille()[i-1][j] !=null)
+										{
+											this.getGrille()[i-1][j]=a;
+											mess= "Monté!";
+										}
+									}
+									catch(IndexOutOfBoundsException e)
+									{
+										mess="Vous ne pouvez pas allez plus haut.";
+									}
+								}
+										
+								else
+								{
+									try{
+										if(this.getGrille()[i+1][j] !=null)
+										{
+											this.getGrille()[i+1][j]=a;
+											mess= "Descendu!";
+										}
+									}
+									catch(IndexOutOfBoundsException e)
+									{
+										mess="Vous ne pouvez pas allez plus bas.";
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		
+		
+		}
+		return mess;
+	}
+	
 }
