@@ -139,7 +139,7 @@ public class Carte {
 									}
 									catch(IndexOutOfBoundsException e)
 									{
-										mess="Vous ne pouvez pas allez plus à droite."
+										mess="Vous ne pouvez pas allez plus à droite.";
 									}
 								}
 										
@@ -154,7 +154,7 @@ public class Carte {
 									}
 									catch(IndexOutOfBoundsException e)
 									{
-										mess="Vous ne pouvez pas allez plus à gauche."
+										mess="Vous ne pouvez pas allez plus à gauche.";
 									}
 								}
 							}

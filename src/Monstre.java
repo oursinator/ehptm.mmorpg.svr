@@ -8,13 +8,17 @@ public class Monstre extends PersonnageNonJoueur {
 	public Monstre(Monstre m){
 		super(m);
 	}
-	/*
+	
 	public void dropItem()
 	{
-		for(int i=0;i<this.getInventaire().getTailleSacADos();i++)
+		if(this.getPointVie()==0)
 		{
-				this.getInventaire().getSacADos()[i]= null;
+			for(int i=0;i<this.getInventaire().getTailleSacADos();i++)
+			{
+					this.getInventaire().getSacADos()[i]= null;
+			}
 		}
-	}*/
+		
+	}
 
 }

@@ -1,4 +1,4 @@
-public abstract class Personnage{
+public class Personnage{
 	
 
 	private int pointVie;
@@ -62,7 +62,6 @@ public abstract class Personnage{
 	}
 	
 	
-	public abstract boolean attaquer(Personnage cible);//methode abstraite
 	
 	
 	public String etat()
@@ -115,7 +114,7 @@ public abstract class Personnage{
 		this.nom = nom;
 	}
 	
-	public void deplacer
+
 	
 	
 }
