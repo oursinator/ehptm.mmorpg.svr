@@ -1,3 +1,8 @@
+import ehptm.mmorpg.svr.classe.metier.Armure;
+import ehptm.mmorpg.svr.classe.metier.Equipement;
+import ehptm.mmorpg.svr.classe.metier.Gants;
+import ehptm.mmorpg.svr.classe.metier.PaireBottes;
+
 
 public class TestEquipement {
 
