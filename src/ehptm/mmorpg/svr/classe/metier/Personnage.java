@@ -1,12 +1,12 @@
 package ehptm.mmorpg.svr.classe.metier;
-public abstract class Personnage{
-	
+public class Personnage{
 
 	private int pointVie;
 	private int pointAction;
 	private Inventaire inventaire;
 	private long startTime;
 	private String nom;
+	
 	public Personnage(int pointVie, int pointAction, Inventaire inventaire,
 			String nom) {
 		this.setNom(nom);
@@ -61,11 +61,7 @@ public abstract class Personnage{
 	public void setInventaire(Inventaire inventaire) {
 		this.inventaire = inventaire;
 	}
-	
-	
-	public abstract boolean attaquer(Personnage cible);//methode abstraite
-	
-	
+
 	public String etat()
 	{
 		String a= "mort";
@@ -103,10 +99,6 @@ public abstract class Personnage{
 	{
 		
 	}
-	public void utiliserItem(Item item)
-	{
-		//il faut utiliser la méthode utiliser des items en questions
-	}
 
 	public String getNom() {
 		return nom;
@@ -116,7 +108,10 @@ public abstract class Personnage{
 		this.nom = nom;
 	}
 	
-	public void deplacer
+	public void utiliserItem(Item item)
+	{
+		//item.utiliser();
+	}
 	
 	
 }

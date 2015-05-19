@@ -140,8 +140,9 @@ public class PersonnageJoueur extends Personnage {
 		}
 	}*/
 	
-	public void attaquer(Personnage cible) // cette méthode ne calcule pas les carac mais fait des dégats
+	public boolean attaquer(Personnage cible) // cette méthode ne calcule pas les carac mais fait des dégats
 	{
+		boolean mess=false;
 		if(this.getPointAction()>=3)
 		{
 			this.setPointAction(this.getPointAction()-3);
@@ -181,9 +182,8 @@ public class PersonnageJoueur extends Personnage {
 						int difference= degats- def;
 						int pvPerdu= (int) difference/3;
 						cible.setPointVie(cible.getPointVie()- pvPerdu);
+						mess= true;
 					}
-					else
-						System.out.println("Raté!! pas assez rapide!");// A enlever
 			
 			}
 			if(cible instanceof PersonnageNonJoueur)
@@ -201,16 +201,13 @@ public class PersonnageJoueur extends Personnage {
 					int difference= degats - newCible.getDefense();
 					int pvPerdu= (int)difference/3;
 					cible.setPointVie(cible.getPointVie()- pvPerdu);
+					mess=true;
 				}
-				else
-					System.out.println("Raté!! pas assez rapide!"); // A enlever
+				
 			}
 		
 		}
-		else
-		{
-			System.out.println("Pas assez de point d'actions");// A enlever
-		}
+		return mess;
 	}
 	
 	public void recuperationPointAction(Partie partie)

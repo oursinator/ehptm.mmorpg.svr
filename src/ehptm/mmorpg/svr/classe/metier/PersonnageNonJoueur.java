@@ -75,8 +75,9 @@ public class PersonnageNonJoueur extends Personnage {
 		this.defense = defense;
 	}
 	
-	public void attaquer(PersonnageJoueur cible)
+	public boolean attaquer(PersonnageJoueur cible)
 	{
+		boolean mess= false;
 		if(this.getPointAction()>=3)
 		{
 			this.setPointAction(this.getPointAction()-3);	
@@ -100,25 +101,16 @@ public class PersonnageNonJoueur extends Personnage {
 						int difference= this.getDegats()- def;
 						int pvPerdu= (int) difference/3;
 						cible.setPointVie(cible.getPointVie()- pvPerdu);
+						mess=false;
 					}
-					else
-						System.out.println("Raté!! pas assez rapide!");
-			
+					
 		
 		}
-		else
-		{
-			System.out.println("Pas assez de point d'actions");
-		}
+		return mess;
 	}
 	
 	
-	public void deplacer(int x, int y)
-	{
-		
-		//this.setPointPlan(new PointPlan(x,y));
-		
-	}
+	
 	/*public void dropItem()
 	{
 		for(int i=0;i<this.getInventaire().getTailleSacADos();i++)

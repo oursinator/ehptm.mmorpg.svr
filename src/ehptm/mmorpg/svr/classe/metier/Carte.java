@@ -110,8 +110,7 @@ public class Carte {
 	}
 	
 	
-	//##############################
-	//A modifier !
+	
 	
 	public String deplacer(Personnage a, int direction, int sens)
 	{
@@ -140,7 +139,7 @@ public class Carte {
 									}
 									catch(IndexOutOfBoundsException e)
 									{
-										mess="Vous ne pouvez pas allez plus à droite."
+										mess="Vous ne pouvez pas allez plus à droite.";
 									}
 								}
 										
@@ -155,7 +154,7 @@ public class Carte {
 									}
 									catch(IndexOutOfBoundsException e)
 									{
-										mess="Vous ne pouvez pas allez plus à gauche."
+										mess="Vous ne pouvez pas allez plus à gauche.";
 									}
 								}
 							}
