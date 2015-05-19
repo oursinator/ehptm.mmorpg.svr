@@ -109,8 +109,7 @@ public class Carte {
 	}
 	
 	
-	//##############################
-	//A modifier !
+	
 	
 	public String deplacer(Personnage a, int direction, int sens)
 	{

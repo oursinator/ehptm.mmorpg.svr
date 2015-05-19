@@ -101,10 +101,7 @@ public class Personnage{
 	{
 		
 	}
-	public void utiliserItem(Item item)
-	{
-		//il faut utiliser la méthode utiliser des items en questions
-	}
+	
 
 	public String getNom() {
 		return nom;
@@ -114,7 +111,10 @@ public class Personnage{
 		this.nom = nom;
 	}
 	
-
+	public void utiliserItem(Item item)
+	{
+		//item.utiliser();
+	}
 	
 	
 }
