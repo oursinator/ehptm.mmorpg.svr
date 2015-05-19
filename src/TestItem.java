@@ -1,3 +1,5 @@
+import ehptm.mmorpg.svr.classe.metier.Item;
+
 
 public class TestItem {
 
