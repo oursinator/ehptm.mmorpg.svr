@@ -1,5 +1,8 @@
 package ehptm.mmorpg.svr.game;
 
+import ehptm.mmorpg.svr.classe.dialogue.*;
+import ehptm.mmorpg.svr.classe.metier.*;
+
 public class Jeu {
 
 	public static void main(String[] args) {
@@ -10,6 +13,9 @@ public class Jeu {
 				+ "                         Groupe GIRARDEAU / COUPPOUSSAMY\n"
 				+ "                         ###############################\n\n"
 				+ "Eventuellement Hors-ligne et Pas Tres Massif MMORPG Sans Veritable Roleplay");
+		
+		
+		
 	}
 
 }
