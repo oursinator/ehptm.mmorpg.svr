@@ -3,8 +3,8 @@ public class Carte {
 	
 	private Object grille[][]; 
 	private String nom;
-	public static final int NB_MURS= 5;
-	public static final int TAILLE_GRILLE=(int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM + Carte.NB_MURS);
+	public static final int NB_MURS= 100;
+	public static final int TAILLE_GRILLE=(int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM + Carte.NB_MURS)+20;
 	
 	
 
@@ -18,36 +18,31 @@ public class Carte {
 	public Carte() {
 		this.nom = "Default_map";
 		this.grille= new Object[Carte.TAILLE_GRILLE][Carte.TAILLE_GRILLE];
-		for(int i=0; i<grille.length;i++){
-			grille[i][0]=new Object();
-			grille[i][grille[0].length-1]=new Object();
+		
+		for(int i=0; i<this.grille.length;i++){
+			this.grille[i][0]=new Object();
+			this.grille[i][this.grille[0].length-1]=new Object();
 			
 		}
-		for(int j=0;j<grille[0].length;j++){
-			grille[0][j]=new Object();
-			grille[grille.length-1][j]=new Object();
+		for(int j=0;j<this.grille[0].length;j++){
+			this.grille[0][j]=new Object();
+			this.grille[this.grille.length-1][j]=new Object();
 		}
 		for(int i=0;i< Carte.NB_MURS;i++)
 		{
-			for(int j=0; j<Carte.TAILLE_GRILLE;j++)
-			{
-				for(int x=0;x<Carte.TAILLE_GRILLE;x++)
-				{
-					if(this.grille[j][x] != null)
-					{
-						int a= (int)(Math.random() *(Carte.TAILLE_GRILLE-1));
-						int b= (int)(Math.random() *(Carte.TAILLE_GRILLE-1));
-						while(this.collision(a, b))
-						{
-							a= (int)(Math.random() *(Carte.TAILLE_GRILLE-1));
-							b= (int)(Math.random() *(Carte.TAILLE_GRILLE-1));
-						}
-						this.getGrille()[a][b]= new Object();
-					}
+			int a=-1;
+			int b=-1;
+			try{
+				do{
+					a= (int)(Math.random() *(this.grille.length-1));
+					b= (int)(Math.random() *(this.grille[0].length-1));
 				}
+				while(this.collision(a, b));
+			
+				this.getGrille()[a][b]= new Object();
+			}catch(Exception e){
+				
 			}
-			
-			
 		}
 	}
 
@@ -82,7 +77,7 @@ public class Carte {
 
 
 	public Object[][] getGrille() {
-		return grille;
+		return this.grille;
 	}
 
 
@@ -94,23 +89,17 @@ public class Carte {
 
 
 	public String getNom() {
-		return nom;
+		return this.nom;
 	}
 
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 	
-	public boolean collision(int a, int b)
+	public boolean collision(int a, int b)throws Exception
 	{
-		if(this.getGrille()[a][b] != null)
-			return true; //il y a collision
-		
-		return false;
+		return this.getGrille()[a][b] != null; //true s'il y a collision
 	}
-	
-	
-	
 	
 	public String deplacer(Personnage a, int direction, int sens)
 	{
