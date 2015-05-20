@@ -61,4 +61,10 @@ public class PotionMolotov extends Potion {
 	public String toString(){
     	return super.toString() + " | degat: "+this.degat+" | rayon: "+this.radius+"]";
     }
+	public void utiliser(Personnage perso) {
+		perso.setPointAction(perso.getPointAction()-this.getPointAction());
+		// A completer
+		
+		
+	}
 }
