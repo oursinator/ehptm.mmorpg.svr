@@ -43,5 +43,11 @@ public class PotionSoin  extends Potion {
     public String toString(){
     	return super.toString() + " | Soin: "+this.soin+"]";
     }
+	@Override
+	public void utiliser(Personnage perso) {
+		perso.setPointAction(perso.getPointAction()-this.getPointAction());
+		perso.setPointVie(perso.getPointVie()+this.soin);
+		
+	}
 
 }

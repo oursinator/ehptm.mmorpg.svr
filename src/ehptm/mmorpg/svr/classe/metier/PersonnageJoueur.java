@@ -74,33 +74,42 @@ public class PersonnageJoueur extends Personnage {
 		int[] encombrement= new int[2];
 		encombrement[0]=0;
 		encombrement[1]=0;
-		for(int i=0;i<this.getInventaire().getTailleSacADos();i++)
-		{
-			if(this.getInventaire().getSacADos()[i] instanceof Equipement)
-				{
-					Equipement a= (Equipement)this.getInventaire().getSacADos()[i];
-					encombrement[0]+= a.getEncombrement()[0];//il faut que item herite equipement
-					encombrement[1]+= a.getEncombrement()[1];
-				}
-			
+		
+		for(int i=0;i<this.getInventaire().getArme().length;i++){
+			if(this.getInventaire().getArme()[i]!=null){
+				encombrement[0]+=this.getInventaire().getArme()[i].getEncombrement()[0];
+				encombrement[1]+=this.getInventaire().getArme()[i].getEncombrement()[1];
+			}
+		}
+		for(int i=0;i<this.getInventaire().getGants().length;i++){
+			if(this.getInventaire().getArme()[i]!=null){
+				encombrement[0]+=this.getInventaire().getGants()[i].getEncombrement()[0];
+				encombrement[1]+=this.getInventaire().getGants()[i].getEncombrement()[1];
+			}
+		}
+		if(this.getInventaire().getArmure()!=null){
+			encombrement[0]+=this.getInventaire().getArmure().getEncombrement()[0];
+			encombrement[1]+=this.getInventaire().getArmure().getEncombrement()[1];
+		}
+		if(this.getInventaire().getPaireBottes()!=null){
+			encombrement[0]+=this.getInventaire().getPaireBottes().getEncombrement()[0];
+			encombrement[1]+=this.getInventaire().getPaireBottes().getEncombrement()[1];
 		}
 		encombrement[0]= this.getAdresse()[0]- encombrement[0];
 		encombrement[1]= this.getAdresse()[1]- encombrement[1];
 		
-
-		
-			return encombrement;
+		return encombrement;
 	}
 	public int[] attaque()
 	{
 		int tab[]= new int[2];
-		tab[0]=	this.getInventaire().getArme()[0].getManiabilite()[0]+this.getInventaire().getArme()[1].getManiabilite()[0];
-		tab[1]= this.getInventaire().getArme()[0].getManiabilite()[1]+this.getInventaire().getArme()[1].getManiabilite()[1];
+		if(this.getInventaire().getArme()[0]!=null && this.getInventaire().getArme()[1]!=null){
+			tab[0]=	this.getInventaire().getArme()[0].getManiabilite()[0]+this.getInventaire().getArme()[1].getManiabilite()[0];
+			tab[1]= this.getInventaire().getArme()[0].getManiabilite()[1]+this.getInventaire().getArme()[1].getManiabilite()[1];
+		}
 		tab[0]= tab[0]+ this.getAdresse()[0];
 		tab[1]= tab[1]+this.getAdresse()[1];
-		
-		
-			return tab;
+		return tab;
 	}
 	public int[] esquive()
 	{
@@ -109,8 +118,13 @@ public class PersonnageJoueur extends Personnage {
 	public int[] degats()
 	{
 		int tab[]= new int[2];
-		tab[0]=	this.getInventaire().getArme()[0].getImpact()[0]+this.getInventaire().getArme()[1].getImpact()[0];
-		tab[1]= this.getInventaire().getArme()[0].getImpact()[1]+this.getInventaire().getArme()[1].getImpact()[1];
+		for(int i=0;i<this.getInventaire().getArme().length;i++){
+			if(this.getInventaire().getArme()[i]!=null){
+				tab[0]+=this.getInventaire().getArme()[i].getImpact()[0];
+				tab[1]+=this.getInventaire().getArme()[i].getImpact()[1];
+			}
+		}
+		
 		tab[0]= tab[0]+ this.getForce()[0];
 		tab[1]= tab[1]+ this.getForce()[1];
 		
@@ -120,13 +134,30 @@ public class PersonnageJoueur extends Personnage {
 	public int[] defense()
 	{
 		int tab[]= new int[2];
-		tab[0]=	this.getInventaire().getArme()[0].getSolidite()[0]+this.getInventaire().getArme()[1].getSolidite()[0];
-		tab[1]= this.getInventaire().getArme()[0].getSolidite()[1]+this.getInventaire().getArme()[1].getSolidite()[1];
+		for(int i=0;i<this.getInventaire().getArme().length;i++){
+			if(this.getInventaire().getArme()[i]!=null){
+				tab[0]+=	this.getInventaire().getArme()[i].getSolidite()[0];
+				tab[1]+= this.getInventaire().getArme()[i].getSolidite()[1];
+			}
+		}
+		for(int i=0;i<this.getInventaire().getGants().length;i++){
+			if(this.getInventaire().getArme()[i]!=null){
+				tab[0]+=this.getInventaire().getGants()[i].getSolidite()[0];
+				tab[1]+=this.getInventaire().getGants()[i].getSolidite()[1];
+			}
+		}
+		if(this.getInventaire().getPaireBottes()!=null){
+			tab[0]+=this.getInventaire().getPaireBottes().getSolidite()[0];
+			tab[1]+=this.getInventaire().getPaireBottes().getSolidite()[1];
+		}
+		if(this.getInventaire().getArmure() != null){
+			tab[0]+=this.getInventaire().getArmure().getSolidite()[0];
+			tab[1]+=this.getInventaire().getArmure().getSolidite()[1];
+		}
+		
 		tab[0]= tab[0]+ this.getResistance()[0];
 		tab[1]= tab[1]+ this.getResistance()[1];
-		
-
-			return tab;
+		return tab;
 	}
 	/*
 	public void dropItem(Item nom)

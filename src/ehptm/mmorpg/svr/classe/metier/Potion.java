@@ -1,7 +1,7 @@
 package ehptm.mmorpg.svr.classe.metier;
 
 
-public class Potion extends Item {
+public abstract class Potion extends Item {
   
     private int pointAction;
     
@@ -9,15 +9,17 @@ public class Potion extends Item {
     	super("Potion "+nom);
     	this.pointAction=pointAction;
     }
+    
     public Potion(Potion potion){
         super(potion);
         this.pointAction=potion.getPointAction();
     }
     
-    
     public int getPointAction() {
         return this.pointAction;
     }
+    
+    public abstract void utiliser(Personnage perso);
 
     
     public void setPointAction(int value) {
