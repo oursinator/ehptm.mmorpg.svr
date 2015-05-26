@@ -14,6 +14,23 @@ public class PersonnageJoueur extends Personnage {
 		this.resistance = resistance;
 	}
 	
+	public PersonnageJoueur()
+	{
+		super();
+		this.px= new int[2];
+		this.force= new int[2];
+		this.adresse= new int[2];
+		this.resistance= new int[2];
+		for(int i=0;i<2;i++)
+		{
+			this.px[i]=9;
+			this.force[i]=9;
+			this.adresse[i]=9;
+			this.resistance[i]=9;
+		}
+		
+	}
+	
 	public PersonnageJoueur(PersonnageJoueur a)
 	{
 		this.px= new int[2];
@@ -75,7 +92,7 @@ public class PersonnageJoueur extends Personnage {
 		encombrement[0]=0;
 		encombrement[1]=0;
 		
-		for(int i=0;i<this.getInventaire().getArme().length;i++){
+		for(int i=0;i<2;i++){
 			if(this.getInventaire().getArme()[i]!=null){
 				encombrement[0]+=this.getInventaire().getArme()[i].getEncombrement()[0];
 				encombrement[1]+=this.getInventaire().getArme()[i].getEncombrement()[1];
@@ -95,9 +112,20 @@ public class PersonnageJoueur extends Personnage {
 			encombrement[0]+=this.getInventaire().getPaireBottes().getEncombrement()[0];
 			encombrement[1]+=this.getInventaire().getPaireBottes().getEncombrement()[1];
 		}
+		System.out.println(encombrement[0]+" zz");
+		System.out.println(encombrement[1]+" yy");
+		
 		encombrement[0]= this.getAdresse()[0]- encombrement[0];
 		encombrement[1]= this.getAdresse()[1]- encombrement[1];
 		
+		if(encombrement[0]<0)
+		{
+			encombrement[0]=0;
+		}
+		if(encombrement[1]<0)
+		{
+			encombrement[1]=0;
+		}
 		return encombrement;
 	}
 	public int[] attaque()
@@ -212,7 +240,13 @@ public class PersonnageJoueur extends Personnage {
 						def += b.defense()[1];
 						int difference= degats- def;
 						int pvPerdu= (int) difference/3;
+						System.out.println(pvPerdu);
 						cible.setPointVie(cible.getPointVie()- pvPerdu);
+						if(cible.getPointVie()<0)
+						{
+							cible.setPointVie(0);
+						}
+						
 						mess= true;
 					}
 			
@@ -232,12 +266,18 @@ public class PersonnageJoueur extends Personnage {
 					int difference= degats - newCible.getDefense();
 					int pvPerdu= (int)difference/3;
 					cible.setPointVie(cible.getPointVie()- pvPerdu);
+					if(cible.getPointVie()<0)
+					{
+						cible.setPointVie(0);
+					}
+					
 					mess=true;
 				}
 				
 			}
 		
 		}
+		
 		return mess;
 	}
 	
@@ -248,8 +288,7 @@ public class PersonnageJoueur extends Personnage {
 		long dla= this.getStartTime();
 		if(endTime-dla>= partie.getDuree())
 		{
-			
-			this.setPointAction((int)(degre*0.5));
+			this.setPointAction((int)(this.getPointAction()+(degre*0.5)));
 			if(this.getPointAction()>6)
 			{
 				this.setPointAction(6);
@@ -257,4 +296,6 @@ public class PersonnageJoueur extends Personnage {
 		}
 		
 	}
+	
+	
 }

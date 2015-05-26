@@ -1,10 +1,6 @@
 package ehptm.mmorpg.svr.game;
-
-import ehptm.mmorpg.svr.classe.dialogue.*;
-import ehptm.mmorpg.svr.classe.metier.*;
-
 public class Jeu {
-
+/*
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println(
@@ -17,5 +13,5 @@ public class Jeu {
 		
 		
 	}
-
+*/
 }

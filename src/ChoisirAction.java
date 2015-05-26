@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+import ehptm.mmorpg.svr.classe.metier.Carte;
+import ehptm.mmorpg.svr.classe.metier.Personnage;
+import ehptm.mmorpg.svr.classe.metier.PersonnageJoueur;
+
 
 public class ChoisirAction {
 
@@ -58,13 +62,13 @@ public class ChoisirAction {
 					System.out.println(carte.deplacer(personnage,-1,1));
 				}
 			}
-			
+
 		}
 		else if(choix==2)
 		{
 			for(int i=0;i<personnage.getInventaire().getTailleSacADos();i++)
 			{
-				System.out.println(personnage.getInventaire().getSacADos()[i] +i);
+				System.out.println(personnage.getInventaire().getSacADos()[i]+"" +i);
 				System.out.println("taper le numero de l'item que vous voulez utiliser");
 				int arme= input.nextInt();
 				personnage.utiliserItem(personnage.getInventaire().getSacADos()[arme]);
@@ -72,7 +76,7 @@ public class ChoisirAction {
 		}
 		else if(choix==3)
 		{
-			
+
 			if(personnage instanceof PersonnageJoueur)
 			{
 				System.out.println("Tapez 1 pour attaquer celui du haut, 2 pour diagonale en haut à droite, 3 pour à droite, 4 pour en bas à droite, 5 en bas, 6 en bas à gauche, 7 à gauche et 8 en haut à gauche");
@@ -82,13 +86,13 @@ public class ChoisirAction {
 					System.out.println("Tapez 1 pour attaquer celui du haut, 2 pour diagonale en haut à droite, 3 pour à droite, 4 pour en bas à droite, 5 en bas, 6 en bas à gauche, 7 à gauche et 8 en haut à gauche");
 					cible= input.nextInt();
 				}
-				
+
 				PersonnageJoueur a= (PersonnageJoueur)personnage;
 				for(int i=0;i<carte.getGrille().length;i++)
 				{
 					for(int j=0;j<carte.getGrille().length;j++)
 					{
-						
+
 						if(carte.getGrille()[i][j]== a)
 						{
 							if(cible==1)
@@ -112,79 +116,80 @@ public class ChoisirAction {
 											a.attaquer((Personnage)carte.getGrille()[i-1][j]);
 										}
 									}
-							}
-							else if(cible ==3)
-							{
-								if(carte.getGrille()[i][j+1] !=null)
+								}
+								else if(cible ==3)
 								{
-									if(carte.getGrille()[i][j+1] instanceof Personnage)
+									if(carte.getGrille()[i][j+1] !=null)
 									{
-										a.attaquer((Personnage)carte.getGrille()[i][j+1]);
+										if(carte.getGrille()[i][j+1] instanceof Personnage)
+										{
+											a.attaquer((Personnage)carte.getGrille()[i][j+1]);
+										}
 									}
 								}
-							}
-							else if(cible == 4)
-							{
-								if(carte.getGrille()[i+1][j+1] !=null)
+								else if(cible == 4)
 								{
-									if(carte.getGrille()[i+1][j+1] instanceof Personnage)
+									if(carte.getGrille()[i+1][j+1] !=null)
 									{
-										a.attaquer((Personnage)carte.getGrille()[i+1][j+1]);
+										if(carte.getGrille()[i+1][j+1] instanceof Personnage)
+										{
+											a.attaquer((Personnage)carte.getGrille()[i+1][j+1]);
+										}
 									}
 								}
-							}
-							else if(cible ==5)
-							{
-								if(carte.getGrille()[i+1][j] !=null)
+								else if(cible ==5)
 								{
-									if(carte.getGrille()[i+1][j] instanceof Personnage)
+									if(carte.getGrille()[i+1][j] !=null)
 									{
-										a.attaquer((Personnage)carte.getGrille()[i+1][j]);
+										if(carte.getGrille()[i+1][j] instanceof Personnage)
+										{
+											a.attaquer((Personnage)carte.getGrille()[i+1][j]);
+										}
 									}
 								}
-							}
-							else if(cible ==6)
-							{
-								if(carte.getGrille()[i+1][j-1] !=null)
+								else if(cible ==6)
 								{
-									if(carte.getGrille()[i+1][j-1] instanceof Personnage)
+									if(carte.getGrille()[i+1][j-1] !=null)
 									{
-										a.attaquer((Personnage)carte.getGrille()[i+1][j-1]);
+										if(carte.getGrille()[i+1][j-1] instanceof Personnage)
+										{
+											a.attaquer((Personnage)carte.getGrille()[i+1][j-1]);
+										}
 									}
 								}
-							}
-							else if(cible ==7)
-							{
-								if(carte.getGrille()[i][j-1] !=null)
+								else if(cible ==7)
 								{
-									if(carte.getGrille()[i][j-1] instanceof Personnage)
+									if(carte.getGrille()[i][j-1] !=null)
 									{
-										a.attaquer((Personnage)carte.getGrille()[i][j-1]);
+										if(carte.getGrille()[i][j-1] instanceof Personnage)
+										{
+											a.attaquer((Personnage)carte.getGrille()[i][j-1]);
+										}
 									}
 								}
-							}
-							else if(cible ==8)
-							{
-								if(carte.getGrille()[i-1][j-1] !=null)
+								else if(cible ==8)
 								{
-									if(carte.getGrille()[i-1][j-1] instanceof Personnage)
+									if(carte.getGrille()[i-1][j-1] !=null)
 									{
-										a.attaquer((Personnage)carte.getGrille()[i-1][j-1]);
+										if(carte.getGrille()[i-1][j-1] instanceof Personnage)
+										{
+											a.attaquer((Personnage)carte.getGrille()[i-1][j-1]);
+										}
 									}
 								}
+
+
+
 							}
-							
-							
-							
 						}
 					}
+
+
 				}
-				
-				
+
 			}
-			
+
+
 		}
-		
-		
 	}
 }

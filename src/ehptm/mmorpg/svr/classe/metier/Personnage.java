@@ -1,5 +1,5 @@
 package ehptm.mmorpg.svr.classe.metier;
-public class Personnage{
+public abstract class Personnage{
 
 	private int pointVie;
 	private int pointAction;
@@ -18,10 +18,10 @@ public class Personnage{
 	
 	public Personnage()
 	{
-		super();
+		this.nom="donnes moi un nom flemmard!";
 		this.pointVie = 6;
 		this.pointAction = 5;
-		this.inventaire = null;
+		this.inventaire = new Inventaire();
 		this.startTime = System.currentTimeMillis();
 	}
 	
@@ -95,10 +95,8 @@ public class Personnage{
 		return a; // si pointVie egale à 0
 	}
 	
-	public void recuperationPointAction()//methode abstraite
-	{
-		
-	}
+	public abstract void recuperationPointAction(Partie partie);//methode abstraite
+	
 
 	public String getNom() {
 		return nom;
@@ -111,6 +109,13 @@ public class Personnage{
 	public void utiliserItem(Item item)
 	{
 		//item.utiliser();
+	}
+	
+	public String toString()
+	{
+		String a= ""+this.nom+" a "+this.pointVie +" points de vie et "+ this.pointAction+" points d'actions.";
+
+				return a;
 	}
 	
 	
