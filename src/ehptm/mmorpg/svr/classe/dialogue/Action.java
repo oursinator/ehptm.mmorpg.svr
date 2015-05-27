@@ -13,7 +13,7 @@ public class Action {
 		System.out.println("Que voulez-vous faire? Tapez\n 1-pour vous deplacer\n 2-pour utiliser un équipement\n 3-pour attaquer\n 0-pour passer votre tour");
 		Scanner input= new Scanner(System.in);
 		int choix= input.nextInt();
-		while(choix !=1 || choix!=2 || choix!=3 || choix!=0)
+		while(choix !=1 && choix!=2 && choix!=3 && choix!=0)
 		{
 			System.out.println("Que voulez-vous faire? Tapez\n 1-pour vous deplacer\n 2-pour utiliser un équipement\n 3-pour attaquer\n 0-pour passer votre tour");
 			choix= input.nextInt();

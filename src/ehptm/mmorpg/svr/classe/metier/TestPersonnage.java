@@ -2,6 +2,7 @@ package ehptm.mmorpg.svr.classe.metier;
 
 import java.io.IOException;
 
+import ehptm.mmorpg.svr.classe.dialogue.ChoisirPersonnage;
 import ehptm.mmorpg.svr.classe.dialogue.SauvegarderPersonnage;
 
 public class TestPersonnage {
@@ -58,11 +59,15 @@ public class TestPersonnage {
 //		System.out.println(a.getPointAction());
 		try{
 		SauvegarderPersonnage.sauvegarder(a);
+		PersonnageJoueur test= ChoisirPersonnage.choisirPersonnage();
+		System.out.println(test);
 		}
 		catch(IOException e)
 		{
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 }

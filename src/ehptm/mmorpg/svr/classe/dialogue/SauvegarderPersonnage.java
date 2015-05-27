@@ -17,7 +17,7 @@ public class SauvegarderPersonnage{
 		int pv= joueur.getPointVie();
 		long time= joueur.getStartTime();
 		int taille= joueur.getInventaire().getTailleSacADos();
-		int place= joueur.getInventaire().getNbPlaceRestanteSacADos();
+		
 		boolean armure= false;
 		boolean arme= false;
 		boolean bottes= false;
@@ -49,7 +49,7 @@ public class SauvegarderPersonnage{
 			w.write(pv+"\r\n");
 			w.write(time+"\r\n");
 			w.write(taille+"\r\n");
-			w.write(place+"\r\n");
+			
 			w.write(armure+"\r\n");
 			if(armure==true)
 			{
