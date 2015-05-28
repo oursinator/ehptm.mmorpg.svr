@@ -6,6 +6,7 @@ import ehptm.mmorpg.svr.classe.metier.Item;
 import ehptm.mmorpg.svr.classe.metier.PaireBottes;
 import ehptm.mmorpg.svr.classe.metier.PotionSoin;
 
+
 public class TestInventaire {
 
 	public static void main(String[] args) {

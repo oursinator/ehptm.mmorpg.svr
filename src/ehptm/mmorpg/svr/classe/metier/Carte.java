@@ -86,7 +86,29 @@ public class Carte {
 		this.grille = grille;
 	}
 
-
+	public boolean ajouter(Object a)
+	{
+		boolean test=false;
+		int i=0;
+		int j=0;
+		while(test!= true && i<TAILLE_GRILLE )
+		{
+			
+			while(test != true && j<TAILLE_GRILLE)
+			{
+				if(this.grille[i][j]== null)
+				{
+					this.grille[i][j]=a;
+					test=true;
+				}
+				j++;
+			}
+			j=0;
+			i++;
+		}
+		
+		return test;
+	}
 
 	public String getNom() {
 		return this.nom;
@@ -103,6 +125,9 @@ public class Carte {
 	
 	public String deplacer(Personnage a, int direction, int sens)
 	{
+		int x=0;
+		int y=0;
+		
 		String mess="vos indices de déplacements ne sont pas valides";
 		if(direction ==1 || direction == -1) // 1 pour horizontale et -1 pour verticale
 		{
@@ -112,74 +137,83 @@ public class Carte {
 				{
 					for(int j=0;j<TAILLE_GRILLE;j++)
 					{
-						if(this.getGrille()[i][j].equals(a))
+						if(this.getGrille()[i][j] != null)
 						{
-							
-							if(direction ==1)
-							{
-								if(sens ==1)
+							if(this.getGrille()[i][j].equals(a))
+							{	x=i;
+								y=j;
+								
+								if(direction ==1)
 								{
-									try{
-										if(this.getGrille()[i][j+1] !=null)
+									if(sens ==1)
+									{
+										try{
+											if(this.getGrille()[x][y+1] ==null)
+											{
+												this.getGrille()[x][y+1]=a;
+												mess= "à droite toute!";
+												this.getGrille()[x][y]= null;
+											}
+										}
+										catch(IndexOutOfBoundsException e)
 										{
-											this.getGrille()[i][j+1]=a;
-											mess= "à droite toute!";
+											mess="Vous ne pouvez pas allez plus à droite.";
 										}
 									}
-									catch(IndexOutOfBoundsException e)
+											
+									else
 									{
-										mess="Vous ne pouvez pas allez plus à droite.";
+										try{
+											if(this.getGrille()[x][y-1] ==null)
+											{
+												this.getGrille()[x][y-1]=a;
+												mess= "à gauche toute!";
+												this.getGrille()[x][y]= null;
+											}
+										}
+										catch(IndexOutOfBoundsException e)
+										{
+											mess="Vous ne pouvez pas allez plus à gauche.";
+										}
 									}
 								}
-										
 								else
 								{
-									try{
-										if(this.getGrille()[i][j-1] !=null)
+									if(sens ==1)
+									{
+										try{
+											if(this.getGrille()[x-1][y] ==null)
+											{
+												this.getGrille()[x-1][y]=a;
+												mess= "Monté!";
+												this.getGrille()[x][y]= null;
+											}
+										}
+										catch(IndexOutOfBoundsException e)
 										{
-											this.getGrille()[i][j-1]=a;
-											mess= "à droite toute!";
+											mess="Vous ne pouvez pas allez plus haut.";
 										}
 									}
-									catch(IndexOutOfBoundsException e)
+											
+									else
 									{
-										mess="Vous ne pouvez pas allez plus à gauche.";
-									}
-								}
-							}
-							else
-							{
-								if(sens ==1)
-								{
-									try{
-										if(this.getGrille()[i-1][j] !=null)
-										{
-											this.getGrille()[i-1][j]=a;
-											mess= "Monté!";
+										try{
+											if(this.getGrille()[x+1][y] ==null)
+											{
+												this.getGrille()[x+1][j]=a;
+												mess= "Descendu!";
+												this.getGrille()[x][y]= null;
+											}
 										}
-									}
-									catch(IndexOutOfBoundsException e)
-									{
-										mess="Vous ne pouvez pas allez plus haut.";
-									}
-								}
-										
-								else
-								{
-									try{
-										if(this.getGrille()[i+1][j] !=null)
+										catch(IndexOutOfBoundsException e)
 										{
-											this.getGrille()[i+1][j]=a;
-											mess= "Descendu!";
+											mess="Vous ne pouvez pas allez plus bas.";
 										}
-									}
-									catch(IndexOutOfBoundsException e)
-									{
-										mess="Vous ne pouvez pas allez plus bas.";
 									}
 								}
 							}
 						}
+						
 					}
 				}
 			}
@@ -188,5 +222,21 @@ public class Carte {
 		}
 		return mess;
 	}
-	
+	public String toString()
+	{
+		String a= this.nom+" ";
+		for(int i=0;i<TAILLE_GRILLE;i++)
+		{
+			for(int j=0;j<TAILLE_GRILLE;j++)
+			{
+				if(this.grille[i][j] instanceof Personnage)
+				{
+					a +=this.grille[i][j].toString()+" "+i+"eme ligne et "+j+"eme colonne ";
+		
+				}
+					
+			}
+		}
+		return a;
+	}
 }

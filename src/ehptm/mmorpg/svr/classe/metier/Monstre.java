@@ -1,8 +1,8 @@
 package ehptm.mmorpg.svr.classe.metier;
 public class Monstre extends PersonnageNonJoueur {
 
-	public Monstre(int pointVie, int pointAction, Inventaire inventaire, String nom, int niveau, int initiative, int attaque,int esquive, int degats, int defense) {
-		super(pointVie, pointAction, inventaire,nom, niveau, initiative, attaque, esquive, degats, defense);
+	public Monstre(int pointVie, int pointAction, Inventaire inventaire, String nom, int niveau) {
+		super(pointVie, pointAction, inventaire,nom, niveau);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -10,16 +10,33 @@ public class Monstre extends PersonnageNonJoueur {
 		super(m);
 	}
 	
-	public void dropItem()
+	public Inventaire dropItem()
 	{
+		Inventaire a=null;
 		if(this.getPointVie()==0)
 		{
-			for(int i=0;i<this.getInventaire().getTailleSacADos();i++)
+			a= this.getInventaire();
+			this.setInventaire(new Inventaire());
+			
+			/*for(int i=0;i<this.getInventaire().getTailleSacADos();i++)
 			{
 					this.getInventaire().getSacADos()[i]= null;
 			}
+			
+			 this.getInventaire().setArmure(null);
+			
+
+			for(int i=0;i<this.getInventaire().getTailleSacADos();i++)
+			{
+				 this.getInventaire().setArme(new Arme[2]);
+			}
+			
+				this.getInventaire().setPaireBottes(null);
+			
+				this.getInventaire().setGants(null);*/
+			
 		}
-		
+		return a;
 	}
 
 }

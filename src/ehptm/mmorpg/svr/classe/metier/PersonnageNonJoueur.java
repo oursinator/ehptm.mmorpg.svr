@@ -7,25 +7,25 @@ public class PersonnageNonJoueur extends Personnage {
 	private int esquive;
 	private int degats;
 	private int defense;
-	public PersonnageNonJoueur(int pointVie, int pointAction,Inventaire inventaire, String nom, int niveau,int initiative, int attaque, int esquive, int degats, int defense) {
+	public PersonnageNonJoueur(int pointVie, int pointAction,Inventaire inventaire, String nom,int niveau) {
 		super(pointVie, pointAction, inventaire, nom);
 		this.niveau = niveau;
-		this.initiative = initiative;
-		this.attaque = attaque;
-		this.esquive = esquive;
-		this.degats = degats;
-		this.defense = defense;
+		this.initiative = (int) (53+(53*niveau*0.5));
+		this.attaque = (int) (53+(53*niveau*0.5));
+		this.esquive = (int)(53+(53*niveau*0.5));
+		this.degats = (int)(53*+(53*niveau*0.5));
+		this.defense = (int)(53*+(53*niveau*0.5));
 	}
 	
 	public PersonnageNonJoueur()
 	{
 		super();
 		this.niveau = 1;
-		this.initiative = 0;
-		this.attaque = 0;
-		this.esquive = 0;
-		this.degats = 0;
-		this.defense = 0;
+		this.initiative = 53;
+		this.attaque = 53;
+		this.esquive = 53;
+		this.degats = 53;
+		this.defense = 53;
 	}
 	
 	public PersonnageNonJoueur(PersonnageNonJoueur a)
@@ -137,5 +137,12 @@ public class PersonnageNonJoueur extends Personnage {
 			}
 		}
 		
+	}
+	
+	public String toString()
+	{
+		String a= super.toString();
+		a= a+" est de niveau "+this.niveau+" avec une initiative de "+this.initiative +" possede une force d'attaque de "+ this.attaque + " et une esquive de "+ this.esquive+ " et peut faire "+this.degats+ " points de dégats";
+		return a;
 	}
 }

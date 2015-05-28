@@ -1,3 +1,7 @@
+import ehptm.mmorpg.svr.classe.metier.Potion;
+import ehptm.mmorpg.svr.classe.metier.PotionMolotov;
+import ehptm.mmorpg.svr.classe.metier.PotionSoin;
+
 
 public class TestPotion {
 
