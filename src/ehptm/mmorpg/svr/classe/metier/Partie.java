@@ -54,17 +54,9 @@ public class Partie {
     }
 
     
-    public void ajouterElementCarte(Object a) {
-    	
-    	for(int i=0;i<Carte.TAILLE_GRILLE;i++)
-    	{
-    		for(int j=0;j<Carte.TAILLE_GRILLE;j++)
-    		{
-    			if(this.getCarte().getGrille()[i][j]!= null){
-    				this.getCarte().getGrille()[i][j]=a;
-    			}
-    		}
-    	}
+    public void ajouterElementCarte(Object a) throws Exception{
+    	if(this.carte.getNbItem()+1>Partie.NB_MAX_ITEM || this.carte.getNbJoueur()+1>Partie.NB_MAX_JOUEUR) throw new Exception("Nombre d'element atteint !");
+    	if(!this.carte.ajouter(a)) throw new Exception("Element existe deja");
     }
 
     

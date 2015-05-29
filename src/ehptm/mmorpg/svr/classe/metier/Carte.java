@@ -3,6 +3,8 @@ public class Carte {
 	
 	private Object grille[][]; 
 	private String nom;
+	private int nbItem;
+	private int nbJoueur;
 	public static final int NB_MURS= 100;
 	public static final int TAILLE_GRILLE=(int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM + Carte.NB_MURS)+20;
 	
@@ -88,26 +90,37 @@ public class Carte {
 
 	public boolean ajouter(Object a)
 	{
-		boolean test=false;
-		int i=0;
-		int j=0;
-		while(test!= true && i<TAILLE_GRILLE )
-		{
-			
-			while(test != true && j<TAILLE_GRILLE)
+		int x=-1;
+		int y=-1;
+		try{
+			boolean existeDeja=false;
+			for(int i=0; i<this.grille.length;i++)
 			{
-				if(this.grille[i][j]== null)
+				for(int j=0;j< this.grille[0].length; i++)
 				{
-					this.grille[i][j]=a;
-					test=true;
+					if( this.grille[i][j] instanceof Object && this.grille[i][j].equals((Object)a))
+						existeDeja=true;
 				}
-				j++;
 			}
-			j=0;
-			i++;
-		}
+			if(!existeDeja){
+				do{
+					x= (int)(Math.random() *(this.grille.length-1));
+					y= (int)(Math.random() *(this.grille[0].length-1));
+				}
+				while(this.collision(x, y));
+				this.grille[x][y]= a;
+				if(a instanceof Personnage)
+					this.setNbJoueur(this.getNbJoueur() + 1);
+				if(a instanceof Item)
+					this.setNbItem(this.getNbItem() + 1);
+				return true;
+			}
+			else 
+				return false;
+		}catch(Exception e){
+			return false;
+		}	
 		
-		return test;
 	}
 
 	public String getNom() {
@@ -118,6 +131,30 @@ public class Carte {
 		this.nom = nom;
 	}
 	
+	public int getNbItem() {
+		return nbItem;
+	}
+
+
+
+	public void setNbItem(int nbItem) {
+		this.nbItem = nbItem;
+	}
+
+
+
+	public int getNbJoueur() {
+		return nbJoueur;
+	}
+
+
+
+	public void setNbJoueur(int nbJoueur) {
+		this.nbJoueur = nbJoueur;
+	}
+
+
+
 	public boolean collision(int a, int b)throws Exception
 	{
 		return this.getGrille()[a][b] != null; //true s'il y a collision

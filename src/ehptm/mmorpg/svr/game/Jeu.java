@@ -1,6 +1,9 @@
 package ehptm.mmorpg.svr.game;
+
+import ehptm.mmorpg.svr.classe.metier.*;
+
 public class Jeu {
-/*
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println(
@@ -10,8 +13,9 @@ public class Jeu {
 				+ "                         ###############################\n\n"
 				+ "Eventuellement Hors-ligne et Pas Tres Massif MMORPG Sans Veritable Roleplay");
 		
+		Partie partie=new Partie(Partie.PARTIE_COURTE);
 		
 		
 	}
-*/
+
 }
