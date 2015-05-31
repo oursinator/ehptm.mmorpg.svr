@@ -1,12 +1,15 @@
 package ehptm.mmorpg.svr.classe.metier;
+
+import java.util.ArrayList;
+
 public class Carte {
 	
-	private Object grille[][]; 
+	private static Object grille[][]; 
 	private String nom;
 	private int nbItem;
 	private int nbJoueur;
-	public static final int NB_MURS= 100;
-	public static final int TAILLE_GRILLE=(int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM + Carte.NB_MURS)+20;
+	public static final int NB_MURS= 30;
+	public static final int TAILLE_GRILLE=(int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM + Carte.NB_MURS)+15;
 	
 	
 
@@ -76,10 +79,21 @@ public class Carte {
 		return NB_MURS;
 	}
 
+	public ArrayList<Personnage> listePersonnage(){
+		ArrayList<Personnage> listePersonnage=new ArrayList<Personnage>();
+		for(int i=0;i<getGrille().length;i++){
+			for(int j=0;j<getGrille()[0].length;j++){
+				if(getGrille()[i][j]!=null){
+					if(getGrille()[i][j] instanceof Personnage)
+					listePersonnage.add((Personnage)getGrille()[i][j]);
+				}
+			}
+		}
+		return listePersonnage;
+	}
 
-
-	public Object[][] getGrille() {
-		return this.grille;
+	public static Object[][] getGrille() {
+		return grille;
 	}
 
 
@@ -96,10 +110,12 @@ public class Carte {
 			boolean existeDeja=false;
 			for(int i=0; i<this.grille.length;i++)
 			{
-				for(int j=0;j< this.grille[0].length; i++)
+				for(int j=0;j< this.grille[0].length; j++)
 				{
-					if( this.grille[i][j] instanceof Object && this.grille[i][j].equals((Object)a))
-						existeDeja=true;
+					if( this.grille[i][j]!=null){
+						if(this.grille[i][j].equals(a))
+								existeDeja=true;
+					}
 				}
 			}
 			if(!existeDeja){
@@ -118,9 +134,9 @@ public class Carte {
 			else 
 				return false;
 		}catch(Exception e){
+			System.out.println(e.toString());
 			return false;
 		}	
-		
 	}
 
 	public String getNom() {
@@ -261,18 +277,21 @@ public class Carte {
 	}
 	public String toString()
 	{
-		String a= this.nom+" ";
-		for(int i=0;i<TAILLE_GRILLE;i++)
+		String a= this.nom+"\n";
+		for(int i=0;i<this.grille.length;i++)
 		{
-			for(int j=0;j<TAILLE_GRILLE;j++)
+			for(int j=0;j<this.grille[0].length;j++)
 			{
-				if(this.grille[i][j] instanceof Personnage)
-				{
-					a +=this.grille[i][j].toString()+" "+i+"eme ligne et "+j+"eme colonne ";
-		
-				}
-					
+				if(this.grille[i][j] ==null)
+					a+=" ";
+				else if(this.grille[i][j] instanceof Personnage)
+					a +="P";
+				else if(this.grille[i][j] instanceof Item)
+					a+="I";
+				else if(this.grille[i][j] instanceof Object)
+					a+="#";
 			}
+			a+="\n";
 		}
 		return a;
 	}

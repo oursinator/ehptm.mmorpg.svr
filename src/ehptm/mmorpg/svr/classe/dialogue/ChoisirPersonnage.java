@@ -219,8 +219,7 @@ public class ChoisirPersonnage{
 				}
 			}
 			
-		}
-		
+		}	
 		return joueur;
 	}
 

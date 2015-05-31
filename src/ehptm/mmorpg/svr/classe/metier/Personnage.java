@@ -106,11 +106,6 @@ public abstract class Personnage{
 		this.nom = nom;
 	}
 	
-	public void utiliserItem(Item item)
-	{
-		//item.utiliser();
-	}
-	
 	public String toString()
 	{
 		String a= ""+this.nom+" a "+this.pointVie +" points de vie et "+ this.pointAction+" points d'actions.";

@@ -49,10 +49,6 @@ public class PotionMolotov extends Potion {
 	public void setRadius(int radius) {
 		this.radius = radius;
 	}
-	
-    public void utiliser() {
-    }
-
 	public String toString(){
     	return super.toString() + " | degat: "+this.degat+" | rayon: "+this.radius+"]";
     }

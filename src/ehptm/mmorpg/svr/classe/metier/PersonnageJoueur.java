@@ -112,8 +112,6 @@ public class PersonnageJoueur extends Personnage {
 			encombrement[0]+=this.getInventaire().getPaireBottes().getEncombrement()[0];
 			encombrement[1]+=this.getInventaire().getPaireBottes().getEncombrement()[1];
 		}
-		System.out.println(encombrement[0]+" zz");
-		System.out.println(encombrement[1]+" yy");
 		
 		encombrement[0]= this.getAdresse()[0]- encombrement[0];
 		encombrement[1]= this.getAdresse()[1]- encombrement[1];

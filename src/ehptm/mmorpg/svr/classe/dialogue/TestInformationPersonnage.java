@@ -4,7 +4,7 @@ import ehptm.mmorpg.svr.classe.metier.Inventaire;
 import ehptm.mmorpg.svr.classe.metier.PersonnageJoueur;
 
 public class TestInformationPersonnage {
-/*
+
 	public static void main(String[] args) {
 		PersonnageJoueur perso=new PersonnageJoueur(5, 2, new Inventaire(), "Kikoo_Du_93", new int[2], new int[2], new int[2], new int[2]);
 		InformationPersonnage.afficherEtat(perso);
@@ -12,5 +12,4 @@ public class TestInformationPersonnage {
 		InformationPersonnage.afficherPointAction(perso);
 		
 	}
-*/
 }
