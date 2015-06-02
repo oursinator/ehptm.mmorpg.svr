@@ -219,6 +219,21 @@ public class Inventaire {
 	    return item_cache;
     }
     
+    public void ajouter(Item item) throws Exception{
+    	if(this.getNbPlaceRestanteSacADos()<=0)throw new Exception("Il n'y a plus de place dans le sac");
+    	try{
+    		int emplacement=-1;
+    		for(int i=0;i<this.sacADos.length && emplacement<0;i++){
+    			if(this.sacADos[i]==null){
+    				emplacement=i;
+    			}
+    		}
+    		this.sacADos[emplacement]=item;
+    	}catch(IndexOutOfBoundsException e){
+    		throw new Exception("Impossible d'ajouter cet objet");
+    	}
+    }
+    
     public String toString(){
     	String s="### Contenu du sac a dos ###\nPlace restante: "+this.getNbPlaceRestanteSacADos()+"\n";
     	for(int i=0;i<this.sacADos.length;i++){

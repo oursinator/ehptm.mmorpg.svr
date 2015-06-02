@@ -19,20 +19,9 @@ public class Jeu {
 		PersonnageJoueur perso;
 		Partie partie=new Partie(Partie.PARTIE_COURTE);
 		try {
-			partie.ajouterElementCarte(new PotionSoin(PotionSoin.SOIN_1));
-			partie.ajouterElementCarte(new Arme(Arme.EPEE,"de Maximus"));
-			partie.ajouterElementCarte(new Armure(Armure.ARMURE_BRONZE));
-			partie.ajouterElementCarte(new Gants(Gants.GANT_OR));
-		} catch (Exception e) {
-			
-		}
-		try {
 			perso=ChoisirPersonnage.choisirPersonnage();
 			try {
 				//Test avec des ennemie
-				partie.ajouterElementCarte(new PersonnageNonJoueur());
-				partie.ajouterElementCarte(new PersonnageNonJoueur());
-				partie.ajouterElementCarte(new PersonnageNonJoueur());
 				partie.ajouterElementCarte(perso);
 				while(partie.restePersonnageJoueur()){
 					for(Personnage personnage : partie.getCarte().listePersonnage()){

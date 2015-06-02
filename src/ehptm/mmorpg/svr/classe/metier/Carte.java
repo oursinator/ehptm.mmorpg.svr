@@ -8,8 +8,8 @@ public class Carte {
 	private String nom;
 	private int nbItem;
 	private int nbJoueur;
-	public static final int NB_MURS= 30;
-	public static final int TAILLE_GRILLE=(int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM + Carte.NB_MURS)+15;
+	public static final int NB_MURS= 45;
+	public static final int TAILLE_GRILLE=(int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM + Carte.NB_MURS+10)+15;
 	
 	
 
@@ -125,7 +125,7 @@ public class Carte {
 				}
 				while(this.collision(x, y));
 				this.grille[x][y]= a;
-				if(a instanceof Personnage)
+				if(a instanceof PersonnageJoueur)
 					this.setNbJoueur(this.getNbJoueur() + 1);
 				if(a instanceof Item)
 					this.setNbItem(this.getNbItem() + 1);
@@ -134,7 +134,6 @@ public class Carte {
 			else 
 				return false;
 		}catch(Exception e){
-			System.out.println(e.toString());
 			return false;
 		}	
 	}
