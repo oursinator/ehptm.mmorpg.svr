@@ -1,10 +1,15 @@
 package ehptm.mmorpg.svr.classe.metier;
+
+import java.util.ArrayList;
+
 public class Carte {
 	
-	private Object grille[][]; 
+	private static Object grille[][]; 
 	private String nom;
-	public static final int NB_MURS= 5;
-	public static final int TAILLE_GRILLE=(int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM + Carte.NB_MURS);
+	private int nbItem;
+	private int nbJoueur;
+	public static final int NB_MURS= 30;
+	public static final int TAILLE_GRILLE=(int)Math.sqrt(Partie.NB_MAX_JOUEUR + Partie.NB_MAX_ITEM + Carte.NB_MURS)+15;
 	
 	
 
@@ -18,36 +23,31 @@ public class Carte {
 	public Carte() {
 		this.nom = "Default_map";
 		this.grille= new Object[Carte.TAILLE_GRILLE][Carte.TAILLE_GRILLE];
-		for(int i=0; i<grille.length;i++){
-			grille[i][0]=new Object();
-			grille[i][grille[0].length-1]=new Object();
+		
+		for(int i=0; i<this.grille.length;i++){
+			this.grille[i][0]=new Object();
+			this.grille[i][this.grille[0].length-1]=new Object();
 			
 		}
-		for(int j=0;j<grille[0].length;j++){
-			grille[0][j]=new Object();
-			grille[grille.length-1][j]=new Object();
+		for(int j=0;j<this.grille[0].length;j++){
+			this.grille[0][j]=new Object();
+			this.grille[this.grille.length-1][j]=new Object();
 		}
 		for(int i=0;i< Carte.NB_MURS;i++)
 		{
-			for(int j=0; j<Carte.TAILLE_GRILLE;j++)
-			{
-				for(int x=0;x<Carte.TAILLE_GRILLE;x++)
-				{
-					if(this.grille[j][x] != null)
-					{
-						int a= (int)(Math.random() *(Carte.TAILLE_GRILLE-1));
-						int b= (int)(Math.random() *(Carte.TAILLE_GRILLE-1));
-						while(this.collision(a, b))
-						{
-							a= (int)(Math.random() *(Carte.TAILLE_GRILLE-1));
-							b= (int)(Math.random() *(Carte.TAILLE_GRILLE-1));
-						}
-						this.getGrille()[a][b]= new Object();
-					}
+			int a=-1;
+			int b=-1;
+			try{
+				do{
+					a= (int)(Math.random() *(this.grille.length-1));
+					b= (int)(Math.random() *(this.grille[0].length-1));
 				}
+				while(this.collision(a, b));
+			
+				this.getGrille()[a][b]= new Object();
+			}catch(Exception e){
+				
 			}
-			
-			
 		}
 	}
 
@@ -79,9 +79,20 @@ public class Carte {
 		return NB_MURS;
 	}
 
+	public ArrayList<Personnage> listePersonnage(){
+		ArrayList<Personnage> listePersonnage=new ArrayList<Personnage>();
+		for(int i=0;i<getGrille().length;i++){
+			for(int j=0;j<getGrille()[0].length;j++){
+				if(getGrille()[i][j]!=null){
+					if(getGrille()[i][j] instanceof Personnage)
+					listePersonnage.add((Personnage)getGrille()[i][j]);
+				}
+			}
+		}
+		return listePersonnage;
+	}
 
-
-	public Object[][] getGrille() {
+	public static Object[][] getGrille() {
 		return grille;
 	}
 
@@ -91,30 +102,85 @@ public class Carte {
 		this.grille = grille;
 	}
 
-
+	public boolean ajouter(Object a)
+	{
+		int x=-1;
+		int y=-1;
+		try{
+			boolean existeDeja=false;
+			for(int i=0; i<this.grille.length;i++)
+			{
+				for(int j=0;j< this.grille[0].length; j++)
+				{
+					if( this.grille[i][j]!=null){
+						if(this.grille[i][j].equals(a))
+								existeDeja=true;
+					}
+				}
+			}
+			if(!existeDeja){
+				do{
+					x= (int)(Math.random() *(this.grille.length-1));
+					y= (int)(Math.random() *(this.grille[0].length-1));
+				}
+				while(this.collision(x, y));
+				this.grille[x][y]= a;
+				if(a instanceof Personnage)
+					this.setNbJoueur(this.getNbJoueur() + 1);
+				if(a instanceof Item)
+					this.setNbItem(this.getNbItem() + 1);
+				return true;
+			}
+			else 
+				return false;
+		}catch(Exception e){
+			System.out.println(e.toString());
+			return false;
+		}	
+	}
 
 	public String getNom() {
-		return nom;
+		return this.nom;
 	}
 
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 	
-	public boolean collision(int a, int b)
-	{
-		if(this.getGrille()[a][b] != null)
-			return true; //il y a collision
-		
-		return false;
+	public int getNbItem() {
+		return nbItem;
 	}
-	
-	
-	//##############################
-	//A modifier !
+
+
+
+	public void setNbItem(int nbItem) {
+		this.nbItem = nbItem;
+	}
+
+
+
+	public int getNbJoueur() {
+		return nbJoueur;
+	}
+
+
+
+	public void setNbJoueur(int nbJoueur) {
+		this.nbJoueur = nbJoueur;
+	}
+
+
+
+	public boolean collision(int a, int b)throws Exception
+	{
+		return this.getGrille()[a][b] != null; //true s'il y a collision
+	}
 	
 	public String deplacer(Personnage a, int direction, int sens)
 	{
+		int x=0;
+		int y=0;
+		
 		String mess="vos indices de déplacements ne sont pas valides";
 		if(direction ==1 || direction == -1) // 1 pour horizontale et -1 pour verticale
 		{
@@ -124,74 +190,83 @@ public class Carte {
 				{
 					for(int j=0;j<TAILLE_GRILLE;j++)
 					{
-						if(this.getGrille()[i][j].equals(a))
+						if(this.getGrille()[i][j] != null)
 						{
-							
-							if(direction ==1)
-							{
-								if(sens ==1)
+							if(this.getGrille()[i][j].equals(a))
+							{	x=i;
+								y=j;
+								
+								if(direction ==1)
 								{
-									try{
-										if(this.getGrille()[i][j+1] !=null)
+									if(sens ==1)
+									{
+										try{
+											if(this.getGrille()[x][y+1] ==null)
+											{
+												this.getGrille()[x][y+1]=a;
+												mess= "à droite toute!";
+												this.getGrille()[x][y]= null;
+											}
+										}
+										catch(IndexOutOfBoundsException e)
 										{
-											this.getGrille()[i][j+1]=a;
-											mess= "à droite toute!";
+											mess="Vous ne pouvez pas allez plus à droite.";
 										}
 									}
-									catch(IndexOutOfBoundsException e)
+											
+									else
 									{
-										mess="Vous ne pouvez pas allez plus à droite."
+										try{
+											if(this.getGrille()[x][y-1] ==null)
+											{
+												this.getGrille()[x][y-1]=a;
+												mess= "à gauche toute!";
+												this.getGrille()[x][y]= null;
+											}
+										}
+										catch(IndexOutOfBoundsException e)
+										{
+											mess="Vous ne pouvez pas allez plus à gauche.";
+										}
 									}
 								}
-										
 								else
 								{
-									try{
-										if(this.getGrille()[i][j-1] !=null)
+									if(sens ==1)
+									{
+										try{
+											if(this.getGrille()[x-1][y] ==null)
+											{
+												this.getGrille()[x-1][y]=a;
+												mess= "Monté!";
+												this.getGrille()[x][y]= null;
+											}
+										}
+										catch(IndexOutOfBoundsException e)
 										{
-											this.getGrille()[i][j-1]=a;
-											mess= "à droite toute!";
+											mess="Vous ne pouvez pas allez plus haut.";
 										}
 									}
-									catch(IndexOutOfBoundsException e)
+											
+									else
 									{
-										mess="Vous ne pouvez pas allez plus à gauche."
-									}
-								}
-							}
-							else
-							{
-								if(sens ==1)
-								{
-									try{
-										if(this.getGrille()[i-1][j] !=null)
-										{
-											this.getGrille()[i-1][j]=a;
-											mess= "Monté!";
+										try{
+											if(this.getGrille()[x+1][y] ==null)
+											{
+												this.getGrille()[x+1][j]=a;
+												mess= "Descendu!";
+												this.getGrille()[x][y]= null;
+											}
 										}
-									}
-									catch(IndexOutOfBoundsException e)
-									{
-										mess="Vous ne pouvez pas allez plus haut.";
-									}
-								}
-										
-								else
-								{
-									try{
-										if(this.getGrille()[i+1][j] !=null)
+										catch(IndexOutOfBoundsException e)
 										{
-											this.getGrille()[i+1][j]=a;
-											mess= "Descendu!";
+											mess="Vous ne pouvez pas allez plus bas.";
 										}
-									}
-									catch(IndexOutOfBoundsException e)
-									{
-										mess="Vous ne pouvez pas allez plus bas.";
 									}
 								}
 							}
 						}
+						
 					}
 				}
 			}
@@ -200,5 +275,24 @@ public class Carte {
 		}
 		return mess;
 	}
-	
+	public String toString()
+	{
+		String a= this.nom+"\n";
+		for(int i=0;i<this.grille.length;i++)
+		{
+			for(int j=0;j<this.grille[0].length;j++)
+			{
+				if(this.grille[i][j] ==null)
+					a+=" ";
+				else if(this.grille[i][j] instanceof Personnage)
+					a +="P";
+				else if(this.grille[i][j] instanceof Item)
+					a+="I";
+				else if(this.grille[i][j] instanceof Object)
+					a+="#";
+			}
+			a+="\n";
+		}
+		return a;
+	}
 }

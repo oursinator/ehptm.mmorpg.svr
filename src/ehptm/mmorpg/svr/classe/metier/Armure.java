@@ -1,15 +1,12 @@
 package ehptm.mmorpg.svr.classe.metier;
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
-
-@objid ("a2815e15-375c-4494-9551-3c8535ee22b7")
 public class Armure extends Equipement {
-    @objid ("52c186d3-e9e3-4eed-b6a0-7a1e4ea89851")
+    
     public static final String ARMURE_CUIR="cuir";
 
-    @objid ("25653cf1-b82b-4df1-a901-06667175fa6f")
+  
     public static final String ARMURE_BRONZE="bronze";
 
-    @objid ("9829e3a1-a91f-4846-a458-05e9892e8da9")
+   
     public static final String ARMURE_OR="or";
 
     public Armure(String nom,int[] solidite,int[] encombrement){

@@ -16,7 +16,7 @@ public class GestionInventaire {
 	}
 	
 	
-	public static void menuInventaire(Inventaire inventairePerso){
+	public static void menuInventaire(PersonnageJoueur perso){
 		int choix=0;
 		do{
 			System.out.println(
@@ -33,13 +33,50 @@ public class GestionInventaire {
 				choix=Integer.parseInt(demandeDuChoix("Taper le chiffre correspondant : "));
 			}while(choix<1 || choix>5);
 			switch(choix){
-				case 1:afficheInventaire(inventairePerso);
+				case 1:
+					afficheInventaire(perso.getInventaire());
 					break;
-				case 2:equiperObjet(inventairePerso);
+				case 2:
+					equiperObjet(perso.getInventaire());
 					break;
-				case 3:desequiperObjet(inventairePerso);
+				case 3:
+					desequiperObjet(perso.getInventaire());
 					break;
-				case 4:jeterObjet(inventairePerso);
+				case 4:
+					int positionObjetX=-1;
+					int positionObjetY=-1;
+					for(int i=0;i<Carte.getGrille().length;i++){
+						for(int j=0;j<Carte.getGrille()[0].length;j++){
+							if(Carte.getGrille()[i][j].equals(perso)){
+								try{
+									if(Carte.getGrille()[i+1][j]==null){
+										positionObjetX=i+1;
+										positionObjetY=j;
+									}
+									else if(Carte.getGrille()[i+1][j+1]==null){
+										positionObjetX=i+1;
+										positionObjetY=j;
+									}
+									else if(Carte.getGrille()[i][j+1]==null){
+										positionObjetX=i+1;
+										positionObjetY=j;
+									}
+								}catch(Exception e){
+									for(int x=0;x<Carte.getGrille().length && positionObjetX==-1;i++){
+										for(int y=0;y<Carte.getGrille()[0].length && positionObjetX==-1;y++){
+											if(Carte.getGrille()[x][y]==null){
+												positionObjetX=x;positionObjetY=y;
+											}
+										}
+									}
+								}
+	
+							}
+						}
+					}
+					try{
+						Carte.getGrille()[positionObjetX][positionObjetY]=jeterObjet(perso.getInventaire());
+					}catch(Exception e){}
 					break;
 			}
 		}while(choix!=5);
@@ -67,7 +104,7 @@ public class GestionInventaire {
 			inventairePerso.desequiper(reponse, 0);
 	}
 
-	public static void jeterObjet(Inventaire inventairePerso){
+	public static Item jeterObjet(Inventaire inventairePerso){
 		afficheInventaire(inventairePerso);
 		String question="Genre de l'item ?\n"
 				+ "\t- sac a dos\n"
@@ -77,8 +114,8 @@ public class GestionInventaire {
 				+ "\t- bottes\n";
 		String reponse=demandeDuChoix(question).toLowerCase();
 		if(reponse.equals("arme")|| reponse.equals("gants")|| reponse.equals("sac a dos"))
-			inventairePerso.jeter(reponse, Integer.parseInt(demandeDuChoix("Numero de l'emplacement du "+reponse))-1);
+			return inventairePerso.jeter(reponse, Integer.parseInt(demandeDuChoix("Numero de l'emplacement du "+reponse))-1);
 		else
-			inventairePerso.jeter(reponse, 0);
+			return inventairePerso.jeter(reponse, 0);
 	}
 }

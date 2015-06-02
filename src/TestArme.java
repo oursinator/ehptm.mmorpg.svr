@@ -1,6 +1,8 @@
 import ehptm.mmorpg.svr.classe.metier.Arme;
 
 
+
+
 public class TestArme {
 
 	public static void main(String[] args) {

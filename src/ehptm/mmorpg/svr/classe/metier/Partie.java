@@ -20,51 +20,32 @@ public class Partie {
 	public void setDuree(long duree) {
 		this.duree = duree;
 	}
-
-	public static int getNbMaxJoueur() {
-		return NB_MAX_JOUEUR;
-	}
-
-	public static int getNbMaxItem() {
-		return NB_MAX_ITEM;
-	}
-
-	public static long getPartieCourte() {
-		return PARTIE_COURTE;
-	}
-
-	public static long getPartieLongue() {
-		return PARTIE_LONGUE;
-	}
 	
-    
-    void setCarte(Carte value) {
+    public boolean restePersonnageJoueur(){
+    	if(this.carte.listePersonnage().isEmpty()){
+    		return false;
+    	}
+    	for(int i=0;i<this.carte.listePersonnage().size();i++){
+    		if(this.carte.listePersonnage().get(i) instanceof PersonnageJoueur)
+    			return true;
+    	}
+    	return false;
+    }
+    public void setCarte(Carte value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.carte = value;
     }
 
-    Carte getCarte() {
+    public Carte getCarte() {
         // Automatically generated method. Please delete this comment before entering specific code.
         return this.carte;
     }
 
-    static int getNB_MAX_JOUEUR() {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        return NB_MAX_JOUEUR;
-    }
 
     
-    public void ajouterElementCarte(Object a) {
-    	
-    	for(int i=0;i<Carte.TAILLE_GRILLE;i++)
-    	{
-    		for(int j=0;j<Carte.TAILLE_GRILLE;j++)
-    		{
-    			if(this.getCarte().getGrille()[i][j]!= null){
-    				this.getCarte().getGrille()[i][j]=a;
-    			}
-    		}
-    	}
+    public void ajouterElementCarte(Object a) throws Exception{
+    	if(this.carte.getNbItem()+1>Partie.NB_MAX_ITEM || this.carte.getNbJoueur()+1>Partie.NB_MAX_JOUEUR) throw new Exception("Nombre d'element atteint !");
+    	if(!this.carte.ajouter(a)) throw new Exception("Element existe deja");
     }
 
     
