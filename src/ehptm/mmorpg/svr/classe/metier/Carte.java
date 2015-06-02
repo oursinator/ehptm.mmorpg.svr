@@ -125,6 +125,7 @@ public class Carte {
 	
 	public String deplacer(Personnage a, int direction, int sens)
 	{
+		boolean test= false;
 		int x=0;
 		int y=0;
 		
@@ -133,10 +134,11 @@ public class Carte {
 		{
 			if(sens==1 || sens ==-1) // 1 pour droite et -1 pour gauche
 			{
-				for(int i=0;i<TAILLE_GRILLE;i++)
+				int i=0;
+				int j=0;
+				
+				while(i<TAILLE_GRILLE && j<TAILLE_GRILLE && test== false)
 				{
-					for(int j=0;j<TAILLE_GRILLE;j++)
-					{
 						if(this.getGrille()[i][j] != null)
 						{
 							if(this.getGrille()[i][j].equals(a))
@@ -153,6 +155,8 @@ public class Carte {
 												this.getGrille()[x][y+1]=a;
 												mess= "à droite toute!";
 												this.getGrille()[x][y]= null;
+												test= true;
+												a.setPointAction(a.getPointAction()-2);
 											}
 										}
 										catch(IndexOutOfBoundsException e)
@@ -169,6 +173,8 @@ public class Carte {
 												this.getGrille()[x][y-1]=a;
 												mess= "à gauche toute!";
 												this.getGrille()[x][y]= null;
+												test= true;
+												a.setPointAction(a.getPointAction()-2);
 											}
 										}
 										catch(IndexOutOfBoundsException e)
@@ -187,6 +193,8 @@ public class Carte {
 												this.getGrille()[x-1][y]=a;
 												mess= "Monté!";
 												this.getGrille()[x][y]= null;
+												test= true;
+												a.setPointAction(a.getPointAction()-2);
 											}
 										}
 										catch(IndexOutOfBoundsException e)
@@ -203,6 +211,8 @@ public class Carte {
 												this.getGrille()[x+1][j]=a;
 												mess= "Descendu!";
 												this.getGrille()[x][y]= null;
+												test= true;
+												a.setPointAction(a.getPointAction()-2);
 											}
 										}
 										catch(IndexOutOfBoundsException e)
@@ -213,8 +223,8 @@ public class Carte {
 								}
 							}
 						}
-						
-					}
+					i++;	
+					j++;
 				}
 			}
 		
