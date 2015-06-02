@@ -1,6 +1,8 @@
 import ehptm.mmorpg.svr.classe.metier.Item;
 
 
+
+
 public class TestItem {
 
 	public static void main(String[] args) {

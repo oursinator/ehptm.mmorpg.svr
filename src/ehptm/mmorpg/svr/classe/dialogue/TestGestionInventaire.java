@@ -9,7 +9,7 @@ import ehptm.mmorpg.svr.classe.metier.PaireBottes;
 import ehptm.mmorpg.svr.classe.metier.PotionSoin;
 
 public class TestGestionInventaire {
-
+/*
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Item[] sac= new Item[10];
@@ -21,5 +21,5 @@ public class TestGestionInventaire {
 		Inventaire inventaire=new Inventaire(sac,new Armure(Armure.ARMURE_BRONZE),arme,new PaireBottes(PaireBottes.PAIREBOTTES_CUIR),gants);
 		GestionInventaire.menuInventaire(inventaire);
 	}
-
+*/
 }
