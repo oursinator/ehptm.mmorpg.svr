@@ -170,109 +170,115 @@ public class Carte {
 
 
 
-	public boolean collision(int a, int b)throws Exception
+	public boolean collision(int a, int b)throws IndexOutOfBoundsException, Exception
 	{
 		return this.getGrille()[a][b] != null; //true s'il y a collision
 	}
 	
 	public String deplacer(Personnage a, int direction, int sens)
 	{
+		boolean test= false;
 		int x=0;
 		int y=0;
-		
-		String mess="vos indices de déplacements ne sont pas valides";
-		if(direction ==1 || direction == -1) // 1 pour horizontale et -1 pour verticale
-		{
-			if(sens==1 || sens ==-1) // 1 pour droite et -1 pour gauche
-			{
-				for(int i=0;i<TAILLE_GRILLE;i++)
-				{
-					for(int j=0;j<TAILLE_GRILLE;j++)
-					{
-						if(this.getGrille()[i][j] != null)
-						{
-							if(this.getGrille()[i][j].equals(a))
-							{	x=i;
-								y=j;
-								
-								if(direction ==1)
-								{
-									if(sens ==1)
-									{
-										try{
-											if(this.getGrille()[x][y+1] ==null)
-											{
-												this.getGrille()[x][y+1]=a;
-												mess= "à droite toute!";
-												this.getGrille()[x][y]= null;
-											}
-										}
-										catch(IndexOutOfBoundsException e)
-										{
-											mess="Vous ne pouvez pas allez plus à droite.";
-										}
-									}
-											
-									else
-									{
-										try{
-											if(this.getGrille()[x][y-1] ==null)
-											{
-												this.getGrille()[x][y-1]=a;
-												mess= "à gauche toute!";
-												this.getGrille()[x][y]= null;
-											}
-										}
-										catch(IndexOutOfBoundsException e)
-										{
-											mess="Vous ne pouvez pas allez plus à gauche.";
-										}
-									}
-								}
-								else
-								{
-									if(sens ==1)
-									{
-										try{
-											if(this.getGrille()[x-1][y] ==null)
-											{
-												this.getGrille()[x-1][y]=a;
-												mess= "Monté!";
-												this.getGrille()[x][y]= null;
-											}
-										}
-										catch(IndexOutOfBoundsException e)
-										{
-											mess="Vous ne pouvez pas allez plus haut.";
-										}
-									}
-											
-									else
-									{
-										try{
-											if(this.getGrille()[x+1][y] ==null)
-											{
-												this.getGrille()[x+1][j]=a;
-												mess= "Descendu!";
-												this.getGrille()[x][y]= null;
-											}
-										}
-										catch(IndexOutOfBoundsException e)
-										{
-											mess="Vous ne pouvez pas allez plus bas.";
-										}
-									}
-								}
-							}
-						}
-						
-					}
+		for(int i=0;i<this.grille.length;i++){
+			for(int j=0;j<this.grille[0].length;j++){
+				if(this.grille[i][j] == a){
+					x=i;
+					y=j;
 				}
 			}
-		
-		
 		}
-		return mess;
+		if(a.getPointAction()-2>=0){
+			String mess="";
+			switch(direction){
+				case 1:
+					if(sens ==1){
+						try{
+							if(!collision(x, y+1)){
+								this.getGrille()[x][y+1]=a;
+								mess= "à droite toute!";
+								this.getGrille()[x][y]= null;
+								test= true;
+								a.setPointAction(a.getPointAction()-2);
+							
+							}
+							else
+								mess="Vous ne pouvez pas allez plus à droite.";
+						}catch(IndexOutOfBoundsException e){
+							mess="Vous ne pouvez pas allez plus à droite.";
+						}
+						catch(Exception e){
+							mess="Vous ne pouvez pas allez plus à droite.";
+						}
+					}
+					else if(sens == -1){
+						try{
+							if(!collision(x, y-1)){
+								this.getGrille()[x][y-1]=a;
+								mess= "à gauche toute!";
+								this.getGrille()[x][y]= null;
+								test= true;
+								a.setPointAction(a.getPointAction()-2);
+							
+							}
+							else
+								mess="Vous ne pouvez pas allez plus à gauche.";
+						}catch(IndexOutOfBoundsException e){
+							mess="Vous ne pouvez pas allez plus à gauche.";
+						}
+						catch(Exception e){
+							mess="Vous ne pouvez pas allez plus à droite.";
+						}
+					}
+					break;
+				case -1:
+					if(sens ==1){
+						try{
+							if(!collision(x-1, y)){
+								this.getGrille()[x-1][y]=a;
+								mess= "Monté!";
+								this.getGrille()[x][y]= null;
+								test= true;
+								a.setPointAction(a.getPointAction()-2);
+							
+							}
+							else
+								mess="Vous ne pouvez pas allez plus haut.";
+						}catch(IndexOutOfBoundsException e){
+							mess="Vous ne pouvez pas allez plus haut.";
+						}
+						catch(Exception e){
+							mess="Vous ne pouvez pas allez plus à droite.";
+						}
+					}
+					else if(sens == -1){
+						try{
+							if(!collision(x+1, y)){
+								this.getGrille()[x+1][y]=a;
+								mess= "Descendu!";
+								this.getGrille()[x][y]= null;
+								test= true;
+								a.setPointAction(a.getPointAction()-2);
+							
+							}
+							else
+								mess="Vous ne pouvez pas allez plus bas.";
+						}catch(IndexOutOfBoundsException e){
+							mess="Vous ne pouvez pas allez plus bas.";
+						}
+						catch(Exception e){
+							mess="Vous ne pouvez pas allez plus à droite.";
+						}
+					}
+					break;
+				default:
+					mess="Vos indices de déplacements ne sont pas valides";
+					break;	
+			}
+			return mess;
+		}
+		return "Il manque des points d'actions ..";
+		
 	}
 	public String toString()
 	{

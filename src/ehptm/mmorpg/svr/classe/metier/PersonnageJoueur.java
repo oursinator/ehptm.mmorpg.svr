@@ -185,90 +185,70 @@ public class PersonnageJoueur extends Personnage {
 		tab[1]= tab[1]+ this.getResistance()[1];
 		return tab;
 	}
-	/*
-	public void dropItem(Item nom)
-	{
-		for(int i=0;i<this.getInventaire().getTailleSacADos();i++)
-		{
-			if(this.getInventaire().getSacADos()[i].equals(nom.getNom()))//méthode equals a definir dans la classe Item 
-			{
-				this.getInventaire().getSacADos()[i]= null;
-			}
-		}
-	}*/
 	
 	public boolean attaquer(Personnage cible) // cette méthode ne calcule pas les carac mais fait des dégats
 	{
 		boolean mess=false;
 		if(this.getPointAction()>=3)
 		{
-			this.setPointAction(this.getPointAction()-3);
-			int somme=0;
-			for(int i=0;i<this.attaque()[0];i++)
+			int attaque= this.attaque()[0];
+			for(int i=0;i<this.attaque()[1];i++)
 			{
 				int a= (int)((Math.random()*(7-1))+1);
-				somme+= a;
+				attaque+= a;
 			}
-			somme+= this.attaque()[1];		
 			if(cible instanceof PersonnageJoueur)
 			{
-				PersonnageJoueur b= new PersonnageJoueur((PersonnageJoueur)cible);
-					int somme2=0;
-					for(int i=0;i<b.esquive()[0];i++)
+				PersonnageJoueur b=(PersonnageJoueur) cible;
+					int esquive=b.esquive()[0];
+					for(int i=0;i<b.esquive()[1];i++)
 					{
 						int a= (int)((Math.random()*(7-1))+1);
-						somme2 += a;
+						esquive += a;
 					}
-					somme2 += b.esquive()[1];
-					if(somme> somme2)
+					if(attaque> esquive)
 					{
-						int degats=0;
-						for(int i=0;i<this.degats()[0];i++)
+						int degats=this.degats()[0];
+						for(int i=0;i<this.degats()[1];i++)
 						{
 							int a= (int)((Math.random()*(7-1))+1);
 							degats += a;
 						}
-						degats += this.degats()[1];
-						int def=0;
-						for(int i=0;i<b.defense()[0];i++)
+						int def= b.defense()[0];
+						for(int i=0;i<b.defense()[1];i++)
 						{
 							int a= (int)((Math.random()*(7-1))+1);
 							def += a;
 						}
-						def += b.defense()[1];
 						int difference= degats- def;
-						int pvPerdu= (int) difference/3;
-						System.out.println(pvPerdu);
+						int pvPerdu= difference/3;
 						cible.setPointVie(cible.getPointVie()- pvPerdu);
-						if(cible.getPointVie()<0)
-						{
-							cible.setPointVie(0);
-						}
 						
+						if(cible.getPointVie()<0)
+							cible.setPointVie(0);
+						this.setPointAction(this.getPointAction()-3);
 						mess= true;
 					}
 			
 			}
 			if(cible instanceof PersonnageNonJoueur)
 			{
-				PersonnageNonJoueur newCible = new PersonnageNonJoueur((PersonnageNonJoueur) cible);
-				if(somme> newCible.getInitiative())
+				PersonnageNonJoueur newCible = (PersonnageNonJoueur) cible;
+				if(attaque> newCible.getInitiative())
 				{
-					int degats=0;
-					for(int i=0;i<this.degats()[0];i++)
+					int degats=this.degats()[0];
+					for(int i=0;i<this.degats()[1];i++)
 					{
 						int a= (int)((Math.random()*(7-1))+1);
-					degats += a;
+						degats += a;
 					}
-					degats += this.degats()[1];
 					int difference= degats - newCible.getDefense();
-					int pvPerdu= (int)difference/3;
+					int pvPerdu= difference/3;
 					cible.setPointVie(cible.getPointVie()- pvPerdu);
-					if(cible.getPointVie()<0)
-					{
-						cible.setPointVie(0);
-					}
 					
+					if(cible.getPointVie()<0)
+						cible.setPointVie(0);
+					this.setPointAction(this.getPointAction()-3);
 					mess=true;
 				}
 				
@@ -281,16 +261,18 @@ public class PersonnageJoueur extends Personnage {
 	
 	public void recuperationPointAction(Partie partie)
 	{
-		int degre =this.initiative()[0]*3+this.initiative()[1];
+		int degre =this.initiative()[1]*3+this.initiative()[0];
 		long endTime = System.currentTimeMillis();
 		long dla= this.getStartTime();
+		
 		if(endTime-dla>= partie.getDuree())
 		{
-			this.setPointAction((int)(this.getPointAction()+(degre*0.5)));
-			if(this.getPointAction()>6)
+			this.setPointAction((this.getPointAction()+(degre)/2));
+			if(this.getPointAction()>10)
 			{
-				this.setPointAction(6);
+				this.setPointAction(10);
 			}
+			this.setStartTime(System.currentTimeMillis());
 		}
 		
 	}

@@ -3,8 +3,8 @@ public class Partie {
     
     public static final int NB_MAX_JOUEUR=5;
     public static final int NB_MAX_ITEM=25;
-    public static final long PARTIE_COURTE=(120*60)*1000;//7200 *1000
-    public static final long PARTIE_LONGUE=(5*60)*1000;//7200 *1000
+    public static final long PARTIE_COURTE=(120*60)*10;//7200 *1000
+    public static final long PARTIE_LONGUE=(5*60)*10;//7200 *1000
     private long duree;
     private Carte carte;
     
@@ -13,6 +13,7 @@ public class Partie {
     	for(int i=0;i<5;i++){
     		this.carte.ajouter(new PersonnageNonJoueur(10,5,new Inventaire(),"PNG",i));
     		this.carte.ajouter(new Monstre(10,5,new Inventaire(),"Morphus",(i+3)/2));
+    		this.carte.ajouter(new PersonnageNonJoueur());
     	}
     	for(int i=0;i<2;i++){
     		this.carte.ajouter(new PotionSoin(PotionSoin.SOIN_1));

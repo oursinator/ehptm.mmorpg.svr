@@ -1,6 +1,6 @@
 package ehptm.mmorpg.svr.classe.metier;
 public class PersonnageNonJoueur extends Personnage {
-	
+
 	private int niveau;
 	private int initiative;
 	private int attaque;
@@ -16,18 +16,18 @@ public class PersonnageNonJoueur extends Personnage {
 		this.degats = (int)(53*+(53*niveau*0.5));
 		this.defense = (int)(53*+(53*niveau*0.5));
 	}
-	
+
 	public PersonnageNonJoueur()
 	{
 		super();
 		this.niveau = 1;
-		this.initiative = 53;
-		this.attaque = 53;
-		this.esquive = 53;
-		this.degats = 53;
-		this.defense = 53;
+		this.initiative = 5;
+		this.attaque = 5;
+		this.esquive = 5;
+		this.degats = 5;
+		this.defense = 5;
 	}
-	
+
 	public PersonnageNonJoueur(PersonnageNonJoueur a)
 	{
 		super((Personnage) a);
@@ -74,75 +74,169 @@ public class PersonnageNonJoueur extends Personnage {
 	public void setDefense(int defense) {
 		this.defense = defense;
 	}
-	
+
 	public boolean attaquer(PersonnageJoueur cible)
 	{
 		boolean mess= false;
 		if(this.getPointAction()>=3)
 		{
 			this.setPointAction(this.getPointAction()-3);	
-			
-					int somme2=0;
-					for(int i=0;i<cible.esquive()[0];i++)
-					{
-						int a= (int)((Math.random()*(7-1))+1);
-						somme2 += a;
-					}
-					somme2 += cible.esquive()[1];
-					if(this.getAttaque()> somme2)
-					{
-						int def=0;
-						for(int i=0;i<cible.defense()[0];i++)
-						{
-							int a= (int)((Math.random()*(7-1))+1);
-							def += a;
-						}
-						def += cible.defense()[1];
-						int difference= this.getDegats()- def;
-						int pvPerdu= (int) difference/3;
-						cible.setPointVie(cible.getPointVie()- pvPerdu);
-						mess=false;
-					}
-					
-		
+
+			int somme2=0;
+			for(int i=0;i<cible.esquive()[0];i++)
+			{
+				int a= (int)((Math.random()*(7-1))+1);
+				somme2 += a;
+			}
+			somme2 += cible.esquive()[1];
+			if(this.getAttaque()> somme2)
+			{
+				int def=0;
+				for(int i=0;i<cible.defense()[0];i++)
+				{
+					int a= (int)((Math.random()*(7-1))+1);
+					def += a;
+				}
+				def += cible.defense()[1];
+				int difference= this.getDegats()- def;
+				int pvPerdu= (int) difference/3;
+				cible.setPointVie(cible.getPointVie()- pvPerdu);
+				mess=false;
+			}
+
+
 		}
 		return mess;
 	}
-	
-	
-	
-	/*public void dropItem()
-	{
-		for(int i=0;i<this.getInventaire().getTailleSacADos();i++)
-		{
-			
-				this.getInventaire().getSacADos()[i]= null;
-			
-		}
-	}*/
-	
 
-	public void recuperationPointAction(Partie partie)
-	{
-		int degre =((int)this.getInitiative()/3)+(this.getInitiative()%3);
-		long endTime = System.currentTimeMillis();
-		long dla= this.getStartTime();
-		if(endTime-dla>= partie.getDuree())
+
+		
+		public void recuperationPointAction(Partie partie)
 		{
+			int degre =((int)this.getInitiative()/3)+(this.getInitiative()%3);
+			long endTime = System.currentTimeMillis();
+			long dla= this.getStartTime();
 			
-			this.setPointAction((int)(degre*0.5));
-			if(this.getPointAction()>6)
+			if(endTime-dla>= partie.getDuree())
 			{
-				this.setPointAction(6);
+				this.setPointAction((this.getPointAction()+(degre)/2));
+				if(this.getPointAction()>10)
+				{
+					this.setPointAction(10);
+				}
+				this.setStartTime(System.currentTimeMillis());
 			}
 		}
-		
-	}
-	
 	public String toString()
 	{
 		String a= super.toString();
 		a= a+" est de niveau "+this.niveau+" avec une initiative de "+this.initiative +" possede une force d'attaque de "+ this.attaque + " et une esquive de "+ this.esquive+ " et peut faire "+this.degats+ " points de dégats";
 		return a;
+	}
+
+	public void ia(Carte carte)
+	{
+		boolean fait= false;
+		int x=0;
+		int y=0;
+		for(int i=0; i< Carte.getGrille().length;i++)
+		{
+			for(int j=0;j<Carte.getGrille()[0].length;j++)
+			{
+				if(carte.getGrille()[i][j]== this)
+				{
+					x=i;
+					y=j;
+				}
+			}
+		}
+		if(x-1>=0 && carte.getGrille()[x-1][y] != null )
+		{
+			if(carte.getGrille()[x-1][y] instanceof PersonnageJoueur)
+			{
+				this.attaquer((PersonnageJoueur)carte.getGrille()[x-1][y]);
+				fait= true;
+			}
+		}
+		else if(x+1<carte.getGrille().length && carte.getGrille()[x+1][y]!= null)
+		{
+			if(carte.getGrille()[x+1][y] instanceof PersonnageJoueur)
+			{
+				this.attaquer((PersonnageJoueur)carte.getGrille()[x+1][y]);
+				fait= true;
+			}
+		}
+		else if(y-1>=0 && carte.getGrille()[x][y-1]!= null )
+		{
+			if(carte.getGrille()[x][y-1] instanceof PersonnageJoueur)
+			{
+				this.attaquer((PersonnageJoueur)carte.getGrille()[x][y-1]);
+				fait= true;
+			}
+		}
+		else if(y+1<carte.getGrille()[0].length && carte.getGrille()[x][y+1]!= null)
+		{
+			if(carte.getGrille()[x][y+1] instanceof PersonnageJoueur)
+			{
+				this.attaquer((PersonnageJoueur) carte.getGrille()[x][y+1]);
+				fait= true;
+			}
+		}
+
+		if(fait == false)
+		{
+			int compteur=0;
+			int jH=y;
+			int iG=x;
+			int jB=y;
+			int iD=x;
+			while((jH>0 || iG>0 || jB<carte.getGrille()[0].length || iD<carte.getGrille().length) && !fait){
+				if(iG>0 && carte.getGrille()[iG][y] != null )
+				{
+					if(carte.getGrille()[iG][y] instanceof PersonnageJoueur)
+					{
+						carte.deplacer(this, 1, -1);
+						fait= true;
+					}
+				}
+				else if(iD<carte.getGrille().length && carte.getGrille()[iD][y]!= null)
+				{
+					if(carte.getGrille()[iD][y] instanceof PersonnageJoueur)
+					{
+							carte.deplacer(this, 1, 1);
+							fait= true;
+					}
+				}
+				else if(jH>0 && carte.getGrille()[x][jH]!= null )
+				{
+					if(carte.getGrille()[x][jH] instanceof PersonnageJoueur)
+					{
+						carte.deplacer(this, -1, -1);
+						fait= true;
+					}
+				}
+				else if(jB<carte.getGrille()[0].length && carte.getGrille()[x][jB]!= null)
+				{
+					if(carte.getGrille()[x][jB] instanceof PersonnageJoueur)
+					{
+						carte.deplacer(this, -1, 1);
+						fait= true;
+					}
+				}
+				jB++;
+				jH--;
+				iD++;
+				iG--;
+			}
+		}
+		if(!fait){
+			int queFaire = (int)(Math.random() *4);
+			switch(queFaire){
+				case 0:carte.deplacer(this, -1, 1);break;
+				case 1:carte.deplacer(this, 1, 1);break;
+				case 2:carte.deplacer(this, -1, -1);break;
+				case 3:carte.deplacer(this, 1, -1);break;
+			}
+		}
 	}
 }

@@ -4,7 +4,10 @@ import java.io.IOException;
 
 import ehptm.mmorpg.svr.classe.dialogue.Action;
 import ehptm.mmorpg.svr.classe.dialogue.ChoisirPersonnage;
-import ehptm.mmorpg.svr.classe.metier.*;
+import ehptm.mmorpg.svr.classe.metier.Partie;
+import ehptm.mmorpg.svr.classe.metier.Personnage;
+import ehptm.mmorpg.svr.classe.metier.PersonnageJoueur;
+import ehptm.mmorpg.svr.classe.metier.PersonnageNonJoueur;
 
 public class Jeu {
 
@@ -25,11 +28,14 @@ public class Jeu {
 				partie.ajouterElementCarte(perso);
 				while(partie.restePersonnageJoueur()){
 					for(Personnage personnage : partie.getCarte().listePersonnage()){
-						if(personnage.equals(perso)){
+						if(personnage instanceof PersonnageJoueur && personnage==perso){
 							try{
 								Action.choisirAction(partie.getCarte(), (PersonnageJoueur)personnage);
 							}catch(Exception e){}
 						}
+						else
+							( (PersonnageNonJoueur) personnage).ia(partie.getCarte());
+						personnage.recuperationPointAction(partie);
 					}
 				}
 			} catch (Exception e) {

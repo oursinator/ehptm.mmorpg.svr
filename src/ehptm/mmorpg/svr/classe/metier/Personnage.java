@@ -20,7 +20,7 @@ public abstract class Personnage{
 	{
 		this.nom="donnes moi un nom flemmard!";
 		this.pointVie = 6;
-		this.pointAction = 5;
+		this.pointAction = 10;
 		this.inventaire = new Inventaire();
 		this.startTime = System.currentTimeMillis();
 	}
