@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import ehptm.mmorpg.svr.classe.metier.Armure;
+import ehptm.mmorpg.svr.classe.metier.Inventaire;
 import ehptm.mmorpg.svr.classe.metier.PersonnageJoueur;
 
 public class ChoisirPersonnage{
 
+	
 	public static PersonnageJoueur choisirPersonnage() throws IOException
 	{
 		File file = new File("test.txt");
@@ -29,9 +31,34 @@ public class ChoisirPersonnage{
 		{
 			System.out.println("Choisissez le nom de votre personnage");
 			String b= input.next();
-			joueur= new PersonnageJoueur();
-			joueur.setNom(b);
-			
+			int degres;
+			int force[]=new int[2];
+			int adresse[]=new int[2];
+			int resistance[]=new int[2];
+			int etreSur;
+			do{
+				System.out.println("Repartissez vos degres entre la force, l'adresse et la resistance.");
+				degres=18;
+				do{
+					System.out.println("Degres : "+degres);
+					System.out.print("Force: ");
+					force[1]=input.nextInt();
+				}while(force[1]>degres);
+				degres-=force[1];
+				do{
+					System.out.println("Degres : "+degres);
+					System.out.print("Adresse: ");
+					adresse[1]=input.nextInt();
+				}while(adresse[1]>degres);
+				degres-=adresse[1];
+				System.out.println("Degres : "+degres);
+				System.out.println("Resistance: "+degres);
+				resistance[1]=degres;
+				degres-=resistance[1];
+				System.out.println("Etes-vous sur ? 0-Oui  1-Non");
+				etreSur=input.nextInt();
+			}while(etreSur != 0);
+			joueur= new PersonnageJoueur(6,10,new Inventaire(),b,new int[2],force,adresse,resistance);
 		}
 		else
 		{

@@ -186,51 +186,55 @@ public class PersonnageNonJoueur extends Personnage {
 		if(fait == false)
 		{
 			int compteur=0;
-			int jH=y;
-			int iG=x;
-			int jB=y;
-			int iD=x;
-			while((jH>0 || iG>0 || jB<carte.getGrille()[0].length || iD<carte.getGrille().length) && !fait){
-				if(iG>0 && carte.getGrille()[iG][y] != null )
+			int iH=y;
+			int jG=x;
+			int iB=y;
+			int jD=x;
+			while((iH>=0 || jG>=0 || iB<carte.getGrille()[0].length || jD<carte.getGrille().length) && !fait){
+				if(jG>=0 && carte.getGrille()[x][jG] != null )
 				{
-					if(carte.getGrille()[iG][y] instanceof PersonnageJoueur)
+					if(carte.getGrille()[x][jG] instanceof PersonnageJoueur)
 					{
+						System.out.println("Vu Gauche");
 						carte.deplacer(this, 1, -1);
 						fait= true;
 					}
 				}
-				else if(iD<carte.getGrille().length && carte.getGrille()[iD][y]!= null)
+				else if(jD<carte.getGrille()[0].length && carte.getGrille()[x][jD]!= null)
 				{
-					if(carte.getGrille()[iD][y] instanceof PersonnageJoueur)
+					if(carte.getGrille()[x][jD] instanceof PersonnageJoueur)
 					{
-							carte.deplacer(this, 1, 1);
-							fait= true;
-					}
-				}
-				else if(jH>0 && carte.getGrille()[x][jH]!= null )
-				{
-					if(carte.getGrille()[x][jH] instanceof PersonnageJoueur)
-					{
-						carte.deplacer(this, -1, -1);
+						System.out.println("Vu Droite");
+						carte.deplacer(this, 1, 1);
 						fait= true;
 					}
 				}
-				else if(jB<carte.getGrille()[0].length && carte.getGrille()[x][jB]!= null)
+				else if(iH>=0 && carte.getGrille()[iH][y]!= null )
 				{
-					if(carte.getGrille()[x][jB] instanceof PersonnageJoueur)
+					if(carte.getGrille()[iH][y] instanceof PersonnageJoueur)
 					{
+						System.out.println("Vu Haut");
 						carte.deplacer(this, -1, 1);
 						fait= true;
 					}
 				}
-				jB++;
-				jH--;
-				iD++;
-				iG--;
+				else if(iB<carte.getGrille().length && carte.getGrille()[iB][y]!= null)
+				{
+					if(carte.getGrille()[iB][y] instanceof PersonnageJoueur)
+					{
+						System.out.println("Vu Bas");
+						carte.deplacer(this, -1, -1);
+						fait= true;
+					}
+				}
+				iB++;
+				iH--;
+				jD++;
+				jG--;
 			}
 		}
 		if(!fait){
-			int queFaire = (int)(Math.random() *4);
+			int queFaire = (int)(Math.random() *10);
 			switch(queFaire){
 				case 0:carte.deplacer(this, -1, 1);break;
 				case 1:carte.deplacer(this, 1, 1);break;

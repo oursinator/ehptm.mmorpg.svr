@@ -200,36 +200,34 @@ public class PersonnageJoueur extends Personnage {
 			if(cible instanceof PersonnageJoueur)
 			{
 				PersonnageJoueur b=(PersonnageJoueur) cible;
-					int esquive=b.esquive()[0];
-					for(int i=0;i<b.esquive()[1];i++)
+				int esquive=b.esquive()[0];
+				for(int i=0;i<b.esquive()[1];i++)
+				{
+					int a= (int)((Math.random()*(7-1))+1);
+					esquive += a;
+				}
+				if(attaque> esquive)
+				{
+					int degats=this.degats()[0];
+					for(int i=0;i<this.degats()[1];i++)
 					{
 						int a= (int)((Math.random()*(7-1))+1);
-						esquive += a;
+						degats += a;
 					}
-					if(attaque> esquive)
+					int def= b.defense()[0];
+					for(int i=0;i<b.defense()[1];i++)
 					{
-						int degats=this.degats()[0];
-						for(int i=0;i<this.degats()[1];i++)
-						{
-							int a= (int)((Math.random()*(7-1))+1);
-							degats += a;
-						}
-						int def= b.defense()[0];
-						for(int i=0;i<b.defense()[1];i++)
-						{
-							int a= (int)((Math.random()*(7-1))+1);
-							def += a;
-						}
-						int difference= degats- def;
-						int pvPerdu= difference/3;
-						cible.setPointVie(cible.getPointVie()- pvPerdu);
-						
-						if(cible.getPointVie()<0)
-							cible.setPointVie(0);
-						this.setPointAction(this.getPointAction()-3);
-						mess= true;
+						int a= (int)((Math.random()*(7-1))+1);
+						def += a;
 					}
-			
+					int difference= degats- def;
+					int pvPerdu= difference/3;
+					cible.setPointVie(cible.getPointVie()- pvPerdu);
+					if(cible.getPointVie()<0)
+						cible.setPointVie(0);
+					mess= true;
+				}
+				this.setPointAction(this.getPointAction()-3);
 			}
 			if(cible instanceof PersonnageNonJoueur)
 			{
@@ -248,10 +246,9 @@ public class PersonnageJoueur extends Personnage {
 					
 					if(cible.getPointVie()<0)
 						cible.setPointVie(0);
-					this.setPointAction(this.getPointAction()-3);
 					mess=true;
 				}
-				
+				this.setPointAction(this.getPointAction()-3);				
 			}
 		
 		}

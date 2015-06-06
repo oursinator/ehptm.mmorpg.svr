@@ -39,7 +39,7 @@ public class Jeu {
 					}
 				}
 			} catch (Exception e) {
-				System.out.println("Le personnage n'a pas eu etre placer sur la carte :(");
+				System.out.println(e.getMessage()+"  Le personnage n'a pas eu etre placer sur la carte :(");
 			}
 		} catch (IOException e) {
 			System.out.println("Oups ! Il y a un probleme avec le personnage :(");

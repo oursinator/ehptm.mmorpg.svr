@@ -11,8 +11,8 @@ public class Partie {
     public Partie(long duree){//quelque soit le constructeur il faut mettre le type de partie en parametre
     	this.carte= new Carte();
     	for(int i=0;i<5;i++){
-    		this.carte.ajouter(new PersonnageNonJoueur(10,5,new Inventaire(),"PNG",i));
-    		this.carte.ajouter(new Monstre(10,5,new Inventaire(),"Morphus",(i+3)/2));
+    		//this.carte.ajouter(new PersonnageNonJoueur(10,5,new Inventaire(),"PNG",i));
+    		//this.carte.ajouter(new Monstre(10,5,new Inventaire(),"Morphus",(i+3)/2));
     		this.carte.ajouter(new PersonnageNonJoueur());
     	}
     	for(int i=0;i<2;i++){
