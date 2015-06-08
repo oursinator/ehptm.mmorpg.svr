@@ -1,4 +1,7 @@
 package ehptm.mmorpg.svr.classe.metier;
+
+import java.util.ArrayList;
+
 public class Partie {
     
     public static final int NB_MAX_JOUEUR=5;
@@ -12,7 +15,7 @@ public class Partie {
     	this.carte= new Carte();
     	for(int i=0;i<5;i++){
     		//this.carte.ajouter(new PersonnageNonJoueur(10,5,new Inventaire(),"PNG",i));
-    		//this.carte.ajouter(new Monstre(10,5,new Inventaire(),"Morphus",(i+3)/2));
+    		this.carte.ajouter(new Monstre(6,25,new Inventaire(),"Morphus",(i+3)/2));
     		this.carte.ajouter(new PersonnageNonJoueur());
     	}
     	for(int i=0;i<2;i++){
@@ -50,6 +53,10 @@ public class Partie {
     	}
     	return false;
     }
+    public void retireJoueurMort(){
+    	this.carte.joueursMort();
+    }
+    
     public void setCarte(Carte value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.carte = value;

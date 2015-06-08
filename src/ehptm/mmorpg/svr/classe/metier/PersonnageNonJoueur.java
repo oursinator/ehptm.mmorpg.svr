@@ -10,22 +10,22 @@ public class PersonnageNonJoueur extends Personnage {
 	public PersonnageNonJoueur(int pointVie, int pointAction,Inventaire inventaire, String nom,int niveau) {
 		super(pointVie, pointAction, inventaire, nom);
 		this.niveau = niveau;
-		this.initiative = (int) (53+(53*niveau*0.5));
-		this.attaque = (int) (53+(53*niveau*0.5));
-		this.esquive = (int)(53+(53*niveau*0.5));
-		this.degats = (int)(53*+(53*niveau*0.5));
-		this.defense = (int)(53*+(53*niveau*0.5));
+		this.initiative = (int) (10+(10*niveau*0.5));
+		this.attaque = (int) (10+(10*niveau*0.5));
+		this.esquive = (int)(10+(10*niveau*0.5));
+		this.degats = (int)(10*+(10*niveau*0.5));
+		this.defense = (int)(10*+(10*niveau*0.5));
 	}
 
 	public PersonnageNonJoueur()
 	{
 		super();
 		this.niveau = 1;
-		this.initiative = 5;
-		this.attaque = 5;
-		this.esquive = 5;
-		this.degats = 5;
-		this.defense = 5;
+		this.initiative = 15;
+		this.attaque = 20;
+		this.esquive = 10;
+		this.degats = 15;
+		this.defense = 10;
 	}
 
 	public PersonnageNonJoueur(PersonnageNonJoueur a)
@@ -101,32 +101,29 @@ public class PersonnageNonJoueur extends Personnage {
 				int difference= this.getDegats()- def;
 				int pvPerdu= (int) difference/3;
 				cible.setPointVie(cible.getPointVie()- pvPerdu);
-				mess=false;
+				mess=true;
+				cible.setToucher(true);
 			}
 
 
 		}
 		return mess;
 	}
+	
+	
 
-
-		
-		public void recuperationPointAction(Partie partie)
+	public void recuperationPointAction(Partie partie)
+	{
+		int degre =((int)this.getInitiative()/3)+(this.getInitiative()%3);
+		long endTime = System.currentTimeMillis();
+		long dla= this.getStartTime();
+		if(endTime-dla>= partie.getDuree())
 		{
-			int degre =((int)this.getInitiative()/3)+(this.getInitiative()%3);
-			long endTime = System.currentTimeMillis();
-			long dla= this.getStartTime();
+			this.setPointAction((this.getPointAction()+(degre)/2));
 			
-			if(endTime-dla>= partie.getDuree())
-			{
-				this.setPointAction((this.getPointAction()+(degre)/2));
-				if(this.getPointAction()>10)
-				{
-					this.setPointAction(10);
-				}
-				this.setStartTime(System.currentTimeMillis());
-			}
+			this.setStartTime(System.currentTimeMillis());
 		}
+	}
 	public String toString()
 	{
 		String a= super.toString();
@@ -185,7 +182,6 @@ public class PersonnageNonJoueur extends Personnage {
 
 		if(fait == false)
 		{
-			int compteur=0;
 			int iH=y;
 			int jG=x;
 			int iB=y;

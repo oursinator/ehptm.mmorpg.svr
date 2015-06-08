@@ -29,7 +29,12 @@ public class GestionInventaire {
 					+ "\t5 - Quitter le gestionnaire");
 			
 			do{
-				choix=Integer.parseInt(demandeDuChoix("Taper le chiffre correspondant : "));
+				try{
+					choix=Integer.parseInt(demandeDuChoix("Taper le chiffre correspondant : "));
+				}catch(Exception e){
+					choix=-1;
+					
+				}
 			}while(choix<1 || choix>5);
 			switch(choix){
 				case 1:
@@ -125,7 +130,7 @@ public class GestionInventaire {
 	public static void afficheInventaire(Inventaire inventairePerso){
 		System.out.println(inventairePerso.toString());
 	}
-	
+//	
 	public static void equiperObjet(Inventaire inventairePerso){
 		afficheInventaire(inventairePerso);
 		inventairePerso.equiper(Integer.parseInt(demandeDuChoix("Numero de l'emplacement de l'item dans le sac a dos : "))-1);	

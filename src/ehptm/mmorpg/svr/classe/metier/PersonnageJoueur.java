@@ -5,13 +5,14 @@ public class PersonnageJoueur extends Personnage {
 	private int[] force;
 	private int[] adresse;
 	private int[] resistance;
-	
+	private boolean toucher;
 	public PersonnageJoueur(int pointVie, int pointAction, Inventaire inventaire, String nom, int[] px, int[] force, int[] adresse, int[] resistance) {
 		super(pointVie, pointAction, inventaire, nom);
 		this.px = px;
 		this.force = force;
 		this.adresse = adresse;
 		this.resistance = resistance;
+		this.toucher=false;
 	}
 	
 	public PersonnageJoueur()
@@ -28,7 +29,7 @@ public class PersonnageJoueur extends Personnage {
 			this.adresse[i]=9;
 			this.resistance[i]=9;
 		}
-		
+		this.toucher=false;
 	}
 	
 	public PersonnageJoueur(PersonnageJoueur a)
@@ -44,6 +45,7 @@ public class PersonnageJoueur extends Personnage {
 			this.adresse[i]= a.getAdresse()[i];
 			this.resistance[i]= a.getResistance()[i];
 		}
+		this.toucher=a.isToucher();
 	}
 	
 	public int[] getPx() {
@@ -86,20 +88,28 @@ public class PersonnageJoueur extends Personnage {
 	}
 
 
+	public boolean isToucher() {
+		return toucher;
+	}
+
+	public void setToucher(boolean toucher) {
+		this.toucher = toucher;
+	}
+
 	public int[] initiative()
 	{
 		int[] encombrement= new int[2];
 		encombrement[0]=0;
 		encombrement[1]=0;
 		
-		for(int i=0;i<2;i++){
+		for(int i=0;i<this.getInventaire().getArme().length;i++){
 			if(this.getInventaire().getArme()[i]!=null){
 				encombrement[0]+=this.getInventaire().getArme()[i].getEncombrement()[0];
 				encombrement[1]+=this.getInventaire().getArme()[i].getEncombrement()[1];
 			}
 		}
 		for(int i=0;i<this.getInventaire().getGants().length;i++){
-			if(this.getInventaire().getArme()[i]!=null){
+			if(this.getInventaire().getGants()[i]!=null){
 				encombrement[0]+=this.getInventaire().getGants()[i].getEncombrement()[0];
 				encombrement[1]+=this.getInventaire().getGants()[i].getEncombrement()[1];
 			}
@@ -129,9 +139,11 @@ public class PersonnageJoueur extends Personnage {
 	public int[] attaque()
 	{
 		int tab[]= new int[2];
-		if(this.getInventaire().getArme()[0]!=null && this.getInventaire().getArme()[1]!=null){
-			tab[0]=	this.getInventaire().getArme()[0].getManiabilite()[0]+this.getInventaire().getArme()[1].getManiabilite()[0];
-			tab[1]= this.getInventaire().getArme()[0].getManiabilite()[1]+this.getInventaire().getArme()[1].getManiabilite()[1];
+		for(int i=0;i<this.getInventaire().getArme().length;i++){
+			if(this.getInventaire().getArme()[i]!=null){
+				tab[0]+=this.getInventaire().getArme()[i].getManiabilite()[0];
+				tab[1]+=this.getInventaire().getArme()[i].getManiabilite()[1];
+			}
 		}
 		tab[0]= tab[0]+ this.getAdresse()[0];
 		tab[1]= tab[1]+this.getAdresse()[1];
@@ -167,7 +179,7 @@ public class PersonnageJoueur extends Personnage {
 			}
 		}
 		for(int i=0;i<this.getInventaire().getGants().length;i++){
-			if(this.getInventaire().getArme()[i]!=null){
+			if(this.getInventaire().getGants()[i]!=null){
 				tab[0]+=this.getInventaire().getGants()[i].getSolidite()[0];
 				tab[1]+=this.getInventaire().getGants()[i].getSolidite()[1];
 			}
@@ -226,6 +238,7 @@ public class PersonnageJoueur extends Personnage {
 					if(cible.getPointVie()<0)
 						cible.setPointVie(0);
 					mess= true;
+					b.setToucher(true);
 				}
 				this.setPointAction(this.getPointAction()-3);
 			}
@@ -258,18 +271,16 @@ public class PersonnageJoueur extends Personnage {
 	
 	public void recuperationPointAction(Partie partie)
 	{
-		int degre =this.initiative()[1]*3+this.initiative()[0];
+		int degre =this.initiative()[1]/3+this.initiative()[0];
 		long endTime = System.currentTimeMillis();
 		long dla= this.getStartTime();
-		
-		if(endTime-dla>= partie.getDuree())
-		{
-			this.setPointAction((this.getPointAction()+(degre)/2));
-			if(this.getPointAction()>10)
+		for(int i=10;i>0;i--){
+			if(endTime-dla>= partie.getDuree()*i)
 			{
-				this.setPointAction(10);
+				this.setPointAction((this.getPointAction()+(degre*i)/2));
+				this.setStartTime(System.currentTimeMillis());
+				break;
 			}
-			this.setStartTime(System.currentTimeMillis());
 		}
 		
 	}

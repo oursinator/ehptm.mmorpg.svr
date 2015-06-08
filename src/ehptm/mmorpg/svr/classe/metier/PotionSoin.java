@@ -9,12 +9,12 @@ public class PotionSoin  extends Potion {
     public PotionSoin(String type){
     	super(type,0);
     	if(type.equals(PotionSoin.SOIN_1)){
-    		super.setPointAction(2);
-    		this.soin=10;
+    		super.setPointAction(1);
+    		this.soin=1;
     	}
     	else if(type.equals(PotionSoin.SOIN_2)){
     		super.setPointAction(2);
-    		this.soin=20;
+    		this.soin=2;
     	}
     }
     public PotionSoin(PotionSoin potion){
@@ -40,7 +40,8 @@ public class PotionSoin  extends Potion {
     	return super.toString() + " | Soin: "+this.soin+"]";
     }
 	@Override
-	public void utiliser(Personnage perso) {
+	public void utiliser(Personnage perso) throws Exception{
+		if(perso.getPointAction()-this.getPointAction()<0)throw new Exception("Pas assez de point d'action..");
 		perso.setPointAction(perso.getPointAction()-this.getPointAction());
 		perso.setPointVie(perso.getPointVie()+this.soin);
 		

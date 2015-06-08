@@ -1,312 +1,45 @@
-tanos
-2
+bernard
+1
 6
-1432756812163
-10
-true
-Armure en bronze
-2
-2
-1
+20
+false
+false
+false
+false
+false
+0
+0
+0
+0
+0
+8
 4
-epee de bablabus
-bouclier gemme
-1
-1
-1
-1
-1
-1
-1
-1
-2
-2
-2
-2
-2
-2
-2
-2
-Chaussure en cuir
-1
-3
-2
-1
-Gants en rex
-Gants en zangetsu
-0
-0
-0
-0
-0
-0
-0
-0
-9
-9
-9
-9
-9
-9
-9
-9
-tanos
-2
 6
-1432757141226
-10
-true
-Armure en bronze
-2
+PotionMolotov
+Potion molotov niveau 1
 2
 1
-4
-epee de bablabus
-bouclier gemme
-1
-1
-1
-1
-1
-1
-1
-1
 2
-2
-2
-2
-2
-2
-2
-2
-Chaussure en cuir
-1
-3
+PotionMolotov
+Potion molotov niveau 1
 2
 1
-Gants en rex
-Gants en zangetsu
-0
-0
-0
-0
-0
-0
-0
-0
-9
-9
-9
-9
-9
-9
-9
-9
-tanos
 2
-6
-1432757685164
-10
-true
-Armure en bronze
-2
-2
-1
-4
-epee de bablabus
-bouclier gemme
-1
-1
-1
-1
-1
-1
-1
-1
-2
-2
-2
-2
-2
-2
-2
-2
-Chaussure en cuir
-1
-3
-2
-1
-Gants en rex
-Gants en zangetsu
-0
-0
-0
-0
-0
-0
-0
-0
-9
-9
-9
-9
-9
-9
-9
-9
-tanos
-2
-6
-1433091410943
-10
-true
-Armure en bronze
-2
-2
-1
-4
-epee de bablabus
-bouclier gemme
-1
-1
-1
-1
-1
-1
-1
-1
-2
-2
-2
-2
-2
-2
-2
-2
-Chaussure en cuir
-1
-3
-2
-1
-Gants en rex
-Gants en zangetsu
-0
-0
-0
-0
-0
-0
-0
-0
-9
-9
-9
-9
-9
-9
-9
-9
-tanos
-2
-6
-1433278252375
-10
-true
-Armure en bronze
-2
-2
-1
-4
-epee de bablabus
-bouclier gemme
-1
-1
-1
-1
-1
-1
-1
-1
-2
-2
-2
-2
-2
-2
-2
-2
-Chaussure en cuir
-1
-3
-2
-1
-Gants en rex
-Gants en zangetsu
-0
-0
-0
-0
-0
-0
-0
-0
-9
-9
-9
-9
-9
-9
-9
-9
-tanos
-0
-6
-1433278380066
-10
-true
-Armure en bronze
-2
-2
-1
-4
-epee de bablabus
-bouclier gemme
-1
-1
-1
-1
-1
-1
-1
-1
-2
-2
-2
-2
-2
-2
-2
-2
-Chaussure en cuir
-1
-3
-2
-1
-Gants en rex
-Gants en zangetsu
-0
-0
-0
-0
-0
-0
-0
-0
-9
-9
-9
-9
-9
-9
-9
-9
+false
+false
+false
+false
+false
+false
+false
+false
+false
+false
+false
+false
+false
+false
+false
+false
+false
+false

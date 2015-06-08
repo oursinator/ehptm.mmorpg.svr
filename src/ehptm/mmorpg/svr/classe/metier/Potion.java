@@ -19,7 +19,7 @@ public abstract class Potion extends Item {
         return this.pointAction;
     }
     
-    public abstract void utiliser(Personnage perso);
+    public abstract void utiliser(Personnage perso) throws Exception;
 
     
     public void setPointAction(int value) {

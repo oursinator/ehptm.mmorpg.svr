@@ -20,13 +20,12 @@ public abstract class Personnage{
 	{
 		this.nom="donnes moi un nom flemmard!";
 		this.pointVie = 6;
-		this.pointAction = 10;
+		this.pointAction = 25;
 		this.inventaire = new Inventaire();
 		this.startTime = System.currentTimeMillis();
 	}
 	
 	public Personnage(Personnage copie){
-		
 		this.pointVie= copie.pointVie;
 		this.pointAction= copie.pointAction;
 		this.inventaire= new Inventaire(copie.getInventaire());//il faut créer un constructeur par copie dans inventaire

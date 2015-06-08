@@ -78,7 +78,17 @@ public class Carte {
 	public static int getNbMurs() {
 		return NB_MURS;
 	}
-
+	public void joueursMort(){
+		for(int i=0;i<getGrille().length;i++){
+			for(int j=0;j<getGrille()[0].length;j++){
+				if(getGrille()[i][j]!=null){
+					if(getGrille()[i][j] instanceof Personnage && ((Personnage)this.getGrille()[i][j]).getPointVie()<=0){
+						this.grille[i][j]=null;
+					}
+				}
+			}
+		}
+	}
 	public ArrayList<Personnage> listePersonnage(){
 		ArrayList<Personnage> listePersonnage=new ArrayList<Personnage>();
 		for(int i=0;i<getGrille().length;i++){

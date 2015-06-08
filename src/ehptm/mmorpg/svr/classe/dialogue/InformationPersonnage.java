@@ -7,6 +7,8 @@ public class InformationPersonnage {
 		System.out.println(
 				  "\n\tPersonnage "+perso.getNom()+"\n"
 				+ "\t       ******");
+		if(perso.isToucher())
+			System.out.println("On vous a attaqué :(");
 		System.out.println("Votre etat: \n\t"+perso.etat());
 	}
 	public static void afficherCaracteristique(PersonnageJoueur perso){

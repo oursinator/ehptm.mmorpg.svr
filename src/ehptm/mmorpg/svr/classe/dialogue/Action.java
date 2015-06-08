@@ -1,5 +1,6 @@
 package ehptm.mmorpg.svr.classe.dialogue;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import ehptm.mmorpg.svr.classe.metier.Carte;
@@ -65,7 +66,12 @@ public class Action {
 					int choix;
 					do{
 						System.out.println(message);
-						choix=input.nextInt();
+						try{
+							choix=input.nextInt();
+						}catch(Exception e){
+							choix=-1;
+							input=new Scanner(System.in);
+						}
 					}while(choix<0 || choix>4);
 					switch(choix){
 						case 1:
@@ -108,30 +114,45 @@ public class Action {
 		Scanner input= new Scanner(System.in);
 		int choix;
 		InformationPersonnage.afficherEtat(personnage);
-		InformationPersonnage.afficherCaracteristique(personnage);
-		InformationPersonnage.afficherPointAction(personnage);
-		InformationPersonnage.afficherCarte(personnage);
 		do
 		{
-			System.out.println("Que voulez-vous faire? Tapez\n"
-					+ " 1 - pour vous deplacer ( -2PA )\n"
-					+ " 2 - pour utiliser un équipement ( Cout PA variable )\n"
-					+ " 3 - pour attaquer ( -3PA )\n"
-					+ " 4 - pour gerer son inventaire\n"
-					+ " 5 - pour ramasser un objet ( -2PA )\n"
-					+ " 0 - pour passer votre tour");
-			choix= input.nextInt();
+			InformationPersonnage.afficherCaracteristique(personnage);
+			InformationPersonnage.afficherPointAction(personnage);
+			InformationPersonnage.afficherCarte(personnage);
+			do{
+				System.out.println("Que voulez-vous faire? Tapez\n"
+						+ " 1 - pour vous deplacer ( -2PA )\n"
+						+ " 2 - pour utiliser un équipement ( Cout PA variable )\n"
+						+ " 3 - pour attaquer ( -3PA )\n"
+						+ " 4 - pour gerer son inventaire\n"
+						+ " 5 - pour ramasser un objet ( -2PA )\n"
+						+ " 6 - pour sauvegarder le personnage (Attention ceci effacera l'ancienne sauvegarde)\n"
+						+ " 0 - pour passer votre tour");
+				
+				try{
+					choix= input.nextInt();
+				}catch(Exception e){
+					choix=-1;
+					input=new Scanner(System.in);
+				}
+			}while(choix<0 || choix>6);
 			switch(choix){
 				case 1:System.out.println("Se deplacer vers :\n"
 						+ " 1 - le haut\n"
 						+ " 2 - la droite\n"
 						+ " 3 - le bas\n"
-						+ " 4 - la gauche");
+						+ " 4 - la gauche\n"
+						+ " 0 - Retour");
 					int direction;
 					do{
 						System.out.println("Tapez le chiffre qui correspond");
-						direction=input.nextInt();
-					}while(direction<1 || direction>4);
+						try{
+							direction=input.nextInt();
+						}catch(Exception e){
+							direction=-1;
+							input=new Scanner(System.in);
+						}
+					}while(direction<0 || direction>4);
 					switch(direction){
 						case 1:System.out.println(carte.deplacer(personnage, -1, 1));
 							break;
@@ -152,14 +173,26 @@ public class Action {
 					}
 					
 					System.out.println(invent);
+					System.out.println(" 0 - Pour quitter");
 					
 					int item;
 					do{
 						System.out.println("Taper le numero de l'item que vous voulez utiliser");
-						item=input.nextInt();
+						try{
+							item=input.nextInt();
+						}catch(Exception e){
+							item=-1;
+							input=new Scanner(System.in);
+						}
 					}while(item<0 || item>personnage.getInventaire().getSacADos().length);
-					if(personnage.getInventaire().getSacADos()[item] instanceof Potion)
-						((Potion)personnage.getInventaire().getSacADos()[item]).utiliser(personnage);
+					if(personnage.getInventaire().getSacADos()[item] instanceof Potion){
+						try{
+							((Potion)personnage.getInventaire().getSacADos()[item+1]).utiliser(personnage);
+							personnage.getInventaire().jeter("sac a dos", item+1);
+						}catch(Exception e){
+							System.out.println(e.getMessage());
+						}
+					}
 					break;
 				case 3:
 					int cible;
@@ -172,60 +205,69 @@ public class Action {
 								+ " 5 - pour attaquer en bas\n"
 								+ " 6 - pour attaquer en bas a gauche\n"
 								+ " 7 - pour attaquer a gauche\n"
-								+ " 8 - pour attaquer en haut a gauche");
-						cible=input.nextInt();
-					}while(cible<1||cible>8);
-					int persoX=-1;
-					int persoY=-1;
-					for(int x=0;x<Carte.getGrille().length;x++){
-						for(int y=0;y<Carte.getGrille()[0].length;y++){
-							if(Carte.getGrille()[x][y]==personnage){
-								persoX=x;
-								persoY=y;
+								+ " 8 - pour attaquer en haut a gauche\n"
+								+ " 0 - retour");
+						try{
+							cible=input.nextInt();
+						}catch(Exception e){
+							cible=-1;
+							input=new Scanner(System.in);
+						}
+					}while(cible<0||cible>8);
+					if(cible!=0){
+						int persoX=-1;
+						int persoY=-1;
+						for(int x=0;x<Carte.getGrille().length;x++){
+							for(int y=0;y<Carte.getGrille()[0].length;y++){
+								if(Carte.getGrille()[x][y]==personnage){
+									persoX=x;
+									persoY=y;
+								}
 							}
 						}
+						
+						try{
+							boolean touche=false;
+							switch(cible){
+								case 1:
+									if(Carte.getGrille()[persoX-1][persoY] !=null && Carte.getGrille()[persoX-1][persoY] instanceof Personnage)
+										touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX-1][persoY]);
+									break;
+								case 2:
+									if(Carte.getGrille()[persoX-1][persoY+1] !=null && Carte.getGrille()[persoX-1][persoY+1] instanceof Personnage)
+										touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX-1][persoY+1]);
+									break;
+								case 3:
+									if(Carte.getGrille()[persoX][persoY+1] !=null && Carte.getGrille()[persoX][persoY+1] instanceof Personnage)
+										touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX][persoY+1]);
+									break;
+								case 4:
+									if(Carte.getGrille()[persoX+1][persoY+1] !=null && Carte.getGrille()[persoX+1][persoY+1] instanceof Personnage)
+										touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX+1][persoY+1]);
+									break;
+								case 5:
+									if(Carte.getGrille()[persoX+1][persoY] !=null && Carte.getGrille()[persoX+1][persoY] instanceof Personnage)
+										touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX+1][persoY]);
+									break;
+								case 6:
+									if(Carte.getGrille()[persoX+1][persoY-1] !=null && Carte.getGrille()[persoX+1][persoY-1] instanceof Personnage)
+										touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX+1][persoY-1]);
+									break;
+								case 7:
+									if(Carte.getGrille()[persoX][persoY-1] !=null && Carte.getGrille()[persoX][persoY-1] instanceof Personnage)
+										touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX][persoY-1]);
+									break;
+								case 8:
+									if(Carte.getGrille()[persoX-1][persoY-1] !=null && Carte.getGrille()[persoX-1][persoY-1] instanceof Personnage)
+										touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX-1][persoY-1]);
+									break;
+							}
+							if(touche)
+								System.out.println("Personnage touche !");
+							else
+								System.out.println("Aucun personnage touche ..");
+						}catch(Exception e){}
 					}
-					try{
-						boolean touche=false;
-						switch(cible){
-							case 1:
-								if(Carte.getGrille()[persoX-1][persoY] !=null && Carte.getGrille()[persoX-1][persoY] instanceof Personnage)
-									touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX-1][persoY]);
-								break;
-							case 2:
-								if(Carte.getGrille()[persoX-1][persoY+1] !=null && Carte.getGrille()[persoX-1][persoY+1] instanceof Personnage)
-									touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX-1][persoY+1]);
-								break;
-							case 3:
-								if(Carte.getGrille()[persoX][persoY+1] !=null && Carte.getGrille()[persoX][persoY+1] instanceof Personnage)
-									touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX][persoY+1]);
-								break;
-							case 4:
-								if(Carte.getGrille()[persoX+1][persoY+1] !=null && Carte.getGrille()[persoX+1][persoY+1] instanceof Personnage)
-									touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX+1][persoY+1]);
-								break;
-							case 5:
-								if(Carte.getGrille()[persoX+1][persoY] !=null && Carte.getGrille()[persoX+1][persoY] instanceof Personnage)
-									touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX+1][persoY]);
-								break;
-							case 6:
-								if(Carte.getGrille()[persoX+1][persoY-1] !=null && Carte.getGrille()[persoX+1][persoY-1] instanceof Personnage)
-									touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX+1][persoY-1]);
-								break;
-							case 7:
-								if(Carte.getGrille()[persoX][persoY-1] !=null && Carte.getGrille()[persoX][persoY-1] instanceof Personnage)
-									touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX][persoY-1]);
-								break;
-							case 8:
-								if(Carte.getGrille()[persoX-1][persoY-1] !=null && Carte.getGrille()[persoX-1][persoY-1] instanceof Personnage)
-									touche=personnage.attaquer((Personnage)Carte.getGrille()[persoX-1][persoY-1]);
-								break;
-						}
-						if(touche)
-							System.out.println("Personnage touche !");
-						else
-							System.out.println("Aucun personnage touche ..");
-					}catch(Exception e){System.out.println("hhhhh"+e.getMessage());}
 					break;
 				case 4:
 					GestionInventaire.menuInventaire(personnage);
@@ -233,8 +275,15 @@ public class Action {
 				case 5:
 					ramasserObjet(personnage);
 					break;
+				case 6:
+					try {
+						SauvegarderPersonnage.sauvegarder(personnage);
+					} catch (IOException e) {
+						System.out.println("Erreur de sauvegarde, le personnage n'est pas sauvegerdé");
+					}
+					break;
 			}
-		}while((choix<0 || choix>5)&&choix!=0);
+		}while(choix!=0);
 	}
 		
 }
